@@ -1,0 +1,2581 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Ars Virtutis</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#10141b">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<meta name="description" content="Hábitos de bem-estar com selo de força da evidência, dose, janela de teste e fontes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Cinzel:wght@500;600&family=EB+Garamond:ital,wght@0,500;0,600;1,500&display=swap">
+<style>
+/* Layout: códice de tábuas — uma coluna de tábuas agrupadas por selo; a ficha abre como folha sobreposta; barra de abas fixa embaixo. */
+:root {
+  /* Cor: mármore frio, tinta azul-noite, lápis-lazúli; selos nos pigmentos romanos */
+  --bg: #eceee9;
+  --panel: #f7f8f4;
+  --panel-2: #e2e6df;
+  --ink: #1a2130;
+  --ink-2: #4b5465;
+  --line: #d2d6ce;
+  --accent: #2a4b8d;
+  --columna: #1d6a4e;  --columna-t: #dcebe2;   /* malaquita */
+  --probabile: #2557a0; --probabile-t: #dfe7f4; /* azul egípcio */
+  --experimentum: #8a5d0e; --experimentum-t: #f2e7cf; /* ocre */
+  --indifferens: #67635a; --indifferens-t: #e6e4dd; /* travertino */
+  --fabula: #6e2d60; --fabula-t: #efe0eb;       /* púrpura tíria */
+  --cave: #a3322b; --cave-t: #f5dedb;           /* vermelho pompeiano */
+  /* Tipo: capitulares de inscrição, Garamond para nomes, sans humanista para ler */
+  --f-display: "Cinzel", "Trajan Pro", "Times New Roman", serif;
+  --f-serif: "EB Garamond", Garamond, "Times New Roman", serif;
+  --f-sans: "Alegreya Sans", "Segoe UI", Roboto, system-ui, sans-serif;
+  --r: 8px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10141b; --panel: #171d26; --panel-2: #212833; --ink: #e6e8e2; --ink-2: #a3abb7; --line: #2a313c; --accent: #93b2ec;
+    --columna: #63c29b; --columna-t: #15302a;
+    --probabile: #8aaced; --probabile-t: #172842;
+    --experimentum: #d9ab52; --experimentum-t: #33290f;
+    --indifferens: #aea89b; --indifferens-t: #27261f;
+    --fabula: #d398c4; --fabula-t: #321b2e;
+    --cave: #ef7f72; --cave-t: #3b1a17;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10141b; --panel: #171d26; --panel-2: #212833; --ink: #e6e8e2; --ink-2: #a3abb7; --line: #2a313c; --accent: #93b2ec;
+  --columna: #63c29b; --columna-t: #15302a;
+  --probabile: #8aaced; --probabile-t: #172842;
+  --experimentum: #d9ab52; --experimentum-t: #33290f;
+  --indifferens: #aea89b; --indifferens-t: #27261f;
+  --fabula: #d398c4; --fabula-t: #321b2e;
+  --cave: #ef7f72; --cave-t: #3b1a17;
+  color-scheme: dark;
+}
+
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 16px/1.5 var(--f-sans);
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { max-width: 100%; }
+button { font: inherit; color: inherit; }
+a { color: var(--accent); text-underline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 18px calc(96px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Cabeçalho */
+.mast { display: grid; gap: 4px; padding-block: 6px 14px; }
+.mark { margin: 0; font: 600 27px/1.1 var(--f-display); letter-spacing: .2em; color: var(--ink); }
+.mark .ip { color: var(--accent); padding-inline: .08em; }
+.tagline { margin: 0; font: italic 500 17px/1.35 var(--f-serif); color: var(--ink-2); }
+.stamp { margin: 2px 0 0; font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+/* Lembrete do dia */
+.today { display: grid; gap: 6px; width: 100%; text-align: left; padding: 14px; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); cursor: pointer; }
+.today .eyebrow { font: 600 11px/1 var(--f-display); letter-spacing: .18em; color: var(--ink-2); }
+.today .nm { font: 600 20px/1.2 var(--f-serif); }
+.today .ac { color: var(--ink-2); font-size: 15px; }
+
+/* Testes ativos (faixa) */
+.strip { display: grid; gap: 8px; margin-top: 12px; }
+.strip-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); }
+.plain { display: block; margin: 0; padding: 0; border: 0; background: none; text-align: left; cursor: pointer; }
+.strip-item .t { min-width: 0; }
+.strip-item .t b { display: block; font: 600 16px/1.2 var(--f-serif); }
+.strip-item .t span { font-size: 13px; color: var(--ink-2); }
+
+/* Filtros */
+.filters { display: grid; gap: 8px; margin-top: 18px; }
+.chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); color: var(--ink-2); font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; }
+.chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--vc, var(--ink-2)); }
+.chip .ct { font-variant-numeric: tabular-nums; opacity: .8; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip[aria-pressed="true"] .dot { box-shadow: 0 0 0 2px var(--bg); }
+
+/* Grupos por selo */
+.vgroup { margin-top: 26px; }
+.vhead { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 10px; color: var(--vc); }
+.vhead h2 { margin: 0; display: flex; align-items: center; gap: 8px; font: 600 15px/1.2 var(--f-display); letter-spacing: .18em; }
+.vhead h2 svg { width: 18px; height: 18px; }
+.vhead p { margin: 3px 0 0; font: italic 500 16px/1.3 var(--f-serif); color: var(--ink-2); }
+.vhead .n { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.list { display: grid; gap: 10px; }
+
+/* Tábua (cartão) */
+.tab { display: grid; gap: 6px; width: 100%; text-align: left; padding: 14px 14px 13px; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); cursor: pointer; transition: border-color .15s ease; }
+.tab:hover { border-color: var(--vc); }
+.tab-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.seals { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+.seal { display: inline-flex; align-items: center; gap: 6px; font: 600 11.5px/1 var(--f-display); letter-spacing: .16em; color: var(--vc); }
+.seal svg { width: 15px; height: 15px; flex: none; }
+.seal.cave { color: var(--cave); }
+.modn { font: 600 12px/1 var(--f-display); letter-spacing: .12em; color: var(--ink-2); }
+.tab .nm { font: 600 19px/1.22 var(--f-serif); color: var(--ink); text-wrap: balance; }
+.tab .ac { font-size: 15px; line-height: 1.42; color: var(--ink-2); }
+.tab .cond { justify-self: start; font-size: 12.5px; font-weight: 500; color: var(--vc); background: var(--vt); padding: 2px 8px; border-radius: 999px; }
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; margin-top: 2px; font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.meta b { font-weight: 500; color: var(--ink); }
+.dots { display: inline-flex; gap: 3px; color: var(--vc); vertical-align: -1px; }
+.dots i { width: 8px; height: 8px; border-radius: 50%; border: 1.4px solid currentColor; }
+.dots i.on { background: currentColor; }
+
+.v-columna { --vc: var(--columna); --vt: var(--columna-t); }
+.v-probabile { --vc: var(--probabile); --vt: var(--probabile-t); }
+.v-experimentum { --vc: var(--experimentum); --vt: var(--experimentum-t); }
+.v-indifferens { --vc: var(--indifferens); --vt: var(--indifferens-t); }
+.v-fabula { --vc: var(--fabula); --vt: var(--fabula-t); }
+.v-cave { --vc: var(--cave); --vt: var(--cave-t); }
+
+/* Títulos de seção das outras abas */
+.vtitle { margin: 6px 0 4px; font: 600 15px/1.2 var(--f-display); letter-spacing: .18em; color: var(--ink); }
+.vlead { margin: 0 0 18px; font: italic 500 17px/1.4 var(--f-serif); color: var(--ink-2); max-width: 60ch; }
+
+/* Kits */
+.kit { padding: 16px; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); }
+.kit + .kit { margin-top: 12px; }
+.kit h3 { margin: 0; font: 600 21px/1.2 var(--f-serif); }
+.kit .sub { margin: 2px 0 8px; font: 600 11.5px/1.3 var(--f-display); letter-spacing: .14em; color: var(--accent); }
+.kit .lead { margin: 0 0 12px; font-size: 15px; color: var(--ink-2); }
+.kit ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; }
+.kit li { display: grid; gap: 4px; padding-block: 10px; border-top: 1px solid var(--line); }
+.kit li:first-child { border-top: 0; padding-top: 2px; }
+.kit .links { display: flex; flex-wrap: wrap; gap: 6px; }
+.lk { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); font-size: 13px; color: var(--vc); cursor: pointer; }
+.lk svg { width: 13px; height: 13px; }
+
+/* Botões */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 9px 16px; border: 1px solid var(--ink); border-radius: var(--r); background: var(--ink); color: var(--bg); font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; }
+.btn.alt { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn.vc { background: var(--vc); border-color: var(--vc); color: var(--panel); }
+.btn.small { min-height: 34px; padding: 5px 12px; font-size: 14px; }
+.btn.warn { background: transparent; color: var(--cave); border-color: var(--cave); }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+.btn svg { width: 16px; height: 16px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+/* Painéis genéricos */
+.panel { padding: 16px; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); }
+.panel + .panel, .panel + .block, .block + .panel { margin-top: 12px; }
+.panel h3, .block h3 { margin: 0 0 6px; font: 600 20px/1.2 var(--f-serif); }
+.muted { color: var(--ink-2); }
+.small-t { font-size: 13.5px; }
+.block { margin-top: 22px; }
+.block > h3 { font: 600 12px/1.2 var(--f-display); letter-spacing: .16em; color: var(--ink-2); text-transform: uppercase; margin-bottom: 10px; }
+.notice { padding: 12px 14px; border-radius: var(--r); background: var(--vt, var(--panel-2)); color: var(--ink); font-size: 15px; }
+.notice.cave { --vt: var(--cave-t); border: 1px solid var(--cave); }
+.notice b { color: var(--vc, var(--ink)); }
+
+/* WHO-5 resumo e gráfico */
+.score { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.score .big { font: 600 40px/1 var(--f-serif); font-variant-numeric: tabular-nums; }
+.score .of { color: var(--ink-2); font-size: 14px; }
+.delta { font-weight: 600; font-variant-numeric: tabular-nums; }
+.delta.up { color: var(--columna); } .delta.down { color: var(--cave); }
+.chart { margin-top: 10px; overflow-x: auto; }
+.chart svg { display: block; width: 100%; height: auto; }
+
+/* Experimentos */
+.exp { padding: 14px; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); display: grid; gap: 10px; }
+.exp + .exp { margin-top: 10px; }
+.exp .hd { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+.exp .hd b { font: 600 18px/1.2 var(--f-serif); }
+.exp .hd .when { font-size: 13px; color: var(--ink-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.bar { height: 8px; border-radius: 999px; background: var(--panel-2); overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--vc, var(--accent)); border-radius: inherit; }
+.kv { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.kv b { color: var(--ink); font-weight: 600; }
+.result { padding: 10px 12px; border-radius: var(--r); background: var(--vt); font-size: 15px; }
+
+/* Mitos */
+.myth { padding: 14px 0; border-top: 1px solid var(--line); display: grid; gap: 6px; }
+.myth:first-of-type { border-top: 0; }
+.myth .q { margin: 0; font: italic 500 19px/1.3 var(--f-serif); text-wrap: balance; }
+.verd { justify-self: start; display: inline-flex; align-items: center; gap: 6px; font: 600 11.5px/1 var(--f-display); letter-spacing: .14em; padding: 5px 9px; border-radius: 999px; color: var(--vc); background: var(--vt); }
+.verd.falso { --vc: var(--cave); --vt: var(--cave-t); }
+.verd.parcial { --vc: var(--experimentum); --vt: var(--experimentum-t); }
+.verd.sem { --vc: var(--indifferens); --vt: var(--indifferens-t); }
+.verd.verdadeiro { --vc: var(--columna); --vt: var(--columna-t); }
+.myth p { margin: 0; font-size: 15.5px; }
+.srcline { font-size: 13px; color: var(--ink-2); }
+.srcline a { color: var(--accent); }
+
+/* Guia */
+.legend { display: grid; gap: 10px; }
+.legend .it { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; }
+.legend .ic { color: var(--vc); padding-top: 2px; }
+.legend .ic svg { width: 22px; height: 22px; }
+.legend b { font: 600 12.5px/1.2 var(--f-display); letter-spacing: .14em; color: var(--vc); }
+.legend .pt { font-weight: 600; color: var(--ink); }
+.legend p { margin: 2px 0 0; font-size: 15px; color: var(--ink-2); }
+.prose p { margin: 0 0 10px; max-width: 65ch; }
+.prose ul, .prose ol { margin: 0 0 10px; padding-left: 20px; display: grid; gap: 6px; max-width: 65ch; }
+.callnum { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+.callnum .num { display: grid; gap: 2px; padding: 10px 14px; border: 1px solid var(--cave); border-radius: var(--r); background: var(--panel); min-width: 140px; }
+.callnum .num b { font: 600 26px/1 var(--f-serif); color: var(--cave); user-select: all; font-variant-numeric: tabular-nums; }
+.callnum .num span { font-size: 13px; color: var(--ink-2); }
+textarea { width: 100%; min-height: 120px; padding: 10px; border: 1px solid var(--line); border-radius: var(--r); background: var(--bg); color: var(--ink); font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+/* Barra de abas */
+.tabbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--panel); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom, 0px); padding-left: max(4px, env(safe-area-inset-left, 0px)); padding-right: max(4px, env(safe-area-inset-right, 0px)); }
+.tabbar .in { max-width: 720px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.tabbar button { display: grid; justify-items: center; gap: 3px; padding: 9px 2px 8px; border: 0; background: none; color: var(--ink-2); font-size: 12px; font-weight: 500; cursor: pointer; }
+.tabbar button svg { width: 22px; height: 22px; }
+.tabbar button[aria-current="page"] { color: var(--accent); }
+.tabbar button[aria-current="page"] span { font-weight: 700; }
+
+/* Folha (ficha) e modal */
+.layer { position: fixed; inset: 0; z-index: 40; background: var(--bg); overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.layer.modal { z-index: 50; }
+.layer .in { max-width: 720px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px)); }
+.layer-top { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: calc(10px + env(safe-area-inset-top, 0px)); padding-bottom: 10px; background: var(--bg); border-bottom: 1px solid var(--line); }
+.layer-top .crumb { font: 600 11.5px/1.2 var(--f-display); letter-spacing: .16em; color: var(--ink-2); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (prefers-reduced-motion: no-preference) {
+  .layer:not([hidden]) { animation: rise .22s ease-out; }
+  @keyframes rise { from { transform: translateY(18px); opacity: .4; } to { transform: none; opacity: 1; } }
+}
+.sh-head { padding-top: 16px; display: grid; gap: 6px; }
+.sh-title { margin: 2px 0 0; font: 600 27px/1.15 var(--f-serif); text-wrap: balance; }
+.sh-verdict { margin: 0; font: italic 500 17.5px/1.35 var(--f-serif); color: var(--vc); }
+.sh-cond { justify-self: start; font-size: 13px; font-weight: 600; color: var(--vc); background: var(--vt); padding: 3px 10px; border-radius: 999px; }
+.facts { margin: 14px 0 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.facts .f { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 12px; padding-block: 9px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.facts dt { font: 600 11px/1.6 var(--f-display); letter-spacing: .14em; color: var(--ink-2); margin: 0; }
+.facts dd { margin: 0; }
+.sh-lead { margin: 18px 0 0; font-size: 18px; line-height: 1.45; font-weight: 500; max-width: 62ch; }
+.sec { margin-top: 24px; }
+.sec h4 { margin: 0 0 8px; font: 600 12px/1.2 var(--f-display); letter-spacing: .16em; color: var(--ink-2); }
+.sec ul { margin: 0; padding-left: 18px; display: grid; gap: 7px; max-width: 65ch; }
+.sec p { margin: 0 0 8px; max-width: 65ch; }
+.testbox { padding: 14px; border-radius: var(--r); background: var(--vt); display: grid; gap: 10px; }
+.testbox .kv { color: var(--ink); }
+.plbox { padding: 12px 14px; border-left: 0; border-radius: var(--r); background: var(--panel); border: 1px solid var(--line); font-size: 15px; }
+.plbox b { font: 600 11px/1.6 var(--f-display); letter-spacing: .14em; color: var(--ink-2); display: block; }
+.cavebox { padding: 12px 14px; border-radius: var(--r); background: var(--cave-t); border: 1px solid var(--cave); }
+.cavebox h4 { color: var(--cave); }
+.trad { margin-top: 8px; font: italic 500 16px/1.4 var(--f-serif); color: var(--ink-2); }
+.rel { margin-top: 10px; font-size: 13.5px; color: var(--ink-2); }
+.rel b { color: var(--ink); font-weight: 600; }
+.srcs { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.srcs li { font-size: 14.5px; line-height: 1.4; }
+.srcs .ty { display: block; font-size: 12.5px; color: var(--ink-2); }
+.supp { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.supp th, .supp td { text-align: left; vertical-align: top; padding: 8px 8px 8px 0; border-bottom: 1px solid var(--line); }
+.supp th { font-weight: 600; white-space: nowrap; padding-right: 12px; }
+.tbl { overflow-x: auto; }
+
+/* WHO-5 formulário */
+.w5-legend { font-size: 13.5px; color: var(--ink-2); margin: 4px 0 14px; }
+.w5 fieldset { border: 0; margin: 0 0 16px; padding: 0; }
+.w5 legend { padding: 0; margin-bottom: 8px; font: 600 17px/1.3 var(--f-serif); }
+.seg { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+.seg label { position: relative; }
+.seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.seg span { display: grid; place-items: center; min-height: 42px; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); font-weight: 600; font-variant-numeric: tabular-nums; }
+.seg input:checked + span { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.seg input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ends { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-2); margin-top: 4px; }
+.picked { font-size: 13.5px; color: var(--ink-2); min-height: 1.4em; margin-top: 4px; }
+.stepper { display: inline-flex; align-items: center; gap: 0; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.stepper button { width: 42px; height: 40px; border: 0; background: var(--panel); font-size: 20px; cursor: pointer; }
+.stepper output { min-width: 96px; text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; }
+.picker { display: grid; gap: 6px; margin-top: 10px; }
+.picker button { text-align: left; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); cursor: pointer; display: grid; gap: 2px; }
+.picker button b { font: 600 16px/1.25 var(--f-serif); }
+.picker button span { font-size: 13px; color: var(--ink-2); }
+
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(76px + env(safe-area-inset-bottom, 0px)); z-index: 60; max-width: min(92vw, 520px); padding: 10px 14px; border-radius: var(--r); background: var(--ink); color: var(--bg); font-size: 14.5px; box-shadow: 0 6px 24px rgba(0,0,0,.18); }
+.empty { color: var(--ink-2); font-style: italic; }
+footer.colophon { margin-top: 30px; font-size: 13px; color: var(--ink-2); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <main>
+    <!-- PRÁTICAS -->
+    <section id="v-praticas" class="view" aria-labelledby="mark">
+      <header class="mast">
+        <h1 class="mark" id="mark">ARS<span class="ip">·</span>VIRTVTIS</h1>
+        <p class="tagline">Hábitos de bem-estar, com a evidência à vista.</p>
+        <p class="stamp" id="stamp">50 práticas · síntese de 3 levantamentos · out/2026</p>
+      </header>
+      <button class="today" id="today" type="button"></button>
+      <div class="strip" id="strip" hidden></div>
+      <div class="filters">
+        <div class="chips" id="chips-v" role="group" aria-label="Filtrar por selo"></div>
+        <div class="chips" id="chips-m" role="group" aria-label="Filtrar por área"></div>
+      </div>
+      <div id="groups"></div>
+      <footer class="colophon">Toque numa prática para ver protocolo, números, fontes e o teste. Selos explicados em Guia.</footer>
+    </section>
+
+    <!-- KITS -->
+    <section id="v-kits" class="view" hidden>
+      <h2 class="vtitle">KITS</h2>
+      <p class="vlead">Três pacotes prontos, por orçamento de tempo. Toque no nome de uma prática para abrir a ficha.</p>
+      <div id="kit-list"></div>
+    </section>
+
+    <!-- TESTAR -->
+    <section id="v-testar" class="view" hidden>
+      <h2 class="vtitle">TESTAR</h2>
+      <p class="vlead">A média dos estudos vira um teste em você: linha de base, prática pelo tempo da janela, decisão pela régua escrita antes.</p>
+      <div id="import-banner" hidden></div>
+      <div class="panel" id="w5-panel"></div>
+      <div class="block">
+        <h3>Testes em andamento</h3>
+        <div id="exp-active"></div>
+        <div class="row" style="margin-top:12px"><button class="btn" id="new-test" type="button">Começar um teste</button></div>
+      </div>
+      <div class="block" id="done-block" hidden>
+        <h3>Concluídos</h3>
+        <div id="exp-done"></div>
+      </div>
+      <div class="block prose">
+        <h3>Como o teste funciona</h3>
+        <ol>
+          <li>Uma prática por vez. Duas mudanças juntas não dizem qual funcionou.</li>
+          <li>Linha de base: o WHO-5 pergunta sobre as últimas duas semanas, então a primeira resposta já é a sua linha de base.</li>
+          <li>Pratique pelo tempo da janela e marque “Fiz hoje”. Faça um check-in do WHO-5 por semana.</li>
+          <li>Decida pela régua definida antes de olhar os dados: subiu 10 pontos ou mais, funcionou; subiu de 1 a 9, inconclusivo; não subiu, não funcionou.</li>
+          <li>Para práticas reversíveis (respiração, cafeína, celular), alterne semanas com e sem. A alternância separa efeito de tendência.</li>
+        </ol>
+        <p class="muted">Armadilhas: expectativa (as duas primeiras semanas costumam inflar), regressão à média (não comece no seu pior momento), semanas atípicas de prova ou plantão e mudar duas coisas ao mesmo tempo. Resultado nulo também é informação: troque a dose, o formato ou a prática.</p>
+      </div>
+      <p class="small-t muted" id="store-status"></p>
+    </section>
+
+    <!-- MITOS -->
+    <section id="v-mitos" class="view" hidden>
+      <h2 class="vtitle">TRIBVNAL DOS MITOS</h2>
+      <p class="vlead">O que circula por aí, julgado pela melhor evidência disponível.</p>
+      <div id="myths"></div>
+    </section>
+
+    <!-- GUIA -->
+    <section id="v-guia" class="view" hidden>
+      <h2 class="vtitle">GVIA</h2>
+      <p class="vlead">“Todos querem viver felizes, mas para enxergar o que torna a vida feliz andam às cegas.” Sêneca, De vita beata, I.</p>
+
+      <div class="block">
+        <h3>Como ler os selos</h3>
+        <div class="legend" id="legend"></div>
+        <div class="prose" style="margin-top:14px">
+          <p><b>Confiança</b> segue o GRADE: ●●●● alta · ●●●○ moderada · ●●○○ baixa · ●○○○ muito baixa. Quando a evidência difere entre sintomas e bem-estar, a ficha mostra as duas.</p>
+          <p><b>Impacto</b> para um adulto sem transtorno: grande (SMD ≥ 0,50), moderado (0,30–0,49), pequeno (0,10–0,29), desprezível (&lt; 0,10). Como traduzir: SMD 0,2 leva a pessoa típica do percentil 50 para perto do 58; 0,5, para perto do 69; 0,8, para perto do 79.</p>
+          <p><b>Heurística</b> marca um número prático sem dado direto por trás, derivado de raciocínio. <b>[lacuna]</b> marca o que a literatura ainda não respondeu.</p>
+        </div>
+      </div>
+
+      <div class="block prose">
+        <h3>Regras de bolso</h3>
+        <ol>
+          <li><b>Hábitos não compensam carga excessiva.</b> Entre internos, acima de 90 h por semana, um terço preenchia critério de depressão.</li>
+          <li><b>Comece pelos pilares.</b> O erro clássico é começar pelo que é gostoso de planejar e nunca instalar o básico.</li>
+          <li><b>No máximo 2 ou 3 práticas novas por vez</b>, escolhidas pelo gosto. A mesma prática funciona para uns e não para outros.</li>
+          <li><b>Use “se X, então Y”.</b> Intenções de implementação tiveram efeito d = 0,65 sobre cumprir metas em 94 testes.</li>
+          <li><b>Hábito leva uns dois meses</b> (mediana de 66 dias, de 18 a 254). Um dia perdido não zera a curva.</li>
+          <li><b>Meça antes de acreditar:</b> WHO-5 semanal e testes de uma prática por vez.</li>
+        </ol>
+      </div>
+
+      <div class="block prose">
+        <h3>Por onde começar (Heurística)</h3>
+        <ul>
+          <li><b>Maior efeito absoluto:</b> sono regular (e TCC-I se houver insônia) e movimento.</li>
+          <li><b>Melhor retorno por minuto:</b> luz da manhã, uma conversa de verdade por dia, gratidão semanal, celular fora do quarto.</li>
+          <li><b>Se houver sintomas:</b> agir quando o humor cai e terapia.</li>
+          <li><b>Só se der prazer:</b> hobbies, leitura, música, viagens. O prazer já é o retorno.</li>
+        </ul>
+      </div>
+
+      <div class="block prose">
+        <h3>Quanto dá para mudar</h3>
+        <p>Cerca de um terço das diferenças de bem-estar entre pessoas é herdável (~36%), e herdabilidade não é teto pessoal. A torta “50% genes, 10% circunstâncias, 40% escolhas” não se sustenta como estatística. Na melhor hipótese realista, as práticas deste app somam frações de desvio-padrão, não transformações. Efeitos pequenos e sustentados vencem efeitos grandes e passageiros.</p>
+        <p>A adaptação hedônica é real, porém seletiva: desgasta eventos e compras mais do que práticas e vínculos, e é mais lenta com variedade e apreciação. Prazer e sentido contribuem por vias diferentes e somam. Cortar prazeres em nome da virtude não tem apoio empírico; prazeres pequenos, frequentes e variados, com um ou dois projetos de sentido, é o que a evidência sustenta.</p>
+        <p>Quando duas práticas compartilham o mecanismo (gratidão e saborear; mindfulness e respiração), juntá-las alterna, não soma. Quando os mecanismos diferem, somar é legítimo, com retornos decrescentes: o salto de nada para o básico é maior que o do básico para o otimizado.</p>
+        <p class="srcline" id="src-meta"></p>
+      </div>
+
+      <div class="block prose" id="ajuda">
+        <h3>Quando procurar ajuda</h3>
+        <div class="notice cave">
+          <p style="margin:0 0 8px">Otimizar hábitos é o trabalho certo quando o sofrimento é leve, tem motivo e você segue funcionando. Procure avaliação se houver:</p>
+          <ul style="margin:0">
+            <li>humor deprimido ou perda de prazer na maior parte dos dias por duas semanas ou mais;</li>
+            <li>prejuízo para estudar, trabalhar ou se cuidar;</li>
+            <li>qualquer pensamento de morte;</li>
+            <li>uso de álcool ou outras substâncias para aguentar;</li>
+            <li>WHO-5 de 50 ou menos em duas medidas seguidas, ou de 28 ou menos uma vez; PHQ-9 de 10 ou mais;</li>
+            <li>nenhuma melhora depois de 4 a 8 semanas de medidas próprias.</li>
+          </ul>
+        </div>
+        <div class="callnum">
+          <div class="num"><b>188</b><span>CVV · 24 h, ligação gratuita · chat em cvv.org.br</span></div>
+          <div class="num"><b>192</b><span>SAMU · urgência médica, inclusive crise psiquiátrica</span></div>
+        </div>
+        <ol>
+          <li><b>Risco imediato:</b> CVV 188, SAMU 192 ou pronto-socorro.</li>
+          <li><b>Sintomas moderados:</b> UBS, serviço de apoio psicológico da faculdade, psicólogo ou psiquiatra.</li>
+          <li><b>Sofrimento intenso ou uso de substâncias:</b> CAPS ou CAPS-AD.</li>
+          <li><b>Baixo custo:</b> clínicas-escola de psicologia, com valor social.</li>
+        </ol>
+        <p>Burnout persistente merece avaliação como quadro clínico, não como falha de resiliência.</p>
+      </div>
+
+      <div class="block prose">
+        <h3>Efeitos colaterais do bem-estar</h3>
+        <ul>
+          <li><b>Exercício compulsivo:</b> treinar lesionado, culpa por pular um dia.</li>
+          <li><b>Rigidez alimentar e ortorexia:</b> a regra é direção, não contabilidade.</li>
+          <li><b>Meditação:</b> eventos adversos em cerca de 8% dos praticantes nos estudos, mais em retiros intensivos.</li>
+          <li><b>Ortossonia:</b> perseguir o sono perfeito piora o sono.</li>
+          <li><b>Positividade tóxica:</b> aceitar emoções negativas faz melhor que suprimi-las.</li>
+          <li><b>Medir demais:</b> valorizar demais a felicidade associa-se a menos bem-estar. Meça com frequência fixa e pause quando virar cobrança.</li>
+        </ul>
+      </div>
+
+      <div class="block prose">
+        <h3>De onde vem isto</h3>
+        <p>Síntese de três levantamentos independentes feitos em outubro de 2026 a partir do mesmo protocolo, conferidos por amostragem nas fontes primárias. Onde divergiam, valeram a regra dos selos e a evidência mais recente e pré-registrada. Cada ficha mostra o veredito de cada relatório.</p>
+        <ul>
+          <li><b>R1</b> · síntese compacta, conservadora, com marcações de “não reverificado”. Os números conferidos bateram.</li>
+          <li><b>R2</b> · panorama em texto. Erros encontrados: o efeito da gratidão citado “contra controle ativo” era contra controle sem atividade (contra controle ativo, d −0,03); o efeito das intervenções para solidão nos ECRs é pequeno, não 0,37–0,47; o bloqueio de internet móvel durou 2 semanas, não 4; o “+250% de dopamina” vem de humanos e de dopamina no sangue. Usado só onde outro relatório confirmou.</li>
+          <li><b>R3</b> · dossiê em PDF (103 páginas, 59 recomendações), o mais completo; as citações recentes amostradas existem. Erros encontrados: os números de Firth 2019 (o certo é g 0,275, e 0,17 contra controle ativo) e o NNT do ensaio de TCC-I digital (≈12, não 11).</li>
+        </ul>
+        <p class="muted">Limites: a maioria dos estudos vem de países ricos e ocidentais; quase todos os desfechos são autorrelatados e sem cegamento; poucos ECRs são pré-registrados e com poder adequado. Fichas sem número dizem por quê. Nada aqui substitui avaliação clínica.</p>
+      </div>
+
+      <div class="block prose">
+        <h3>Seus dados</h3>
+        <p id="data-status" class="muted"></p>
+        <div class="row" id="data-actions">
+          <button class="btn alt small" id="btn-export" type="button">Exportar meus dados</button>
+          <button class="btn alt small" id="btn-import" type="button">Importar dados</button>
+          <button class="btn alt small" id="btn-offline" type="button" hidden>Baixar versão offline</button>
+        </div>
+        <div id="io-box" hidden style="margin-top:10px"></div>
+        <p class="muted small-t" style="margin-top:10px">No celular, abra este link no navegador e use “Adicionar à tela de início”. A versão offline funciona sem internet, mas guarda os dados só naquele aparelho.</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<nav class="tabbar" aria-label="Seções">
+  <div class="in" id="tabbar"></div>
+</nav>
+
+<div class="layer" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-title" hidden></div>
+<div class="layer modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="md-title" hidden></div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+/* Ars Virtutis · base de evidências consolidada (out/2026)
+   Fontes: três levantamentos independentes (R1, R2, R3), conferidos por amostragem nas fontes primárias.
+   Links: "doi:" -> doi.org; "pm:" -> busca no PubMed; demais -> URL direta. */
+
+const S = {
+  folk23: [`Folk & Dunn 2023`, `Nature Human Behaviour`, `Revisão sistemática da força da evidência`, `doi:10.1038/s41562-023-01651-4`],
+  folk24: [`Folk & Dunn 2024`, `Annual Review of Psychology`, `Revisão de experimentos pré-registrados`, `doi:10.1146/annurev-psych-022423-030818`],
+  wilkie26: [`Wilkie et al. 2026`, `Nature Human Behaviour`, `Metanálise em rede pré-registrada (183 ECRs)`, `doi:10.1038/s41562-025-02369-1`],
+  vanagteren21: [`van Agteren et al. 2021`, `Nature Human Behaviour`, `Metanálise (419 ECRs)`, `doi:10.1038/s41562-021-01093-w`],
+  pearce22: [`Pearce et al. 2022`, `JAMA Psychiatry`, `Metanálise dose-resposta de coortes`, `doi:10.1001/jamapsychiatry.2022.0609`],
+  noetel24: [`Noetel et al. 2024`, `BMJ`, `Metanálise em rede (218 ECRs)`, `doi:10.1136/bmj-2023-075847`],
+  buecker21: [`Buecker et al. 2021`, `Health Psychology Review`, `Metanálise (pessoas saudáveis)`, `doi:10.1080/17437199.2020.1760728`],
+  ding25: [`Ding et al. 2025`, `Lancet Public Health`, `Metanálise dose-resposta (passos)`, `pm:Ding 2025 daily steps health outcomes dose-response meta-analysis Lancet Public Health`],
+  paluch22: [`Paluch et al. 2022`, `Lancet Public Health`, `Metanálise (passos e mortalidade)`, `doi:10.1016/S2468-2667(21)00302-9`],
+  scott21: [`Scott et al. 2021`, `Sleep Medicine Reviews`, `Metanálise de 65 ECRs`, `doi:10.1016/j.smrv.2021.101556`],
+  windred24: [`Windred et al. 2024`, `Sleep`, `Coorte com actigrafia (UK Biobank)`, `doi:10.1093/sleep/zsad253`],
+  palmer24: [`Palmer et al. 2024`, `Psychological Bulletin`, `Metanálise de experimentos de privação de sono`, `pm:Palmer 2024 sleep loss and emotion meta-analysis Psychological Bulletin`],
+  watson15: [`Watson et al. 2015`, `Sleep`, `Consenso AASM/SRS`, `doi:10.5665/sleep.4716`],
+  chen25: [`Chen et al. 2025`, `PLoS Medicine`, `ECR (TCC-I digital para prevenir depressão)`, `https://pmc.ncbi.nlm.nih.gov/articles/PMC11750088/`],
+  fang22: [`Fang et al. 2022`, `NEJM`, `Coorte (Intern Health Study, 17.082 internos)`, `doi:10.1056/NEJMc2210365`],
+  torquati19: [`Torquati et al. 2019`, `American Journal of Public Health`, `Metanálise (turnos e saúde mental)`, `doi:10.2105/AJPH.2019.305278`],
+  burns23: [`Burns et al. 2023`, `Nature Mental Health`, `Coorte transversal com luz medida`, `doi:10.1038/s44220-023-00135-8`],
+  menegaz25: [`Menegaz de Almeida et al. 2025`, `JAMA Psychiatry`, `Metanálise (fototerapia, depressão não sazonal)`, `pm:bright light therapy nonseasonal depression meta-analysis JAMA Psychiatry 2025`],
+  firth19: [`Firth et al. 2019`, `Psychosomatic Medicine`, `Metanálise de 16 ECRs`, `doi:10.1097/PSY.0000000000000673`],
+  jacka17: [`Jacka et al. 2017`, `BMC Medicine`, `ECR SMILES`, `doi:10.1186/s12916-017-0791-y`],
+  conner17: [`Conner et al. 2017`, `PLoS ONE`, `ECR pré-registrado`, `doi:10.1371/journal.pone.0171206`],
+  lassale19: [`Lassale et al. 2019`, `Molecular Psychiatry`, `Metanálise de coortes`, `doi:10.1038/s41380-018-0237-8`],
+  guia14: [`Ministério da Saúde 2014`, `Guia Alimentar para a População Brasileira`, `Diretriz oficial`, `https://bvsms.saude.gov.br/bvs/publicacoes/guia_alimentar_populacao_brasileira_2ed.pdf`],
+  lane24: [`Lane et al. 2024`, `BMJ`, `Umbrella review`, `doi:10.1136/bmj-2023-077310`],
+  werneck22: [`Werneck et al. 2022`, `Journal of Affective Disorders`, `Coortes de Pelotas`, `pm:Werneck ultra-processed food common mental disorders Pelotas birth cohorts`],
+  mantantzis19: [`Mantantzis et al. 2019`, `Neuroscience & Biobehavioral Reviews`, `Metanálise (açúcar e humor)`, `doi:10.1016/j.neubiorev.2019.03.016`],
+  wagner14: [`Wagner et al. 2014`, `Health Psychology`, `Experimentos (comfort food)`, `doi:10.1037/hea0000068`],
+  okereke20: [`Okereke et al. 2020`, `JAMA`, `ECR VITAL-DEP`, `doi:10.1001/jama.2020.10224`],
+  appleton21: [`Appleton et al. 2021`, `Cochrane`, `Revisão sistemática (ômega-3)`, `doi:10.1002/14651858.CD004692.pub5`],
+  molin19: [`Molin et al. 2019`, `Revista de Saúde Pública`, `Análise de suplementos vendidos online`, `pm:Molin 2019 dietary supplements sold online Brazil Revista de Saude Publica`],
+  turner06: [`Turner, Loftis & Blackwell 2006`, `Pharmacology & Therapeutics`, `Revisão (5-HTP)`, `pm:Turner Loftis Blackwell 2006 5-hydroxytryptophan supplementation`],
+  biddinger22: [`Biddinger et al. 2022`, `JAMA Network Open`, `Randomização mendeliana não linear`, `doi:10.1001/jamanetworkopen.2022.3849`],
+  gardiner23: [`Gardiner et al. 2023`, `Sleep Medicine Reviews`, `Metanálise (cafeína e sono)`, `doi:10.1016/j.smrv.2023.101764`],
+  taylor14: [`Taylor et al. 2014`, `BMJ`, `Metanálise de estudos longitudinais`, `doi:10.1136/bmj.g1151`],
+  marconi16: [`Marconi et al. 2016`, `Schizophrenia Bulletin`, `Metanálise`, `doi:10.1093/schbul/sbw003`],
+  gobbi19: [`Gobbi et al. 2019`, `JAMA Psychiatry`, `Metanálise`, `doi:10.1001/jamapsychiatry.2018.4500`],
+  solmi23: [`Solmi et al. 2023`, `BMJ`, `Umbrella review`, `doi:10.1136/bmj-2022-072348`],
+  white19: [`White et al. 2019`, `Scientific Reports`, `Transversal (n = 19.806)`, `doi:10.1038/s41598-019-44097-3`],
+  bratman15: [`Bratman et al. 2015`, `PNAS`, `ECR pequeno`, `doi:10.1073/pnas.1510459112`],
+  balban23: [`Balban et al. 2023`, `Cell Reports Medicine`, `ECR`, `doi:10.1016/j.xcrm.2022.100895`],
+  fincham23: [`Fincham et al. 2023`, `Scientific Reports`, `Metanálise (breathwork)`, `doi:10.1038/s41598-022-27247-y`],
+  sramek00: [`Šrámek et al. 2000`, `European Journal of Applied Physiology`, `Experimento fisiológico`, `https://pubmed.ncbi.nlm.nih.gov/10751106/`],
+  buijze16: [`Buijze et al. 2016`, `PLoS ONE`, `ECR (n = 3.018)`, `doi:10.1371/journal.pone.0161749`],
+  packheiser24: [`Packheiser et al. 2024`, `Nature Human Behaviour`, `Metanálise pré-registrada`, `doi:10.1038/s41562-024-01841-8`],
+  galante23: [`Galante et al. 2023`, `Nature Mental Health`, `Metanálise com dados individuais`, `doi:10.1038/s44220-023-00081-5`],
+  galante21: [`Galante et al. 2021`, `PLOS Medicine`, `Metanálise (136 ECRs)`, `doi:10.1371/journal.pmed.1003481`],
+  goyal14: [`Goyal et al. 2014`, `JAMA Internal Medicine`, `Metanálise`, `doi:10.1001/jamainternmed.2013.13018`],
+  farias20: [`Farias et al. 2020`, `Acta Psychiatrica Scandinavica`, `Revisão sistemática (eventos adversos)`, `doi:10.1111/acps.13225`],
+  kral22: [`Kral et al. 2022`, `Science Advances`, `ECR (n = 218)`, `doi:10.1126/sciadv.abk3316`],
+  choi25: [`Choi et al. 2025`, `PNAS`, `Metanálise pré-registrada (145 artigos, 28 países)`, `doi:10.1073/pnas.2425193122`],
+  davis16: [`Davis et al. 2016`, `Journal of Counseling Psychology`, `Metanálise`, `doi:10.1037/cou0000107`],
+  cregg21: [`Cregg & Cheavens 2021`, `Journal of Happiness Studies`, `Metanálise`, `doi:10.1007/s10902-020-00236-6`],
+  whiteuttl19: [`White, Uttl & Holder 2019`, `PLoS ONE`, `Reanálise de metanálises`, `doi:10.1371/journal.pone.0216588`],
+  lyubomirsky05: [`Lyubomirsky, Sheldon & Schkade 2005`, `Review of General Psychology`, `Revisão teórica`, `doi:10.1037/1089-2680.9.2.111`],
+  curry18: [`Curry et al. 2018`, `Journal of Experimental Social Psychology`, `Metanálise`, `doi:10.1016/j.jesp.2018.02.014`],
+  aknin20: [`Aknin et al. 2020`, `Journal of Personality and Social Psychology`, `Replicação registrada`, `https://pubmed.ncbi.nlm.nih.gov/32250135/`],
+  hui20: [`Hui et al. 2020`, `Psychological Bulletin`, `Metanálise`, `doi:10.1037/bul0000298`],
+  carrillo19: [`Carrillo et al. 2019`, `PLoS ONE`, `Metanálise`, `doi:10.1371/journal.pone.0222386`],
+  seligman05: [`Seligman et al. 2005`, `American Psychologist`, `ECR controlado por placebo`, `doi:10.1037/0003-066X.60.5.410`],
+  park04: [`Park, Peterson & Seligman 2004`, `Journal of Social and Clinical Psychology`, `Correlacional`, `doi:10.1521/jscp.23.5.603.50748`],
+  proyer14: [`Proyer et al. 2014`, `Aging & Mental Health`, `ECR`, `pm:Proyer 2014 strengths-based positive psychology interventions older adults randomized`],
+  webb12: [`Webb, Miles & Sheeran 2012`, `Psychological Bulletin`, `Metanálise de experimentos`, `doi:10.1037/a0027600`],
+  ford18: [`Ford et al. 2018`, `Journal of Personality and Social Psychology`, `Laboratório, diário e longitudinal`, `doi:10.1037/pspp0000157`],
+  killingsworth10: [`Killingsworth & Gilbert 2010`, `Science`, `Amostragem de experiência`, `doi:10.1126/science.1192439`],
+  cuijpers26: [`Cuijpers et al. 2026`, `Clinical Psychology Review`, `Metanálise (105 ECRs)`, `doi:10.1016/j.cpr.2026.102783`],
+  mazzucchelli10: [`Mazzucchelli, Kane & Rees 2010`, `Journal of Positive Psychology`, `Metanálise`, `doi:10.1080/17439760903569154`],
+  frattaroli06: [`Frattaroli 2006`, `Psychological Bulletin`, `Metanálise (146 estudos)`, `doi:10.1037/0033-2909.132.6.823`],
+  reinhold18: [`Reinhold, Bürkner & Holling 2018`, `Clinical Psychology: Science and Practice`, `Metanálise`, `doi:10.1111/cpsp.12224`],
+  weiss16: [`Weiss, Westerhof & Bohlmeijer 2016`, `PLoS ONE`, `Metanálise (27 ECRs)`, `doi:10.1371/journal.pone.0158092`],
+  vanzoonen14: [`van Zoonen et al. 2014`, `International Journal of Epidemiology`, `Metanálise (prevenção)`, `doi:10.1093/ije/dyt175`],
+  fluckiger18: [`Flückiger et al. 2018`, `Psychotherapy`, `Metanálise (aliança terapêutica)`, `doi:10.1037/pst0000172`],
+  rotenstein16: [`Rotenstein et al. 2016`, `JAMA`, `Metanálise (estudantes de medicina)`, `doi:10.1001/jama.2016.17324`],
+  jacques19: [`Jacques-Hamilton, Sun & Smillie 2019`, `Journal of Experimental Psychology: General`, `ECR`, `doi:10.1037/xge0000516`],
+  margolis20: [`Margolis & Lyubomirsky 2020`, `Journal of Experimental Psychology: General`, `ECR`, `doi:10.1037/xge0000668`],
+  nguyen18: [`Nguyen, Ryan & Deci 2018`, `Personality and Social Psychology Bulletin`, `Experimentos (solitude)`, `doi:10.1177/0146167217733073`],
+  holt10: [`Holt-Lunstad, Smith & Layton 2010`, `PLoS Medicine`, `Metanálise (148 estudos)`, `doi:10.1371/journal.pmed.1000316`],
+  holt15: [`Holt-Lunstad et al. 2015`, `Perspectives on Psychological Science`, `Metanálise`, `doi:10.1177/1745691614568352`],
+  hall19: [`Hall 2019`, `Journal of Social and Personal Relationships`, `Estudos longitudinais`, `doi:10.1177/0265407518761225`],
+  epley14: [`Epley & Schroeder 2014`, `Journal of Experimental Psychology: General`, `Experimentos de campo`, `doi:10.1037/a0037323`],
+  sandstrom14: [`Sandstrom & Dunn 2014`, `Personality and Social Psychology Bulletin`, `Amostragem de experiência`, `doi:10.1177/0146167214529799`],
+  kardas22: [`Kardas, Kumar & Epley 2022`, `Journal of Personality and Social Psychology`, `6 experimentos`, `doi:10.1037/pspa0000281`],
+  masi11: [`Masi et al. 2011`, `Personality and Social Psychology Review`, `Metanálise`, `doi:10.1177/1088868310377394`],
+  cruwys22: [`Cruwys et al. 2022`, `British Journal of Psychiatry`, `ECR de não inferioridade`, `doi:10.1192/bjp.2021.128`],
+  li16: [`Li et al. 2016`, `JAMA Internal Medicine`, `Coorte`, `doi:10.1001/jamainternmed.2016.1615`],
+  prati25: [`Prati 2025`, `Psychological Science`, `Painel com análise intrapessoa`, `pm:Prati 2025 religious attendance mental health within-person Psychological Science`],
+  vanderweele25: [`VanderWeele et al. 2025`, `Nature Mental Health`, `Global Flourishing Study (22 países)`, `doi:10.1038/s44220-025-00423-5`],
+  jenkinson13: [`Jenkinson et al. 2013`, `BMC Public Health`, `Revisão sistemática`, `doi:10.1186/1471-2458-13-773`],
+  sutin26: [`Sutin et al. 2026`, `Psychological Medicine`, `Metanálise de coortes (488.765 pessoas)`, `pm:Sutin 2026 purpose in life mortality meta-analysis`],
+  dittmar14: [`Dittmar et al. 2014`, `Journal of Personality and Social Psychology`, `Metanálise`, `doi:10.1037/a0037409`],
+  ryan01: [`Ryan & Deci 2001`, `Annual Review of Psychology`, `Revisão`, `doi:10.1146/annurev.psych.52.1.141`],
+  panagioti17: [`Panagioti et al. 2017`, `JAMA Internal Medicine`, `Metanálise (burnout em médicos)`, `doi:10.1001/jamainternmed.2016.7674`],
+  west16: [`West et al. 2016`, `The Lancet`, `Metanálise (burnout em médicos)`, `doi:10.1016/S0140-6736(16)31279-X`],
+  oprea19: [`Oprea et al. 2019`, `European Journal of Work and Organizational Psychology`, `Metanálise (job crafting)`, `pm:Oprea 2019 job crafting interventions meta-analysis`],
+  sturm22: [`Sturm et al. 2022`, `Emotion`, `ECR`, `doi:10.1037/emo0000876`],
+  burnell25: [`Burnell et al. 2025`, `SSM – Mental Health`, `Metanálise (32 ECRs)`, `doi:10.1016/j.ssmmh.2025.100459`],
+  lemahieu25: [`Lemahieu et al. 2025`, `Scientific Reports`, `Metanálise pré-registrada (abstinência)`, `doi:10.1038/s41598-025-90984-3`],
+  thrul25: [`Thrul et al. 2025`, `Psychology of Popular Media`, `Reanálise de metanálise (duração)`, `doi:10.1037/ppm0000574`],
+  allcott20: [`Allcott et al. 2020`, `American Economic Review`, `ECR (desativar o Facebook)`, `doi:10.1257/aer.20190658`],
+  allcott25: [`Allcott et al. 2025`, `NBER Working Paper 33697`, `ECRs (Facebook e Instagram)`, `https://www.nber.org/papers/w33697`],
+  hunt18: [`Hunt et al. 2018`, `Journal of Social and Clinical Psychology`, `ECR`, `doi:10.1521/jscp.2018.37.10.751`],
+  castelo25: [`Castelo et al. 2025`, `PNAS Nexus`, `ECR pré-registrado`, `doi:10.1093/pnasnexus/pgaf017`],
+  grubbs19: [`Grubbs et al. 2019`, `Archives of Sexual Behavior`, `Revisão e modelo`, `doi:10.1007/s10508-018-1248-x`],
+  fernandez23: [`Fernandez et al. 2023`, `Archives of Sexual Behavior`, `ECR (7 dias de abstinência)`, `pm:Fernandez 2023 pornography abstinence randomized craving Archives of Sexual Behavior`],
+  boileau14: [`Boileau et al. 2014`, `Molecular Psychiatry`, `PET em jogo patológico`, `doi:10.1038/mp.2013.163`],
+  vuorre22: [`Vuorre et al. 2022`, `Royal Society Open Science`, `Coorte com telemetria`, `doi:10.1098/rsos.220411`],
+  wojcieszak22: [`Wojcieszak et al. 2022`, `Humanities & Social Sciences Communications`, `Experimentos pré-registrados`, `doi:10.1057/s41599-022-01423-x`],
+  killingsworth23: [`Killingsworth, Kahneman & Mellers 2023`, `PNAS`, `Colaboração adversarial`, `doi:10.1073/pnas.2208661120`],
+  weingarten21: [`Weingarten & Goodman 2021`, `Journal of Consumer Research`, `Metanálise`, `doi:10.1093/jcr/ucaa047`],
+  whillans17: [`Whillans et al. 2017`, `PNAS`, `Surveys e experimento de campo`, `doi:10.1073/pnas.1706541114`],
+  richardson13: [`Richardson et al. 2013`, `Clinical Psychology Review`, `Metanálise (dívida)`, `doi:10.1016/j.cpr.2013.08.009`],
+  dunn11: [`Dunn, Gilbert & Wilson 2011`, `Journal of Consumer Psychology`, `Revisão`, `doi:10.1016/j.jcps.2011.02.002`],
+  hook21: [`Hook et al. 2021`, `Journal of Positive Psychology`, `Revisão sistemática`, `doi:10.1080/17439760.2021.1991450`],
+  sharif21: [`Sharif, Mogilner & Hershfield 2021`, `Journal of Personality and Social Psychology`, `Surveys e experimentos`, `doi:10.1037/pspp0000391`],
+  stutzer08: [`Stutzer & Frey 2008`, `Scandinavian Journal of Economics`, `Painel`, `doi:10.1111/j.1467-9442.2008.00542.x`],
+  dzhambov19: [`Dzhambov & Lercher 2019`, `IJERPH`, `Metanálise (ruído)`, `doi:10.3390/ijerph16214134`],
+  fancourt19: [`Fancourt & Steptoe 2019`, `BMJ`, `Coorte`, `doi:10.1136/bmj.l6377`],
+  mak23: [`Mak et al. 2023`, `Nature Medicine`, `Coortes em 16 países`, `doi:10.1038/s41591-023-02506-1`],
+  who19: [`Fancourt & Finn 2019`, `Organização Mundial da Saúde`, `Revisão de escopo (artes e saúde)`, `https://iris.who.int/handle/10665/329834`],
+  koch19: [`Koch et al. 2019`, `Frontiers in Psychology`, `Metanálise (dança)`, `doi:10.3389/fpsyg.2019.01806`],
+  bavishi16: [`Bavishi, Slade & Levy 2016`, `Social Science & Medicine`, `Coorte`, `doi:10.1016/j.socscimed.2016.07.014`],
+  panero16: [`Panero et al. 2016`, `Journal of Personality and Social Psychology`, `Replicação`, `doi:10.1037/pspa0000064`],
+  dodell18: [`Dodell-Feder & Tamir 2018`, `Journal of Experimental Psychology: General`, `Metanálise`, `doi:10.1037/xge0000395`],
+  chang15: [`Chang et al. 2015`, `PNAS`, `Experimento cruzado (e-reader)`, `doi:10.1073/pnas.1418490112`],
+  herzog11: [`Herzog 2011`, `Current Directions in Psychological Science`, `Revisão`, `doi:10.1177/0963721411415220`],
+  sheldon12: [`Sheldon & Lyubomirsky 2012`, `Personality and Social Psychology Bulletin`, `Experimento (adaptação hedônica)`, `doi:10.1177/0146167212436400`],
+  nawijn10: [`Nawijn et al. 2010`, `Applied Research in Quality of Life`, `Transversal (n = 1.530)`, `doi:10.1007/s11482-009-9091-9`],
+  debloom09: [`de Bloom et al. 2009`, `Journal of Occupational Health`, `Metanálise (férias)`, `pm:de Bloom 2009 vacation health well-being meta-analysis`],
+  bartels15: [`Bartels 2015`, `Behavior Genetics`, `Metanálise de gêmeos`, `doi:10.1007/s10519-015-9713-y`],
+  brown20: [`Brown & Rohrer 2020`, `Journal of Happiness Studies`, `Crítica metodológica`, `doi:10.1007/s10902-019-00128-4`],
+  sheldon21: [`Sheldon & Lyubomirsky 2021`, `Journal of Positive Psychology`, `Revisão do modelo`, `pm:Sheldon Lyubomirsky 2021 revisiting the sustainable happiness model and pie chart`],
+  gollwitzer06: [`Gollwitzer & Sheeran 2006`, `Advances in Experimental Social Psychology`, `Metanálise (94 testes)`, `doi:10.1016/S0065-2601(06)38002-1`],
+  lally10: [`Lally et al. 2010`, `European Journal of Social Psychology`, `Estudo longitudinal`, `doi:10.1002/ejsp.674`],
+  coles22: [`Coles et al. 2022`, `Nature Human Behaviour`, `Many Smiles (19 países)`, `doi:10.1038/s41562-022-01458-9`],
+  topp15: [`Topp et al. 2015`, `Psychotherapy and Psychosomatics`, `Revisão sistemática (WHO-5)`, `doi:10.1159/000376585`],
+  mauss11: [`Mauss et al. 2011`, `Emotion`, `Experimentos`, `doi:10.1037/a0022010`],
+  luhmann12: [`Luhmann et al. 2012`, `Journal of Personality and Social Psychology`, `Metanálise (eventos de vida)`, `doi:10.1037/a0025948`],
+  huta10: [`Huta & Ryan 2010`, `Journal of Happiness Studies`, `Estudos correlacionais e de intervenção`, `doi:10.1007/s10902-009-9171-4`]
+};
+
+/* m: 1 Corpo · 2 Mente · 3 Vínculos · 4 Sentido · 5 Atenção · 6 Recursos · 7 Lazer
+   v: columna · probabile · experimentum · indifferens · fabula · cave
+   c: confiança 1–4 (GRADE) · w: janela de teste em semanas (0 = não se aplica) */
+const P = [
+/* ───────── I · CORPO ───────── */
+{
+  id: `mexa-se`, m: 1, v: `columna`, c: 3,
+  cn: `Sintomas depressivos ●●●○ · bem-estar em saudáveis ●●○○`,
+  n: `Mexa o corpo quase todo dia`,
+  a: `Some 150 min de movimento por semana; metade disso já protege o humor.`,
+  imp: `Moderado (sintomas) · pequeno (bem-estar)`, custo: `Baixo`,
+  dose: `≈75 min/sem ou ~7.000 passos/dia`, fx: `Minutos (humor) · 4–8 sem (treino)`,
+  w: 8, ok: `WHO-5 sobe ≥10 pontos (ou PHQ-9 cai ≥2)`,
+  proto: [
+    `Mínimo: 2–3 caminhadas rápidas de 30 min por semana (≈75 min) ou ~7.000 passos por dia.`,
+    `Ótimo: 150–300 min/sem de intensidade moderada, em 3–5 dias, mais 2 sessões de força.`,
+    `Modalidade: a que você mantém. Caminhada/corrida, yoga e força tiveram os maiores efeitos; mais intensidade tende a render mais, mas leve também conta.`,
+    `Progressão: suba a intensidade antes do volume; uns 5 min a mais por semana.`
+  ],
+  dia: [
+    `Se eu sair do hospital antes das 19h, então caminho 20 min até o metrô.`,
+    `Escada no lugar do elevador; descer uma estação antes.`,
+    `Caminhar ao telefone com alguém soma vínculo ao movimento.`
+  ],
+  plantao: `10 min de escada ou caminhada rápida entre tarefas, ou 7–10 min de agachamento e flexão em casa. A meta é não zerar.`,
+  falha: `Troque a modalidade antes de desistir e confira sono e dose. Em quem já está bem, o ganho de humor é pequeno por natureza; o benefício para a saúde continua.`,
+  num: [
+    `Prevenção (15 coortes, 191 mil adultos): metade da dose recomendada associa-se a 18% menos depressão; a dose recomendada (≈2,5 h/sem de caminhada rápida), a 25% menos (IC 18–32%). Acima disso, o ganho se achata (Pearce 2022).`,
+    `Tratamento (218 ECRs, 14.170 pessoas, contra controles ativos): caminhada/corrida g −0,62; yoga −0,55; força −0,49. Certeza baixa para caminhada e muito baixa para as demais (Noetel 2024).`,
+    `Bem-estar em pessoas saudáveis: d = 0,36 (IC 0,30–0,42), concentrado em afeto positivo (Buecker 2021).`,
+    `Passos: 7.000 por dia contra 2.000 associam-se a 22% menos sintomas depressivos (57 estudos; Ding 2025).`,
+    `Metanálise em rede pré-registrada (183 ECRs, 22.811 adultos sem diagnóstico): exercício melhorou o bem-estar tanto quanto mindfulness e psicologia positiva (SMD 0,41–0,49) (Wilkie 2026).`
+  ],
+  trad: `d = 0,36 leva a pessoa típica do percentil 50 para perto do 64.`,
+  pq: `Centenas de ECRs, gradiente dose-resposta e benefícios colaterais à saúde sustentam o selo. Rebaixam: falta de cegamento, desfechos autorrelatados, heterogeneidade alta e nenhum estudo de felicidade ao mesmo tempo pré-registrado e com poder adequado (Folk & Dunn 2023).`,
+  rel: `R1 Pilar · R2 Pilar · R3 Pilar`,
+  quem: `Sedentários e quem tem sintomas depressivos ganham mais (efeito cerca de 2× maior que em saudáveis). Força e yoga tiveram menos abandono.`,
+  risco: `Lesão por progressão rápida. Overtraining piora humor e sono. Treinar lesionado ou com culpa por pular um dia sugere exercício compulsivo.`,
+  mito: `“10.000 passos são obrigatórios”; “só exercício intenso conta”; “exercício substitui qualquer tratamento”.`,
+  sin: `Sono, luz da manhã, natureza e vínculos. Uma caminhada no parque com alguém é um pacote, não três ganhos somados.`,
+  ctx: `Custo zero em calçadas, praças e escadas; parques como Ibirapuera e Villa-Lobos juntam natureza e movimento; SESC e o Programa Academia da Saúde (SUS) para dias de chuva.`,
+  src: [`pearce22`, `noetel24`, `buecker21`, `ding25`, `wilkie26`, `folk23`]
+},
+{
+  id: `sono-regular`, m: 1, v: `columna`, c: 3,
+  n: `Acorde sempre no mesmo horário`,
+  a: `Fixe a hora de acordar (±1 h, inclusive no fim de semana) e mire 7–9 h de sono.`,
+  imp: `Moderado`, custo: `Baixo`,
+  dose: `Horário fixo ±1 h; 7–9 h`, fx: `1–2 semanas`,
+  w: 4, ok: `WHO-5 sobe ≥10 e a sonolência diurna cai`,
+  proto: [
+    `Mínimo: acordar no mesmo horário todos os dias, com no máximo 60 min de diferença.`,
+    `Ótimo: janela de sono estável de 7–9 h; cama só para dormir; luz forte de manhã e pouca à noite.`,
+    `Fim de semana: no máximo 1 h de diferença. “Compensar” com horários deslocados piora a regularidade.`
+  ],
+  dia: [
+    `Se forem 22h30, então o celular vai carregar fora do quarto.`,
+    `Se eu não dormir em uns 20 min, então saio da cama e só volto com sono.`
+  ],
+  plantao: `Veja a ficha “Plantão: proteja o sono-âncora”.`,
+  falha: `Se o sono não melhorar em 4–6 semanas, investigue insônia (ficha TCC-I), apneia, problema de ritmo ou depressão.`,
+  num: [
+    `Melhorar o sono melhora a saúde mental de forma causal: 65 ECRs (n = 8.608), saúde mental composta g −0,53; depressão −0,63; ansiedade −0,51; ruminação −0,49; estresse −0,42, com dose-resposta (Scott 2021).`,
+    `Regularidade previu mortalidade melhor que a duração do sono (UK Biobank, actigrafia; observacional) (Windred 2024).`,
+    `Privação aguda reduz afeto positivo e aumenta ansiedade (154 estudos experimentais; Palmer 2024).`
+  ],
+  trad: `g = 0,53 leva a pessoa típica do percentil 50 para perto do 70, em amostras que dormiam mal.`,
+  pq: `Os ECRs manipulam o sono e mostram gradiente. Rebaixam: heterogeneidade alta, comparadores mistos e amostras que dormiam mal; a regularidade em si vem de coortes.`,
+  rel: `R1 Pilar · R2 Pilar · R3 Pilar`,
+  quem: `Mais para quem dorme mal ou tem horários caóticos. Quem já dorme bem não ganha nada mensurável tentando dormir mais.`,
+  risco: `Ortossonia (obsessão com o sono perfeito) piora o sono. Dormir mais de 9 h com frequência é sinal a investigar, não meta.`,
+  mito: `“Todo mundo precisa de exatamente 8 h”; “o fim de semana compensa”; “luz azul arruína o sono” (o efeito é pequeno; adiar a hora de dormir pesa mais).`,
+  sin: `Luz da manhã, exercício e celular fora do quarto agem em parte pelo sono. Cafeína e álcool são as alavancas negativas.`,
+  src: [`scott21`, `windred24`, `palmer24`, `watson15`]
+},
+{
+  id: `tcc-i`, m: 1, v: `columna`, cond: `Se você tem insônia`, c: 3,
+  n: `Se dorme mal, faça TCC-I`,
+  a: `Insônia por semanas? Faça um programa de terapia cognitivo-comportamental para insônia de 6–8 semanas, presencial ou em app.`,
+  imp: `Moderado a grande (insônia)`, custo: `Baixo a médio`,
+  dose: `6 semanas de programa`, fx: `2–4 sem (sono) · 6–12 sem (humor)`,
+  w: 8, ok: `Índice de Gravidade de Insônia cai ≥6 pontos ou WHO-5 sobe ≥10`,
+  proto: [
+    `Os motores: restrição do tempo na cama, controle de estímulos e reestruturação cognitiva.`,
+    `Higiene do sono sozinha é fraca: serve de embalagem, não de motor.`,
+    `Formato: terapeuta, grupo ou app estruturado. As versões digitais têm boa evidência.`
+  ],
+  dia: [
+    `Se eu não dormir em uns 20 min, então levanto e só volto com sono.`,
+    `Mesma hora de acordar todo dia, mesmo depois de noite ruim.`
+  ],
+  plantao: `A restrição de sono dá sonolência nas primeiras semanas: não comece em semana de plantão noturno ou de prova.`,
+  falha: `Sem melhora em 6–8 semanas, avalie apneia, transtorno de ritmo, depressão ou ansiedade.`,
+  num: [
+    `Prevenção em jovens (ECR, n = 708, 15–25 anos, insônia com sintomas depressivos leves): TCC-I em app por 6 semanas contra app de educação em saúde. Depressão maior em 12 meses: 10% contra 18%, cerca de 42% menos (NNT ≈ 12) (Chen 2025).`,
+    `Melhorar o sono: saúde mental g −0,53; depressão −0,63 (65 ECRs; Scott 2021).`
+  ],
+  pq: `ECR preventivo com controle ativo e um ano de seguimento, mais metanálises de ECRs. Rebaixam: amostras com insônia (evidência indireta para quem dorme bem) e desfechos autorrelatados.`,
+  rel: `R1 Pilar (se dorme mal) · R2 dentro de sono · R3 Pilar (condicional)`,
+  quem: `Pilar para quem dorme mal; indiferente para quem já dorme bem.`,
+  risco: `Sonolência transitória na fase de restrição: cuidado ao dirigir. Transtorno bipolar e epilepsia pedem supervisão, porque privação de sono pode desestabilizar.`,
+  mito: `“Remédio para dormir resolve a longo prazo”.`,
+  sin: `Regularidade, luz da manhã e corte de cafeína.`,
+  ctx: `TCC-I presencial é escassa no SUS; a digital é a via pragmática. Insônia persistente merece consulta na UBS.`,
+  src: [`chen25`, `scott21`]
+},
+{
+  id: `plantao`, m: 1, v: `experimentum`, c: 1,
+  cn: `Para humor ●○○○ (base fisiológica; sem ECR de bem-estar)`,
+  n: `Plantão: proteja o sono-âncora`,
+  a: `Em semana de turnos, preserve um bloco de sono fixo, cochile antes do plantão noturno e controle a luz.`,
+  imp: `Incerto`, custo: `Baixo`,
+  dose: `Cochilo de 20–30 min + bloco fixo de 4–5 h`, fx: `Agudo`,
+  w: 4, ok: `Humor do dia seguinte ≥1 ponto melhor (escala 0–10) em 4 ciclos (Heurística)`,
+  proto: [
+    `Âncora: mantenha um bloco de 4–5 h de sono sempre no mesmo horário, inclusive em dias de plantão (Heurística).`,
+    `Cochilo profilático de 20–30 min antes do plantão noturno; ao acordar, espere a inércia passar antes de decisões críticas.`,
+    `Luz forte durante o plantão; óculos escuros na volta pela manhã; quarto totalmente escuro para o sono diurno.`,
+    `Cafeína só na primeira metade do turno.`
+  ],
+  dia: [
+    `Se o plantão é noturno, então durmo 20–30 min entre 18h e 20h.`,
+    `Se saio do plantão às 7h, então volto de óculos escuros e durmo no escuro até o horário-âncora.`
+  ],
+  plantao: `Esta ficha já é a versão de plantão.`,
+  falha: `Ajuste o horário do cochilo e do bloco-âncora. Se o humor cair semana após semana, olhe a carga horária (ficha Burnout).`,
+  num: [
+    `Não há ECR com desfecho de humor para estas táticas; a base é fisiologia circadiana e estudos de desempenho.`,
+    `Intern Health Study (17.082 internos; PHQ-9 inicial 2,7; média de 63 h/sem): o PHQ-9 sobe 1,8 ponto com 40–45 h/sem e 5,2 pontos acima de 90 h/sem; nessa faixa, 33,4% preenchiam critério de depressão (Fang 2022).`,
+    `Trabalho em turnos associa-se a pior saúde mental, mais em mulheres (metanálise de estudos longitudinais; Torquati 2019).`
+  ],
+  pq: `Mecanismo circadiano bem estabelecido; desfecho de bem-estar não testado em ECR. O dado forte é outro: carga horária alta piora o humor de forma dose-dependente.`,
+  rel: `R1 Experimento · R2 dentro de sono · R3 dentro de sono`,
+  quem: `Plantonistas e cronotipos tardios.`,
+  risco: `Inércia do sono depois de cochilos longos; dirigir sonolento depois do plantão.`,
+  mito: `“Dá para compensar tudo no fim de semana”.`,
+  sin: `Luz, cafeína com corte e regularidade.`,
+  src: [`fang22`, `torquati19`]
+},
+{
+  id: `luz`, m: 1, v: `probabile`, c: 2,
+  n: `Luz de manhã, noite escura`,
+  a: `Pegue 10–30 min de luz externa na primeira hora do dia e deixe a noite com pouca luz.`,
+  imp: `Pequeno`, custo: `Baixo`,
+  dose: `10 min de luz externa ao acordar`, fx: `Dias a 2 semanas`,
+  w: 4, ok: `WHO-5 sobe ≥10 ou você acorda mais disposto`,
+  proto: [
+    `Mínimo: 10 min fora de casa na primeira hora, mesmo nublado (o dia externo tem 1.000 a mais de 10.000 lux; um interior, 300–500).`,
+    `Ótimo: 30 min, de preferência caminhando, o que soma movimento.`,
+    `À noite: luz baixa e quente; telas com brilho baixo.`
+  ],
+  dia: [
+    `Se eu acordar, então abro as cortinas e tomo o café na janela ou na calçada.`,
+    `Descer uma estação antes e caminhar 10 min no sol da manhã.`
+  ],
+  plantao: `Luz forte durante o plantão noturno; óculos escuros só na volta.`,
+  falha: `Mantenha pelos benefícios circadianos; não espere grande efeito se você já sai cedo de casa.`,
+  num: [
+    `UK Biobank, luz medida por sensor (n = 86.772): mais luz de dia associa-se a menos depressão e mais bem-estar; mais luz à noite, a mais depressão, ansiedade e psicose. Desenho transversal e ORs modestos (Burns 2023).`,
+    `Fototerapia como adjuvante na depressão não sazonal: remissão de ~41% contra ~24% (11 ECRs; Menegaz de Almeida 2025). É evidência clínica, indireta para saudáveis.`
+  ],
+  pq: `Estudo observacional grande, com medida objetiva e mecanismo sólido. Mas uma coorte prospectiva holandesa foi quase toda nula e não há ECR em saudáveis com desfecho de bem-estar. O custo é quase zero.`,
+  rel: `R1 Experimento · R2 Pilar · R3 Aposta sólida`,
+  quem: `Quem vive em ambientes fechados, cronotipos tardios e plantonistas.`,
+  risco: `Fototerapia pode desencadear mania em transtorno bipolar. Sol sem proteção em horário de UV alto.`,
+  mito: `“Luz pela janela basta” (o vidro filtra boa parte); “luz azul do celular arruína o sono” (exagero).`,
+  sin: `Regularidade do sono e caminhada matinal: movimento, luz e natureza num pacote só.`,
+  ctx: `Em São Paulo o sol nasce entre ~5h30 (verão) e ~6h45 (inverno). A dose é sair do ambiente interno, não tomar sol forte.`,
+  src: [`burns23`, `menegaz25`]
+},
+{
+  id: `comida`, m: 1, v: `probabile`, c: 2,
+  cn: `Bem-estar em saudáveis ●●○○ · sintomas depressivos ●●●○`,
+  n: `Coma comida de verdade`,
+  a: `Monte a maior parte das refeições com comida in natura: arroz, feijão, vegetais, frutas, azeite, peixe, castanhas.`,
+  imp: `Pequeno (saudáveis) · moderado (com depressão)`, custo: `Médio`,
+  dose: `+2 porções de frutas e vegetais por dia`, fx: `~2 sem (vitalidade) · 8–12 sem (humor)`,
+  w: 12, ok: `WHO-5 sobe ≥10 em 12 semanas`,
+  proto: [
+    `Mínimo: a regra de ouro do Guia Alimentar brasileiro, com base in natura ou minimamente processada e preparações culinárias.`,
+    `Ótimo (padrão dos ECRs): azeite como gordura principal; ≥2 porções de vegetais e ≥2 de frutas por dia; leguminosas ≥3×/sem; peixe ≥2×/sem; castanhas.`,
+    `Progressão: troque um item por refeição; 8–12 semanas é o prazo dos ECRs.`
+  ],
+  dia: [
+    `Se for almoçar no refeitório, então escolho o prato com vegetal, feijão e proteína.`,
+    `Marmita de domingo; fruta na mochila.`
+  ],
+  plantao: `Lanche de verdade (castanhas, fruta, sanduíche natural) no lugar da máquina de salgadinho.`,
+  falha: `Mantenha pela saúde geral; o efeito sobre o humor em quem já come bem é pequeno.`,
+  num: [
+    `16 ECRs (n = 45.826, maioria sem diagnóstico): melhorar a dieta reduziu sintomas depressivos, g 0,275 (IC 0,10–0,45); contra controle ativo, 0,17. Ansiedade: sem efeito (Firth 2019).`,
+    `SMILES (n = 67, depressão maior, 12 semanas): remissão de 32% contra 8% (Jacka 2017). Pequeno e simples-cego.`,
+    `+2 porções de frutas e vegetais por dia durante 14 dias (ECR, n = 171 jovens): mais vitalidade, florescimento e motivação; sem mudança em depressão ou ansiedade (Conner 2017).`,
+    `Coortes: maior adesão ao padrão mediterrâneo, RR 0,67 de depressão (Lassale 2019; confundimento possível).`
+  ],
+  pq: `Direção consistente, efeitos pequenos, ECRs curtos e não cegos. As coortes exageram por confundimento (renda, saúde, escolaridade).`,
+  rel: `R1 Aposta sólida · R2 Aposta sólida · R3 Aposta sólida`,
+  quem: `Mais para quem tem sintomas depressivos ou come mal; pouco para quem já come bem.`,
+  risco: `Rigidez alimentar e ortorexia. A regra é direção, não contabilidade.`,
+  mito: `“90% da serotonina é intestinal, então a dieta controla o humor” (a serotonina do intestino não atravessa a barreira hematoencefálica); “jejum intermitente melhora o humor” (sem evidência consistente).`,
+  sin: `Sono e exercício formam a mesma coluna de estilo de vida.`,
+  ctx: `Arroz, feijão, vegetal e proteína já é um prato próximo do mediterrâneo e barato. Sardinha em lata resolve o peixe; uma colher de azeite por dia basta.`,
+  src: [`firth19`, `jacka17`, `conner17`, `lassale19`, `guia14`]
+},
+{
+  id: `porcaria`, m: 1, v: `probabile`, cave: true, c: 2,
+  n: `Porcaria como exceção, sem culpa`,
+  a: `Trate ultraprocessados como exceção da semana, não como base do dia. Não existe número mágico.`,
+  imp: `Pequeno (indireto)`, custo: `Médio`,
+  dose: `Regra 80/20 a 90/10 (Heurística)`, fx: `Semanas`,
+  w: 8, ok: `WHO-5 e energia à tarde melhoram`,
+  proto: [
+    `Não há limiar validado de “porcaria por semana”. A heurística que equilibra descaso e rigidez: 80–90% das refeições de comida de verdade, o resto livre.`,
+    `No Brasil, ultraprocessados somam cerca de 20–30% das calorias; ficar abaixo da média já é um passo grande.`,
+    `Cuide mais do que a porcaria desloca (frutas, vegetais, sono) do que da porcaria em si.`
+  ],
+  dia: [
+    `Se eu quiser algo ultraprocessado, então como sentado, devagar e sem culpa, e não transformo em “já que furei”.`
+  ],
+  plantao: `Evite energético em série e doce para “dar energia”: piora o alerta na primeira hora.`,
+  falha: `Se a regra virar culpa ou obsessão, afrouxe. Rigidez é o efeito colateral mais provável aqui.`,
+  num: [
+    `Umbrella review (45 análises, ~9,9 milhões de pessoas): ultraprocessados associam-se a ansiedade (OR 1,48), transtornos mentais comuns (OR 1,53) e depressão incidente (HR 1,22). GRADE baixo a muito baixo; associação, não causa (Lane 2024).`,
+    `Coortes de Pelotas (n = 6.295): nenhuma associação prospectiva entre ultraprocessados e transtorno mental comum (Werneck 2022).`,
+    `A cadeia “junk food → inflamação → anedonia” não está demonstrada em humanos, exceto num subgrupo com inflamação alta.`,
+    `Açúcar não melhora o humor e piora o alerta na primeira hora (31 estudos; Mantantzis 2019).`
+  ],
+  pq: `Associação consistente com mecanismos plausíveis, mas sem ECR que randomize ultraprocessados com desfecho mental, e com coorte brasileira nula.`,
+  rel: `R1 Aposta sólida + Cuidado · R2 dentro de alimentação · R3 Aposta sólida + Cuidado`,
+  quem: `Quem vive de lanchonete e máquina ganha mais.`,
+  risco: `Ortorexia e culpa. Proibir tudo aumenta o efeito “já que furei, vou com tudo”.`,
+  mito: `“Comfort food conforta” (conforta tanto quanto qualquer comida); “açúcar dá energia”.`,
+  sin: `Comida de verdade e sono.`,
+  src: [`lane24`, `werneck22`, `mantantzis19`, `wagner14`]
+},
+{
+  id: `suplementos`, m: 1, v: `indifferens`, c: 3,
+  cn: `●●●○ para a ausência de efeito`,
+  n: `Suplemento só com deficiência`,
+  a: `Não tome suplemento para o humor sem deficiência documentada; com fadiga persistente, faça exames antes.`,
+  imp: `Desprezível`, custo: `Baixo`,
+  dose: `Exames antes: ferritina, B12, TSH, 25(OH)D`, fx: `—`, w: 0,
+  proto: [
+    `Com fadiga ou humor baixo persistentes: hemograma, ferritina, TSH, B12 e, se houver risco, 25(OH)D. Trate o que estiver baixo e reavalie em 6–8 semanas.`,
+    `Compre produtos com registro e desconfie de promessas: num levantamento brasileiro, um terço dos suplementos vendidos online tinha substâncias proibidas para a categoria.`
+  ],
+  tab: [
+    [`Vitamina D`, `Indiferente sem deficiência. O maior ECR foi nulo.`],
+    [`Ômega-3 (EPA)`, `Só como adjuvante em depressão clínica, com médico. Certeza muito baixa.`],
+    [`Triptofano / 5-HTP`, `Sem evidência. Cuidado: síndrome serotoninérgica com antidepressivos.`],
+    [`Açafrão (saffron)`, `Experimento em depressão leve; o efeito some nas escalas aplicadas por avaliador.`],
+    [`Ashwagandha`, `Experimento para estresse. Cuidado: casos de lesão hepática.`],
+    [`Magnésio, probióticos, L-teanina`, `Efeitos pequenos e incertos.`],
+    [`Creatina`, `Nada no humor de quem está descansado; possível ajuda cognitiva sob privação de sono.`],
+    [`Ferro`, `Se ferritina baixa com fadiga, mesmo sem anemia.`],
+    [`B12 / folato`, `Só se houver deficiência.`]
+  ],
+  num: [
+    `VITAL-DEP (n = 18.353, ≥50 anos, 2.000 UI/dia por 5,3 anos): risco de depressão HR 0,97 (IC 0,87–1,09) e diferença de 0,01 ponto no PHQ-8 (Okereke 2020).`,
+    `Ômega-3 na depressão maior: SMD −0,40 (≈2,5 pontos na escala de Hamilton), certeza muito baixa; sem diferença em resposta ou remissão (Appleton 2021).`
+  ],
+  pq: `Um ECR gigante e nulo, randomização mendeliana nula para vitamina D e o padrão clássico de efeito grande em estudo pequeno e curto que some no longo prazo.`,
+  rel: `R1 Indiferente · R2 Indiferente / Experimento · R3 Indiferente`,
+  quem: `Exceções com evidência própria: ferro com ferritina baixa, EPA como adjuvante na depressão clínica, deficiências documentadas.`,
+  risco: `Interações (5-HTP com antidepressivos; ashwagandha e fígado), sobrecarga de ferro e contaminação de produtos.`,
+  mito: `“Vitamina D baixa causa depressão e suplementar resolve”; “triptofano melhora o humor”.`,
+  ctx: `A ANVISA regula suplementos como alimentos, sem exigir prova de eficácia.`,
+  src: [`okereke20`, `appleton21`, `molin19`, `turner06`]
+},
+{
+  id: `alcool`, m: 1, v: `columna`, cond: `Se você bebe`, cave: true, c: 2,
+  cn: `Bem-estar ●●○○ · danos à saúde ●●●●`,
+  n: `Álcool: quanto menos, melhor`,
+  a: `Se bebe, corte os episódios de exagero e crie dias sem álcool. Se não bebe, não comece pelo bem-estar.`,
+  imp: `Pequeno a moderado ao reduzir`, custo: `Baixo`,
+  dose: `Nenhum binge; 2–3 dias sem álcool por semana`, fx: `2–4 sem (sono e ansiedade)`,
+  w: 4, ok: `WHO-5 sobe ≥10 e o sono fica menos fragmentado`,
+  proto: [
+    `Mínimo: eliminar os episódios de 4–5 doses ou mais e criar 2–3 dias sem álcool por semana.`,
+    `Teto (Heurística): até 1–2 doses por dia, com pausas.`,
+    `Troca: cerveja sem álcool e água com gás funcionam como redução de dano no contexto social.`
+  ],
+  dia: [
+    `Se for beber, então só socialmente e junto de comida.`,
+    `Se o plantão foi ruim, então descomprimo sem álcool: banho, caminhada, conversa.`
+  ],
+  plantao: `A cerveja pós-plantão para dormir é armadilha dupla: fragmenta o sono e alimenta a ruminação.`,
+  falha: `Tentar cortar e não conseguir é sinal para pedir ajuda (UBS, CAPS-AD).`,
+  num: [
+    `Randomização mendeliana não linear (n = 371.463): o “benefício” do beber leve desaparece e o risco cardiovascular sobe com a dose. A curva em J vinha de confundimento: o grupo dos abstêmios inclui ex-bebedores doentes (Biddinger 2022).`,
+    `Não existe randomização mendeliana com desfecho de bem-estar; para o humor, a recomendação é inferência (sono, ansiedade-rebote) [lacuna].`
+  ],
+  pq: `Pilar pelo critério “impacto pequeno no bem-estar, grande benefício colateral à saúde e custo baixo”. Para o bem-estar em si, a evidência é indireta.`,
+  rel: `R1 Mito (“beber moderado protege”) + Cuidado · R2 Pilar · R3 Pilar (condicional)`,
+  quem: `Quem bebe 3–4 doses ou mais por semana, ou em binge; quem tem ansiedade ou insônia.`,
+  risco: `Dependência, interações e risco de câncer, que cresce desde doses baixas.`,
+  mito: `“Uma taça por dia protege o coração”.`,
+  sin: `O ganho aparece sobretudo pelo sono: não conte duas vezes.`,
+  src: [`biddinger22`]
+},
+{
+  id: `cafeina`, m: 1, v: `probabile`, c: 3,
+  cn: `Efeito no sono ●●●○`,
+  n: `Cafeína com horário de corte`,
+  a: `Fique abaixo de 400 mg de cafeína por dia e tome a última dose 8–9 h antes de dormir.`,
+  imp: `Pequeno`, custo: `Baixo`,
+  dose: `Última dose 8–9 h antes de deitar`, fx: `~2 semanas`,
+  w: 4, ok: `Você adormece mais rápido e o WHO-5 sobe (vale alternar 1 semana com corte, 1 sem)`,
+  proto: [
+    `Referências aproximadas: café coado ~100 mg por xícara; espresso 60–80 mg; energético ~80 mg por lata.`,
+    `Corte: café pelo menos 8,8 h antes de deitar. 400 mg atrapalham o sono até 12 h depois; 100 mg, até umas 4 h.`
+  ],
+  dia: [
+    `Se já passou das 14h e eu durmo às 23h, então troco por descafeinado.`
+  ],
+  plantao: `Use cafeína na primeira metade do turno e conte 8–9 h até o sono planejado (12 h se a dose foi alta).`,
+  falha: `Se nada mudar no sono, a cafeína provavelmente não é o seu gargalo.`,
+  num: [
+    `Metanálise: a cafeína reduz o sono total em ~45 min e a eficiência do sono em ~7% (Gardiner 2023).`,
+    `Doses altas aumentam ansiedade; o limite prático fica em ~400 mg/dia.`
+  ],
+  pq: `ECRs cruzados e metanálises convergentes para o sono; para ansiedade, base menor.`,
+  rel: `R1 Experimento + Cuidado · R2 Heurística (corte às 14h) · R3 Aposta sólida`,
+  quem: `Plantonistas e quem tem insônia ou ansiedade.`,
+  risco: `Ansiedade, palpitação e sono pior.`,
+  mito: `“Café de tarde não afeta quem está acostumado”.`,
+  sin: `Regularidade do sono.`,
+  src: [`gardiner23`]
+},
+{
+  id: `fumo`, m: 1, v: `columna`, cond: `Se você fuma`, c: 3,
+  n: `Parar de fumar melhora o humor`,
+  a: `Se fuma, trate a dependência com apoio: o humor melhora depois de parar, não piora.`,
+  imp: `Moderado`, custo: `Médio`,
+  dose: `Tratamento com apoio (gratuito no SUS)`, fx: `4–6 semanas`,
+  w: 12, ok: `Abstinência mantida e WHO-5 maior em 3 meses`,
+  proto: [`Procure o programa de cessação do tabagismo na UBS: apoio e medicação dobram ou triplicam a chance de sucesso.`],
+  num: [`26 estudos longitudinais: parar de fumar associa-se a menos ansiedade (d −0,37), depressão (−0,25) e estresse (−0,27), e a mais afeto positivo (+0,40). O efeito foi igual ou maior em quem tem transtorno psiquiátrico (Taylor 2014).`],
+  pq: `Observacional, porque não dá para randomizar o fumo, mas são dezenas de coortes convergentes e de direção estável.`,
+  rel: `R1 Pilar · R2 Pilar · R3 Pilar`,
+  mito: `“Fumar alivia o estresse”.`,
+  src: [`taylor14`]
+},
+{
+  id: `substancias`, m: 1, v: `cave`, c: 3,
+  cn: `Risco da cannabis ●●●○ · psicodélicos em saudáveis ●○○○`,
+  n: `Cannabis e psicodélicos: cautela`,
+  a: `Evite cannabis antes dos 25 anos e não use psicodélicos por conta própria em busca de bem-estar.`,
+  imp: `Prevenção de risco`, custo: `—`,
+  dose: `—`, fx: `—`, w: 0,
+  num: [
+    `Uso pesado de cannabis contra nenhum uso: psicose OR 3,90 (Marconi 2016). Uso antes dos 18: depressão adulta OR 1,37, ideação suicida 1,50, tentativa 3,46 (Gobbi 2019). Umbrella de 101 metanálises recomenda evitar antes dos 25 (Solmi 2023).`,
+    `Psicodélicos em saudáveis: ECRs pequenos, com forte efeito de expectativa (a microdose só superou o placebo em quem adivinhou a condição) e ansiedade intensa nas doses altas.`,
+    `No Brasil, psilocibina, LSD e MDMA são proibidos fora de pesquisa; o uso religioso da ayahuasca é regulamentado.`
+  ],
+  pq: `Metanálises de coortes convergentes para cannabis, com causalidade parcial e gradiente plausível; para psicodélicos, ensaios pequenos e amostras clínicas supervisionadas.`,
+  rel: `R1 Cuidado · R2 Não recomendar · R3 Cuidado / Experimento + Cuidado`,
+  risco: `Cannabis: psicose em predispostos, dependência, prejuízo cognitivo. Psicodélicos: ansiedade aguda, psicose em vulneráveis e interações.`,
+  src: [`marconi16`, `gobbi19`, `solmi23`]
+},
+{
+  id: `natureza`, m: 1, v: `experimentum`, c: 2,
+  cn: `●○○○ a ●●○○`,
+  n: `Natureza: umas 2 horas por semana`,
+  a: `Some cerca de 120 min por semana em parques e áreas verdes, de preferência caminhando com alguém.`,
+  imp: `Pequeno`, custo: `Baixo`,
+  dose: `120 min/sem, em qualquer divisão`, fx: `Agudo · semanas`,
+  w: 6, ok: `WHO-5 sobe ≥10 em 6 semanas`,
+  proto: [
+    `Mínimo: ~120 min por semana; uma visita longa vale o mesmo que várias curtas.`,
+    `Junte com movimento e companhia. Verde urbano conta.`
+  ],
+  dia: [
+    `Se for terça ou quinta, então volto pelo parque.`,
+    `Almoço numa praça arborizada perto do hospital.`
+  ],
+  num: [
+    `Inglaterra (n = 19.806, transversal): 120 min ou mais por semana associam-se a alto bem-estar (OR 1,23) e boa saúde (OR 1,59), com pico entre 200 e 300 min (White 2019).`,
+    `Metanálise em rede pré-registrada (183 ECRs, 2026): intervenções baseadas em natureza não foram significativamente melhores que os controles; evidência limitada (Wilkie 2026).`,
+    `ECR pequeno: 90 min de caminhada em área verde reduziram a ruminação (Bratman 2015).`
+  ],
+  pq: `O número famoso vem de um estudo transversal, e a síntese pré-registrada mais recente não confirmou efeito. Por isso o selo é Experimento.`,
+  rel: `R1 Experimento · R2 Aposta sólida · R3 Aposta sólida → consolidado em Experimento pela metanálise de 2026`,
+  quem: `Moradores de cidade com ruminação alta e pouco verde em volta.`,
+  risco: `Calor e segurança em parques ao anoitecer.`,
+  mito: `“Precisa de floresta ou praia deserta”.`,
+  sin: `Caminhada no parque com alguém junta movimento, luz e vínculo num pacote só.`,
+  src: [`white19`, `wilkie26`, `bratman15`, `folk23`]
+},
+{
+  id: `respiracao`, m: 1, v: `experimentum`, c: 2,
+  n: `Respiração lenta, 5 min por dia`,
+  a: `Pratique 5 min de suspiro cíclico (duas inspirações pelo nariz e uma expiração longa) e use 1–2 suspiros nos picos de estresse.`,
+  imp: `Pequeno (agudo)`, custo: `Baixo`,
+  dose: `5 min/dia`, fx: `Minutos`,
+  w: 4, ok: `Afeto negativo diário menor; alterne 1 semana com e 1 sem`,
+  num: [
+    `ECR remoto: 5 min por dia de suspiro cíclico durante 1 mês melhoraram o afeto positivo mais que o mesmo tempo de meditação mindfulness (Balban 2023).`,
+    `Metanálise de técnicas respiratórias: estresse g −0,35; ansiedade −0,32; depressão −0,40, com risco de viés moderado e alerta dos autores contra exageros (Fincham 2023).`
+  ],
+  pq: `Um ECR bem desenhado e uma metanálise pequena; efeitos agudos, estudos curtos.`,
+  rel: `R1 Experimento · R2 Experimento · R3 Aposta sólida`,
+  quem: `Boa ferramenta para crises agudas; mindfulness é o treino de longo prazo.`,
+  risco: `Tontura se hiperventilar: respire devagar.`,
+  src: [`balban23`, `fincham23`]
+},
+{
+  id: `frio`, m: 1, v: `experimentum`, cave: true, c: 1,
+  n: `Banho frio e sauna: opcionais`,
+  a: `Uma ducha fria de 30–90 s no fim do banho é um experimento seguro para quem gosta. Não é obrigação.`,
+  imp: `Pequeno`, custo: `Baixo`,
+  dose: `30–90 s de água fria`, fx: `Agudo (alerta)`,
+  w: 4, ok: `Sem expectativa de humor duradouro`,
+  num: [
+    `O “+250% de dopamina” vem de 1 h de imersão a 14 °C em poucos jovens: dopamina do sangue, não do cérebro, e sem desfecho de humor (Šrámek 2000).`,
+    `Duchas frias por 30 dias (n = 3.018): 29% menos faltas ao trabalho, sem mudança nos dias de doença (Buijze 2016).`
+  ],
+  pq: `Fisiologia interessante; ensaios de humor inexistentes ou frágeis.`,
+  rel: `R1 Alerta agudo · R2 Indiferente / Experimento · R3 Experimento + Cuidado`,
+  risco: `Cardiopatas: o choque térmico eleva pressão e frequência cardíaca.`,
+  mito: `“Banho frio aumenta a dopamina em 250% e melhora o humor de vez”.`,
+  src: [`sramek00`, `buijze16`]
+},
+{
+  id: `toque`, m: 1, v: `probabile`, c: 2,
+  n: `Toque, abraço e massagem`,
+  a: `Inclua toque consentido na rotina: abraços longos, massagem, carinho.`,
+  imp: `Pequeno a moderado`, custo: `Baixo`,
+  dose: `Diário, à vontade`, fx: `Agudo`, w: 0,
+  num: [`Metanálise pré-registrada (137 estudos, n = 12.966): toque contra nenhum toque reduziu dor (g 0,69), depressão (0,59) e ansiedade (0,64); toque humano superou objetos e robôs; efeito menor em saudáveis (0,37). Sem cegamento possível, as magnitudes devem estar infladas (Packheiser 2024).`],
+  pq: `Metanálise ampla e pré-registrada, mas com desfechos autorrelatados e heterogeneidade alta.`,
+  rel: `R1 Aposta sólida · R2 Aposta sólida · R3 Aposta sólida`,
+  risco: `Só com consentimento.`,
+  src: [`packheiser24`]
+},
+
+/* ───────── II · MENTE ───────── */
+{
+  id: `mindfulness`, m: 2, v: `probabile`, cave: true, c: 3,
+  cn: `Sofrimento psíquico ●●●○ · bem-estar ●●○○`,
+  n: `Mindfulness, 10 min por dia`,
+  a: `Pratique 5–10 min por dia por 8 semanas, esperando menos estresse, não iluminação.`,
+  imp: `Pequeno a moderado`, custo: `Baixo`,
+  dose: `5–10 min/dia`, fx: `4–8 semanas`,
+  w: 8, ok: `WHO-5 sobe ≥10 ou o estresse percebido cai`,
+  proto: [
+    `Mínimo: 5–10 min por dia num app estruturado ou em prática sentada.`,
+    `Ótimo: 10–20 min por dia, 5–6 dias por semana, ou um programa de 8 semanas (MBSR, MBCT).`,
+    `Teto: não há dose-resposta clara acima de 20–30 min por dia. Progrida em constância, não em minutos.`,
+    `Tipos: atenção à respiração, escaneamento corporal, compaixão. Nenhum mostrou superioridade clara.`
+  ],
+  dia: [
+    `Se eu sentar no metrô, então pratico 10 min.`,
+    `Atenção plena numa tarefa do dia (lavar a louça, caminhar até o hospital) também conta.`
+  ],
+  plantao: `3 min de respiração atenta antes de entrar no plantão.`,
+  falha: `Troque por exercício ou psicologia positiva: contra alternativas ativas, mindfulness não leva vantagem.`,
+  num: [
+    `Dados individuais de 13 ECRs (n = 2.371, contextos não clínicos): sofrimento psíquico SMD −0,32 (IC −0,41 a −0,24) de 1 a 6 meses, com intervalo de predição igual ao IC e sem moderadores individuais; contra controle passivo (Galante 2023).`,
+    `136 ECRs não clínicos: bem-estar +0,33 contra não intervenção; sem superioridade contra controles ativos específicos (Galante 2021).`,
+    `Metanálise em rede pré-registrada (2026): mindfulness, compaixão, yoga, exercício e psicologia positiva tiveram SMD 0,41–0,49, sem diferença entre si (Wilkie 2026).`
+  ],
+  trad: `SMD 0,32 leva a pessoa típica do percentil 50 para perto do 63.`,
+  pq: `Metanálises grandes e homogêneas, mas contra controle passivo; contra alternativas ativas o efeito encolhe. Folk & Dunn (2023) não encontraram estudo de felicidade pré-registrado e bem potenciado.`,
+  rel: `R1 Aposta sólida + Cuidado · R2 Aposta sólida · R3 Pilar`,
+  quem: `Mais sofrimento no início, mais ganho absoluto. Trauma não estabilizado ou psicose pedem acompanhamento.`,
+  risco: `Eventos adversos em ~8% dos praticantes nos estudos (ansiedade, despersonalização), mais em retiros intensivos (Farias 2020).`,
+  mito: `“Meditação muda a estrutura do cérebro em 8 semanas” (o maior ECR com controle ativo não encontrou mudança; Kral 2022); “é superior ao exercício”.`,
+  sin: `Respiração lenta para crises; autocompaixão. Mindfulness e exercício são alternativas equivalentes: escolha pelo gosto.`,
+  src: [`galante23`, `galante21`, `wilkie26`, `vanagteren21`, `farias20`, `kral22`]
+},
+{
+  id: `gratidao`, m: 2, v: `probabile`, c: 2,
+  n: `Três coisas boas, uma vez por semana`,
+  a: `Uma vez por semana, escreva três coisas boas que aconteceram e por quê, ou agradeça a alguém.`,
+  imp: `Pequeno`, custo: `Baixo`,
+  dose: `1×/semana, 5 min`, fx: `2–6 semanas`,
+  w: 6, ok: `WHO-5 sobe ≥10; depois pause 4 semanas e compare`,
+  proto: [
+    `Mínimo: uma sessão de 5 min por semana.`,
+    `Varie o formato: três coisas boas, carta de gratidão lida em voz alta, mensagem de agradecimento. Combinar tipos aumentou o efeito.`,
+    `Frequência: no estudo clássico, 1×/semana rendeu mais que 3×/semana, provavelmente por adaptação. Não foi replicado em larga escala; use como heurística.`
+  ],
+  dia: [
+    `Se for domingo à noite, então abro a nota “3 coisas boas”.`,
+    `Depois de um bom plantão, mando uma mensagem agradecendo a um colega.`
+  ],
+  plantao: `Pode pausar em semana pesada. A mensagem a um colega é a versão de 1 minuto.`,
+  falha: `Se virar obrigação, reduza ou pare. Gratidão não trata depressão.`,
+  num: [
+    `Metanálise pré-registrada (145 artigos, 24.804 pessoas, 28 países): g = 0,19 (IC 0,15–0,22) no bem-estar, sobretudo no afeto positivo; o efeito variou entre países (Choi 2025).`,
+    `Contra controle psicologicamente ativo: d −0,03, ou seja, igual (Davis 2016). Parte do efeito é fator comum.`,
+    `Sintomas de depressão e ansiedade: g −0,29 no pós-teste (27 estudos); os autores desaconselham usar como autoajuda para depressão (Cregg & Cheavens 2021).`
+  ],
+  trad: `g = 0,19 leva a pessoa típica do percentil 50 para perto do 58.`,
+  pq: `Base grande e transnacional, com efeito pequeno e estável; contra placebo ativo, o efeito some.`,
+  rel: `R1 Aposta sólida · R2 Aposta sólida · R3 Aposta sólida`,
+  quem: `Funciona melhor em quem está no meio do bem-estar. Perfeccionistas podem transformar em cobrança.`,
+  risco: `Positividade tóxica; pode soar invalidante no luto.`,
+  mito: `“Diário de gratidão todo dia é melhor”; “gratidão cura depressão”.`,
+  sin: `Saborear usa o mesmo mecanismo: fazer os dois duplica o esforço, não o ganho.`,
+  src: [`choi25`, `davis16`, `cregg21`, `whiteuttl19`, `lyubomirsky05`]
+},
+{
+  id: `gentileza`, m: 2, v: `probabile`, c: 2,
+  n: `Gentileza e gasto com os outros`,
+  a: `Faça uns cinco pequenos atos de gentileza por semana e, de vez em quando, gaste um pouco com alguém.`,
+  imp: `Pequeno`, custo: `Baixo`,
+  dose: `~5 atos por semana`, fx: `2–4 semanas`,
+  w: 6, ok: `WHO-5 sobe ≥10, ou o humor no dia do ato melhora`,
+  proto: [
+    `Escolha atos que você faria de boa vontade: ajudar um colega, mandar uma mensagem de apoio, levar um café para quem dobrou o plantão.`,
+    `Varie os atos. Pequeno e frequente supera grande e raro.`
+  ],
+  num: [
+    `Metanálise (27 estudos, n = 4.045): gentileza aumenta o bem-estar de quem pratica, δ = 0,28 (Curry 2018).`,
+    `Revisão de experimentos pré-registrados: surpreendentemente pouco apoio para “atos aleatórios de gentileza” (Folk & Dunn 2024).`,
+    `Gasto pró-social: a replicação registrada teve resultado misto, com efeito numa compra real e nulo quando as pessoas só relembravam um gasto (Aknin 2020).`
+  ],
+  pq: `Metanálise favorável, enfraquecida pelos testes pré-registrados. Pequeno e barato: aposta, não pilar.`,
+  rel: `R1 Experimento (gentileza) / Aposta (gasto) · R2 Aposta sólida · R3 Aposta (gentileza) / Experimento (gasto)`,
+  quem: `Escolha autônoma importa. Ajuda informal se associa mais ao bem-estar que voluntariado formal (Hui 2020).`,
+  risco: `Ajudar por obrigação ou até a exaustão.`,
+  src: [`curry18`, `folk24`, `aknin20`, `hui20`]
+},
+{
+  id: `saborear`, m: 2, v: `probabile`, c: 2,
+  n: `Saborear e o melhor eu possível`,
+  a: `Duas a três vezes por semana, escreva 15 min sobre a sua melhor vida possível e saboreie de propósito um momento bom do dia.`,
+  imp: `Pequeno a moderado (afeto positivo)`, custo: `Baixo`,
+  dose: `2–3×/semana`, fx: `2–4 semanas`,
+  w: 4, ok: `A nota diária de afeto positivo sobe`,
+  num: [
+    `“Melhor eu possível” (29 estudos, n = 2.909): bem-estar d 0,33; otimismo 0,33; afeto positivo 0,51; práticas mais curtas funcionaram melhor (Carrillo 2019).`,
+    `Saborear: metanálises recentes mostram efeito maior contra controle passivo do que contra ativo.`
+  ],
+  pq: `Efeitos pequenos a moderados, amostras jovens e ocidentais; robustez contra controle ativo incerta.`,
+  rel: `R1 — · R2 Experimento · R3 Aposta sólida`,
+  risco: `Nenhum relevante.`,
+  src: [`carrillo19`]
+},
+{
+  id: `forcas`, m: 2, v: `probabile`, c: 2,
+  n: `Use uma força sua de um jeito novo`,
+  a: `Descubra suas forças de caráter (o questionário VIA é gratuito) e use uma delas de forma nova por uma semana.`,
+  imp: `Pequeno`, custo: `Baixo`,
+  dose: `1 força nova por semana`, fx: `1–6 semanas`,
+  w: 4, ok: `WHO-5 sobe ≥10`,
+  num: [
+    `No ECR original controlado por placebo, usar as forças de forma nova teve efeito por até 6 meses (Seligman 2005); replicado em adultos de 50 a 79 anos (Proyer 2014).`,
+    `Forças mais associadas à satisfação com a vida: esperança, entusiasmo, gratidão, curiosidade e amor (correlacional; Park, Peterson & Seligman 2004).`
+  ],
+  pq: `ECRs com controle placebo e replicações, com efeitos pequenos; parte da base é correlacional.`,
+  rel: `R1 Experimento (virtude) · R2 menção · R3 Aposta sólida`,
+  src: [`seligman05`, `proyer14`, `park04`]
+},
+{
+  id: `regulacao`, m: 2, v: `probabile`, c: 2,
+  n: `Regule a emoção em vez de suprimir`,
+  a: `Na hora quente, nomeie a emoção, aceite que ela está ali e reavalie o significado do evento. Depois de errar, fale consigo como falaria com um colega.`,
+  imp: `Pequeno a moderado (agudo)`, custo: `Baixo`,
+  dose: `Na hora; diário de reavaliação 2×/sem`, fx: `Minutos · 2–6 semanas`,
+  w: 4, ok: `A nota diária de afeto negativo cai`,
+  proto: [
+    `1. Nomear e permitir: “isto é ansiedade, e pode ficar aqui”.`,
+    `2. Reavaliar: o que mais este evento pode significar?`,
+    `3. Autocompaixão depois de errar: uma frase curta, responsável e sem castigo.`,
+    `Ruminação: marque 15 min de “hora da preocupação” no fim do dia e troque ruminar por agir (ficha “Quando o humor cair”).`
+  ],
+  dia: [`Se o preceptor me corrigir na frente dos outros, então respiro e penso: “é sobre o manejo, não sobre mim”.`],
+  num: [
+    `Experimentos (306 comparações): reavaliar o estímulo teve d+ 0,36 sobre a emoção; suprimir pensamentos não funcionou (Webb 2012).`,
+    `Aceitar emoções negativas associou-se a melhor saúde psicológica em laboratório, em diário e no acompanhamento longitudinal (Ford 2018).`,
+    `As pessoas passam quase metade do tempo acordadas com a mente longe do que fazem, e isso se associa a menos felicidade (Killingsworth & Gilbert 2010).`
+  ],
+  pq: `Efeitos agudos experimentais sólidos; para o bem-estar de longo prazo, estudos menores e associações.`,
+  rel: `R1 menção · R2 Aposta (reduzir supressão) / Experimento · R3 Aposta sólida`,
+  risco: `Reavaliar demais vira racionalizar o que precisa mudar. Aceitar a emoção não é aceitar o dano.`,
+  mito: `“Desabafar com raiva alivia”; “pensar positivo sempre”.`,
+  src: [`webb12`, `ford18`, `killingsworth10`]
+},
+{
+  id: `ativacao`, m: 2, v: `columna`, cond: `Quando o humor cai`, c: 3,
+  n: `Quando o humor cair, aja antes da vontade`,
+  a: `No dia ruim, escolha e faça uma atividade pequena, agradável ou que importe, mesmo sem vontade.`,
+  imp: `Moderado (sintomas)`, custo: `Baixo`,
+  dose: `1 atividade de 15–30 min por dia`, fx: `1–2 semanas`,
+  w: 4, ok: `WHO-5 sobe ≥10 (ou o PHQ-9 cai)`,
+  proto: [
+    `Monte hoje uma lista de 10–12 coisas que costumam te fazer bem (caminhar, ligar para alguém, cozinhar ouvindo música).`,
+    `No dia ruim, faça uma delas, pequena e concreta. A ação vem antes da motivação.`,
+    `Ótimo: três blocos por dia (prazer, domínio, valor) e menos evitação (cama durante o dia, rolagem infinita).`
+  ],
+  dia: [`Se eu perceber que estou evitando, então escolho um item da lista e faço 15 min.`],
+  plantao: `Na saída de um plantão ruim, um item da lista antes de ir para a cama.`,
+  falha: `PHQ-9 de 10 ou mais por 2–4 semanas, ou qualquer pensamento de morte: hora de ajuda profissional (Guia → Quando procurar ajuda).`,
+  num: [`105 ECRs (13.933 pacientes com depressão): efeito de 0,67 contra controles (0,51 nos estudos com baixo risco de viés); igual ao de outras psicoterapias (diferença de 0,04); versão autoguiada 0,36; efeito mantido em 6–12 meses (Cuijpers 2026).`],
+  pq: `Uma das bases de ECRs mais consistentes da psicologia. A extrapolação para o bem-estar de quem não tem depressão é indireta.`,
+  rel: `R1 Aposta (agendar atividades positivas) · R2 — · R3 Pilar (condicional)`,
+  quem: `Tristeza, apatia, depressão leve a moderada. Não substitui o tratamento da depressão grave.`,
+  risco: `Agenda grande demais vira culpa. A dose deve ser pequena e vencível.`,
+  mito: `“Preciso ter vontade antes de agir”.`,
+  sin: `Exercício é a ação de ativação com mais evidência própria.`,
+  src: [`cuijpers26`, `mazzucchelli10`]
+},
+{
+  id: `escrita`, m: 2, v: `indifferens`, c: 3,
+  cn: `●●●○ para efeito muito pequeno`,
+  n: `Escrita expressiva: só se gostar`,
+  a: `Escreva sobre eventos difíceis se isso te ajuda a organizar a cabeça. O efeito médio é mínimo.`,
+  imp: `Desprezível a pequeno`, custo: `Baixo`,
+  dose: `—`, fx: `—`, w: 0,
+  num: [`146 estudos randomizados: efeito médio r = 0,075 (Frattaroli 2006). Em saudáveis, sem efeito de longo prazo em sintomas depressivos (Reinhold 2018).`],
+  pq: `Duas metanálises grandes e convergentes; efeito pequeno e dependente de moderadores.`,
+  rel: `R1 Indiferente · R2 Indiferente / Experimento · R3 Indiferente`,
+  src: [`frattaroli06`, `reinhold18`]
+},
+{
+  id: `terapia`, m: 2, v: `probabile`, cond: `Pilar se houver sintomas`, c: 3,
+  n: `Terapia também previne`,
+  a: `Terapia não é só para transtorno: em quem anda estressado, aumenta o bem-estar e reduz a chance de depressão.`,
+  imp: `Moderado (prevenção)`, custo: `Médio (baixo no SUS e em clínicas-escola)`,
+  dose: `6–12 sessões, ou autoajuda guiada de 6–8 semanas`, fx: `8–12 semanas`,
+  w: 12, ok: `Reavaliar com o terapeuta em 12 semanas`,
+  proto: [
+    `Degraus: autoajuda guiada ou TCC digital, depois grupo, depois individual.`,
+    `Abordagens com evidência: TCC, ACT, terapia do bem-estar, psicoterapia positiva.`,
+    `Nas três primeiras sessões, avalie a aliança: é o melhor preditor de resultado.`
+  ],
+  dia: [`Se o PHQ-9 der 10 ou mais, ou o WHO-5 der 50 ou menos duas vezes, então marco uma avaliação na mesma semana.`],
+  num: [
+    `Pessoas sem diagnóstico (27 ECRs): bem-estar psicológico d 0,44 no fim e 0,22 no seguimento (Weiss 2016).`,
+    `Prevenção (32 ECRs): incidência de depressão 21% menor (NNT 20) (van Zoonen 2014).`,
+    `Aliança terapêutica e resultado: r ≈ 0,28 (295 estudos; Flückiger 2018).`
+  ],
+  pq: `Várias metanálises de ECRs com direção consistente. Rebaixam: desfechos autorrelatados e efeito menor contra controle ativo.`,
+  rel: `R1 Aposta (sem transtorno) / Pilar (sintomas) · R2 Pilar (se há sofrimento) · R3 Aposta sólida`,
+  quem: `Sintomas leves e estresse crônico são o melhor alvo preventivo.`,
+  risco: `Cerca de 5% relatam efeitos negativos duradouros: pergunte ao terapeuta como ele acompanha a evolução.`,
+  mito: `“Terapia é só para quem tem transtorno”.`,
+  ctx: `UBS (porta de entrada, gratuita), CAPS (casos graves), clínicas-escola de psicologia com valor social e o serviço de apoio ao estudante da faculdade. Na formação médica, 27% têm sintomas depressivos e só 16% dos positivos buscam ajuda (Rotenstein 2016).`,
+  src: [`weiss16`, `vanzoonen14`, `fluckiger18`, `rotenstein16`]
+},
+{
+  id: `introvertido`, m: 2, v: `experimentum`, c: 2,
+  n: `Introvertido? Doses sociais escolhidas`,
+  a: `Por uma semana, seja mais falante em situações que você escolher e observe o custo em cansaço.`,
+  imp: `Pequeno`, custo: `Baixo`,
+  dose: `Situações escolhidas, por 1 semana`, fx: `Dias`,
+  w: 2, ok: `O afeto positivo sobe sem cansaço desproporcional`,
+  num: [
+    `ECR de 1 semana: agir de forma extrovertida aumentou o afeto positivo em média, mas introvertidos ganharam menos e tiveram mais cansaço e afeto negativo (Jacques-Hamilton 2019).`,
+    `Uma semana agindo de forma introvertida reduziu o bem-estar (Margolis & Lyubomirsky 2020).`,
+    `Solitude escolhida acalma; isolamento não escolhido, não (Nguyen 2018).`
+  ],
+  pq: `ECRs com amostras moderadas e custos individuais heterogêneos: caso clássico para testar em você.`,
+  rel: `R1 Experimento · R2 menção · R3 Experimento`,
+  quem: `Introvertidos: períodos curtos, grupos pequenos, atividades estruturadas.`,
+  mito: `“Introvertidos não precisam de gente”.`,
+  src: [`jacques19`, `margolis20`, `nguyen18`]
+},
+
+/* ───────── III · VÍNCULOS ───────── */
+{
+  id: `vinculos`, m: 3, v: `columna`, c: 3,
+  cn: `Associação ●●●● · causalidade para você ●●●○`,
+  n: `Cultive 3 a 5 vínculos próximos`,
+  a: `Trate suas relações próximas como infraestrutura de saúde: contato recorrente, com data marcada.`,
+  imp: `Moderado a grande (associação)`, custo: `Médio (tempo)`,
+  dose: `Contato semanal com cada pessoa próxima`, fx: `Dias a semanas`,
+  w: 4, ok: `WHO-5 sobe ≥10 e a solidão (escala UCLA) cai`,
+  proto: [
+    `Mínimo: um contato significativo por semana com cada pessoa do círculo íntimo (ligação, refeição, caminhada).`,
+    `Ótimo: 3–5 vínculos próximos com rituais fixos, como um café semanal ou um grupo de estudo que também conversa.`,
+    `Reative um laço adormecido por mês.`,
+    `Uma amizade nova leva dezenas a centenas de horas de convivência (Hall 2019).`
+  ],
+  dia: [`Se for quinta, então almoço com X.`, `Refeição sem celular na mesa.`],
+  plantao: `Um áudio para alguém próximo na pausa também conta.`,
+  num: [
+    `148 estudos (308.849 pessoas): vínculos fortes associam-se a 50% mais chance de sobrevivência (OR 1,50); medidas de integração social, OR 1,91 (Holt-Lunstad 2010).`,
+    `Com ajuste para confundidores: isolamento OR 1,29 e solidão OR 1,26 para mortalidade (Holt-Lunstad 2015).`,
+    `Revisão de experimentos pré-registrados: ser mais sociável está entre as estratégias com evidência mais confiável (Folk & Dunn 2024).`
+  ],
+  pq: `Associação robusta, replicada e com gradiente, convergente com os experimentos de interação social. Rebaixa: quase tudo é observacional, e quem adoece se isola.`,
+  rel: `R1 Aposta sólida (tendendo a Pilar) · R2 Pilar · R3 Pilar`,
+  quem: `Pessoas isoladas, recém-mudadas ou com vínculos conflituosos.`,
+  risco: `Vínculos conflituosos fazem mal; manter relação por obrigação tem custo.`,
+  mito: `“O que importa é a quantidade de amigos”.`,
+  sin: `Exercício e natureza em companhia.`,
+  src: [`holt10`, `holt15`, `folk24`, `hall19`]
+},
+{
+  id: `microconexoes`, m: 3, v: `probabile`, c: 3,
+  cn: `Afeto no momento ●●●○ · longo prazo ●●○○`,
+  n: `Uma conversa a mais por dia`,
+  a: `Puxe conversa com alguém pouco íntimo todo dia e, uma vez por semana, arrisque uma conversa mais profunda.`,
+  imp: `Pequeno (diário e quase grátis)`, custo: `Baixo`,
+  dose: `1 interação “desnecessária” por dia`, fx: `Na hora`,
+  w: 2, ok: `O humor nos dias com conversa supera o dos dias sem`,
+  dia: [`Café do hospital: “como foi o plantão?” em vez do silêncio do celular.`, `Fila do almoço como janela de conversa.`],
+  num: [
+    `Experimentos em trens e ônibus: falar com um estranho tornou a viagem mais agradável, e as pessoas previam o contrário (Epley & Schroeder 2014).`,
+    `Dias com mais interações com laços fracos foram dias mais felizes (Sandstrom & Dunn 2014).`,
+    `Conversas profundas com estranhos foram menos constrangedoras e mais conectoras do que se esperava (6 experimentos; Kardas 2022).`
+  ],
+  pq: `Experimentos replicados com desfecho imediato; a extrapolação para o bem-estar crônico é indireta.`,
+  rel: `R1 Aposta sólida · R2 Experimento · R3 Aposta sólida`,
+  quem: `Tímidos têm o maior erro de calibração a corrigir. No internato, o ganho está na profundidade e em estar presente sem o celular.`,
+  risco: `Respeite sinais de indisponibilidade: fone de ouvido quer dizer não.`,
+  src: [`epley14`, `sandstrom14`, `kardas22`]
+},
+{
+  id: `solidao`, m: 3, v: `probabile`, cond: `Se há solidão`, c: 3,
+  n: `Solidão: mude a leitura, entre num grupo`,
+  a: `Se a solidão aperta, trate os pensamentos de rejeição como hipóteses e entre num grupo que te dê identidade.`,
+  imp: `Pequeno (só contato) a moderado (cognição)`, custo: `Médio`,
+  dose: `1 interação planejada por dia + 1 grupo`, fx: `5–12 semanas`,
+  w: 8, ok: `A escala de solidão cai e o WHO-5 sobe ≥10`,
+  dia: [`Se aparecer o pensamento “sou invisível aqui”, então trato como hipótese e testo com uma interação.`],
+  num: [
+    `Metanálise de intervenções: nos estudos randomizados, o efeito médio foi pequeno; as que mudam a cognição social (estilo TCC) foram as mais eficazes, à frente de apenas aumentar o contato (Masi 2011).`,
+    `Groups 4 Health (ECR, 15–25 anos): grande redução da solidão, não inferior à TCC em grupo para depressão, mantida em 12 meses (Cruwys 2022).`
+  ],
+  pq: `Direção consistente (cognição antes de contato) e um ECR de não inferioridade, com amostras modestas.`,
+  rel: `R1 menção · R2 Aposta sólida · R3 Pilar (condicional)`,
+  quem: `Jovens adultos, que concentram o pico de solidão. Com ansiedade social, exposição gradual com terapeuta.`,
+  risco: `Empurrar a socialização sem mexer na leitura social pode gerar rejeição real.`,
+  mito: `“Basta sair mais”; “solidão é coisa de idoso”.`,
+  src: [`masi11`, `cruwys22`]
+},
+{
+  id: `grupos`, m: 3, v: `probabile`, c: 2,
+  n: `Pertença a um grupo`,
+  a: `Entre num grupo que te dê identidade (esporte, coral, liga acadêmica, comunidade religiosa se fizer sentido), não só presença.`,
+  imp: `Pequeno a moderado`, custo: `Baixo`,
+  dose: `1 encontro por semana`, fx: `Semanas`,
+  w: 8, ok: `WHO-5 sobe ≥10 e você se sente parte`,
+  num: [
+    `Ir a serviços religiosos mais de 1×/semana: mortalidade HR 0,67 (coorte de 74.534 enfermeiras; mediado por apoio social, menos fumo e menos sintomas depressivos) (Li 2016). Uma análise dentro da mesma pessoa não confirmou efeito causal na saúde mental (Prati 2025).`,
+    `Global Flourishing Study (mais de 200 mil adultos, 22 países, inclusive o Brasil): frequentar serviços religiosos associa-se a mais florescimento; desenho transversal (VanderWeele 2025).`
+  ],
+  pq: `ECRs de grupos de identidade e coortes grandes; causalidade incerta na parte religiosa. O ingrediente provável é a comunidade.`,
+  rel: `R1 Aposta (grupos) / Indiferente (religião) · R2 Aposta sólida · R3 Aposta sólida (condicional)`,
+  quem: `Quem não é religioso encontra a mesma estrutura em grupos seculares com encontros regulares.`,
+  risco: `Grupos com cobrança excessiva ou conflito.`,
+  src: [`li16`, `prati25`, `vanderweele25`, `cruwys22`]
+},
+{
+  id: `voluntariado`, m: 3, v: `experimentum`, cave: true, c: 2,
+  n: `Voluntariado estruturado`,
+  a: `Se for se voluntariar, escolha um papel claro e recorrente, e vigie o custo emocional.`,
+  imp: `Pequeno`, custo: `Médio`,
+  dose: `2–4 h por semana`, fx: `~8 semanas`,
+  w: 12, ok: `WHO-5 sobe ≥10 sem exaustão`,
+  num: [
+    `Coortes associam voluntariado a menos depressão e mais satisfação, mas os estudos experimentais não confirmam; autosseleção provável (Jenkinson 2013).`,
+    `Sem evidência pré-registrada clara (Folk & Dunn 2024).`
+  ],
+  pq: `Observacional e enviesado por seleção; poucos ECRs.`,
+  rel: `R1 Experimento + Cuidado · R2 Aposta sólida · R3 Aposta sólida + Cuidado`,
+  risco: `Fadiga por compaixão em profissionais de saúde: dose e limites.`,
+  src: [`jenkinson13`, `folk24`]
+},
+
+/* ───────── IV · SENTIDO ───────── */
+{
+  id: `proposito`, m: 4, v: `experimentum`, c: 2,
+  cn: `Intervenção ●○○○–●●○○ · associação ●●●○`,
+  n: `Revise o seu “para quê” toda semana`,
+  a: `Uma vez por semana, 10 min: o que eu fiz que importou, e para quem?`,
+  imp: `Incerto (associação grande)`, custo: `Baixo`,
+  dose: `10 min por semana`, fx: `Semanas a meses`,
+  w: 8, ok: `O item “minha vida tem sentido” e o WHO-5 sobem`,
+  dia: [`Se for domingo à noite, então escrevo 10 min sobre o que importou na semana (alternando com a gratidão).`],
+  plantao: `O micropropósito do plantão: “este paciente vai ser bem cuidado por causa de algo que eu fizer bem hoje”.`,
+  num: [
+    `Propósito alto associa-se a ~24% menos mortalidade (25 amostras, 488.765 pessoas, até 32 anos de seguimento), atenuado mas mantido após ajustes (Sutin 2026). Observacional.`,
+    `Intervenções específicas para aumentar o propósito são poucas e de baixa qualidade [lacuna].`
+  ],
+  pq: `Associação forte e prospectiva; o efeito de intervir é frágil. Por isso o selo é Experimento.`,
+  rel: `R1 Experimento · R2 Experimento · R3 Aposta sólida`,
+  quem: `Pessoas em transição de papel. No internato o risco é o inverso: sentido saturado de exigência.`,
+  risco: `Perfeccionismo de propósito (“minha vida precisa de uma Missão”). Propósitos modestos e concretos contam igual.`,
+  src: [`sutin26`]
+},
+{
+  id: `metas`, m: 4, v: `probabile`, c: 2,
+  n: `Metas que você escolheria sem plateia`,
+  a: `Prefira metas de crescimento, vínculo e contribuição às de status, e deixe o progresso visível.`,
+  imp: `Pequeno`, custo: `Baixo`,
+  dose: `Revisão mensal das metas`, fx: `Semanas`,
+  w: 12, ok: `A satisfação com a vida (SWLS mensal) sobe`,
+  num: [
+    `Materialismo associa-se a menor bem-estar, r −0,19 (753 efeitos; Dittmar 2014). Correlacional.`,
+    `Teoria da Autodeterminação: autonomia, competência e pertencimento organizam o que torna uma atividade satisfatória (Ryan & Deci 2001).`
+  ],
+  pq: `Associações replicadas; o efeito causal de trocar de metas é pequeno e pouco testado.`,
+  rel: `R1 Experimento · R2 Aposta sólida · R3 Aposta sólida`,
+  src: [`dittmar14`, `ryan01`]
+},
+{
+  id: `burnout`, m: 4, v: `columna`, cond: `Pilar para mudanças na estrutura do serviço`, c: 3,
+  n: `Burnout: mude a estrutura, não só você`,
+  a: `Hábitos não compensam carga excessiva: proteja-se das semanas de 70–90 h ou mais e ajuste como você trabalha.`,
+  imp: `Moderado (organizacional) · pequeno (individual)`, custo: `Médio`,
+  dose: `1 ajuste de tarefa por semana`, fx: `6–8 semanas`,
+  w: 8, ok: `A exaustão diminui e o WHO-5 sobe ≥10`,
+  proto: [
+    `Individual (job crafting): toda semana, troque uma tarefa de pouco valor por uma de muito valor, busque uma tutoria e escreva o “porquê” do turno.`,
+    `Coletivo: escalas, pausas protegidas e carga de trabalho são as alavancas com mais evidência. Leve estes números às reuniões de serviço.`
+  ],
+  num: [
+    `Internos (n = 17.082): PHQ-9 +1,8 ponto com 40–45 h/sem e +5,2 acima de 90 h/sem; 33,4% com depressão nessa faixa (Fang 2022).`,
+    `Burnout em médicos: intervenções na organização superam as individuais (SMD −0,45 contra −0,18) (Panagioti 2017); qualquer intervenção reduz a exaustão emocional em ~2,7 pontos na escala de Maslach (West 2016).`,
+    `Job crafting (14 estudos): engajamento g 0,31 (Oprea 2019).`
+  ],
+  pq: `Metanálises de ECRs para burnout e job crafting, somadas ao maior estudo sobre carga horária e depressão em internos.`,
+  rel: `R1 Aposta (individual) / Pilar (organizacional) · R2 Aposta (job crafting) · R3 Aposta / Pilar`,
+  quem: `Na formação médica, 27% dos estudantes têm sintomas depressivos e só 16% dos positivos buscam ajuda (Rotenstein 2016).`,
+  risco: `Tratar burnout persistente como falha de resiliência. Ele merece avaliação como quadro clínico.`,
+  src: [`fang22`, `panagioti17`, `west16`, `oprea19`, `rotenstein16`]
+},
+{
+  id: `awe`, m: 4, v: `experimentum`, c: 2,
+  n: `Caminhada de admiração`,
+  a: `Uma vez por semana, caminhe 15 min procurando o que é vasto ou bonito: céu, paisagem, arquitetura.`,
+  imp: `Pequeno`, custo: `Baixo`,
+  dose: `15 min por semana`, fx: `Semanas`,
+  w: 8, ok: `Mais alegria e menos ruminação`,
+  num: [`ECR (n = 60 idosos, 8 semanas): caminhadas de admiração aumentaram a alegria e as emoções pró-sociais e reduziram o foco em si (Sturm 2022).`],
+  pq: `Um ECR pequeno, sem replicação ampla.`,
+  rel: `R1 menção · R2 Experimento · R3 Experimento`,
+  src: [`sturm22`]
+},
+
+/* ───────── V · ATENÇÃO ───────── */
+{
+  id: `redes`, m: 5, v: `experimentum`, c: 3,
+  cn: `Efeito pequeno ●●●○`,
+  n: `Redes sociais: reduza ou pause por 3 semanas`,
+  a: `Se o uso passa de ~1 h por dia ou piora sono e humor, reduza para 30–60 min por dia ou pause por pelo menos 1 semana (o ideal fica perto de 3).`,
+  imp: `Pequeno`, custo: `Baixo`,
+  dose: `Pausa de 1 semana ou mais, ou teto de 30–60 min/dia`, fx: `1–3 semanas`,
+  w: 3, ok: `WHO-5 sobe ≥10 (pausas de 2–4 dias não contam)`,
+  proto: [
+    `Mínimo: tire as redes da tela inicial, desligue as notificações e não use rede na cama.`,
+    `Pausa: 1 semana ou mais; o ótimo observado fica perto de 3 semanas. Pausas de poucos dias pioraram o bem-estar.`,
+    `Planeje o que entra no lugar: o ganho vem do tempo realocado para pessoas, exercício e sono.`,
+    `Não existe dose segura validada. “30 min” foi o braço de um ECR, não um limiar para a população.`
+  ],
+  dia: [`Se eu abrir o Instagram depois das 22h, então troco por um livro de papel.`],
+  plantao: `Em época de prova, uma pausa de 3 semanas é o formato com melhor sinal.`,
+  falha: `Se nada mudar, as redes provavelmente não são o seu problema.`,
+  num: [
+    `32 ECRs de restrição: bem-estar g 0,17 (IC 0,08–0,27), efeito pequeno (Burnell 2025).`,
+    `Abstinência total (10 estudos, n = 4.674, pré-registrada): sem efeito no afeto nem na satisfação com a vida (Lemahieu 2025).`,
+    `Duração: pausas de menos de 1 semana pioraram a saúde mental (d −0,18); de 1 semana ou mais, melhoraram (d +0,16); o ótimo ficou perto de 3 semanas (Thrul 2025).`,
+    `Desativar o Facebook por 4 semanas: +0,09 DP no bem-estar (Allcott 2020). Por 6 semanas em 2020: Facebook +0,060 DP; Instagram +0,041 DP, concentrado em mulheres com menos de 25 anos (Allcott 2025).`
+  ],
+  trad: `g = 0,17 leva a pessoa típica do percentil 50 para perto do 57.`,
+  pq: `Vários ECRs grandes convergem num efeito real, pequeno e dependente de duração e de perfil.`,
+  rel: `R1 Indiferente (abstinência) / Mito (“basta largar”) · R2 Experimento · R3 Experimento`,
+  quem: `Mais para quem usa mais de 2 h por dia, rola o feed sem interagir, se compara muito ou perde sono. Quem usa pouco e para contato real não tem o que ganhar.`,
+  risco: `Abstinência como meta moral gera fracasso e culpa. O WhatsApp de trabalho e de família não é o alvo.`,
+  mito: `“Basta largar as redes para ficar feliz”; “existe um limite seguro de 30 min”; “detox de dopamina”.`,
+  sin: `Celular fora do quarto, sono e vínculos.`,
+  src: [`burnell25`, `lemahieu25`, `thrul25`, `allcott20`, `allcott25`, `hunt18`]
+},
+{
+  id: `celular`, m: 5, v: `experimentum`, c: 2,
+  n: `Celular fora do quarto; 2 semanas sem internet móvel`,
+  a: `Carregue o celular fora do quarto e experimente bloquear a internet móvel por 2 semanas, mantendo ligações e SMS.`,
+  imp: `Pequeno a moderado`, custo: `Baixo`,
+  dose: `2 semanas`, fx: `1–2 semanas`,
+  w: 2, ok: `WHO-5 sobe ≥10 e a atenção melhora`,
+  num: [`ECR pré-registrado (n = 467): bloquear a internet móvel por 2 semanas reduziu o tempo de tela de 314 para 161 min por dia; 91% melhoraram em pelo menos um desfecho (bem-estar, saúde mental ou atenção sustentada medida objetivamente). O efeito passou por mais convívio presencial, exercício e natureza (Castelo 2025).`],
+  pq: `Um ECR pré-registrado com adesão medida objetivamente; falta replicação.`,
+  rel: `R1 Experimento · R2 Experimento · R3 Aposta sólida`,
+  quem: `Quem tinha mais medo de ficar de fora ganhou mais. No internato, use versões parciais, como bloquear fora do horário de trabalho.`,
+  risco: `Quem depende do celular para trabalhar precisa adaptar.`,
+  src: [`castelo25`]
+},
+{
+  id: `porno`, m: 5, v: `experimentum`, c: 2,
+  n: `Pornografia: olhe a incongruência`,
+  a: `Se o uso causa sofrimento, trabalhe a distância entre valores e comportamento (reduzir o uso ou revisar a crença), sem moralismo.`,
+  imp: `Pequeno`, custo: `Baixo`,
+  dose: `4–6 semanas de redução`, fx: `Semanas`,
+  w: 6, ok: `O sofrimento relatado cai, não só a frequência`,
+  num: [
+    `A sensação de “vício” é predita mais pela incongruência moral do que pela frequência de uso (Grubbs 2019).`,
+    `ECR de 7 dias de abstinência (n = 176): nenhum efeito na fissura, no afeto ou em sintomas (Fernandez 2023).`,
+    `Uso problemático com sofrimento responde a TCC e ACT.`
+  ],
+  pq: `Modelos replicados para a incongruência e ECR nulo de abstinência curta; narrativas de comunidades de “reboot” não têm base experimental.`,
+  rel: `R1 Experimento · R2 Indiferente (sem sofrimento) / Aposta (com sofrimento) · R3 Experimento`,
+  mito: `“Pornografia queima receptores de dopamina”.`,
+  src: [`grubbs19`, `fernandez23`]
+},
+{
+  id: `dopamina`, m: 5, v: `fabula`, c: 2,
+  n: `“Detox de dopamina”`,
+  a: `Ignore a história dos receptores queimados. O que pesa é tempo e sono deslocados, hábito e comparação social.`,
+  imp: `Desprezível (do detox em si)`, custo: `—`,
+  dose: `—`, fx: `—`, w: 0,
+  num: [
+    `PET em humanos mostra menos receptores D2/D3 na dependência de cocaína e metanfetamina; no jogo patológico, a liberação de dopamina foi maior que nos controles, o oposto da “queima” (Boileau 2014).`,
+    `Para redes sociais e pornografia não existe estudo PET direto.`,
+    `O que funciona (pausas de 1 semana ou mais, bloqueio de internet móvel) age por deslocamento de tempo e de sono (Castelo 2025).`
+  ],
+  pq: `A evidência disponível aponta contra o mecanismo; o ônus da prova é de quem afirma.`,
+  rel: `R1 Mito · R2 Falso · R3 Mito`,
+  src: [`boileau14`, `castelo25`]
+},
+{
+  id: `midia`, m: 5, v: `indifferens`, cave: true, c: 2,
+  n: `Notícias, games e séries: sem drama`,
+  a: `Jogue e assista se gostar; o tempo em si não prediz bem-estar pior. Só proteja o sono do “só mais um”.`,
+  imp: `Desprezível a pequeno`, custo: `Baixo`,
+  dose: `—`, fx: `—`, w: 0,
+  num: [
+    `Telemetria de 38.935 jogadores por 6 semanas: pouca ou nenhuma relação causal entre tempo de jogo e bem-estar; a motivação importa mais (Vuorre 2022).`,
+    `“Férias de notícias” de 1–2 semanas foram nulas para o bem-estar (Wojcieszak 2022).`
+  ],
+  pq: `Experimentos pré-registrados nulos e coortes com medida objetiva nulas.`,
+  rel: `R1 Indiferente (games) · R2 Indiferente · R3 Indiferente`,
+  risco: `Maratonas de séries deslocam o sono.`,
+  src: [`vuorre22`, `wojcieszak22`]
+},
+
+/* ───────── VI · RECURSOS ───────── */
+{
+  id: `dinheiro`, m: 6, v: `probabile`, c: 2,
+  n: `Gaste em experiências, tempo e pessoas`,
+  a: `Com o que sobra, prefira experiências compartilhadas a objetos, compre tempo quando der e trate dívida cara como prioridade.`,
+  imp: `Pequeno a moderado`, custo: `Médio`,
+  dose: `1 experiência social por mês; delegar 1 tarefa odiada por semana`, fx: `Imediato a semanas`,
+  w: 6, ok: `A resposta a “as compras desta semana valeram?” melhora`,
+  num: [
+    `Não há platô em US$ 75 mil: o bem-estar segue subindo com o log da renda para a maioria; só no grupo menos feliz (~20%) há achatamento acima de ~US$ 100 mil (Killingsworth, Kahneman & Mellers 2023).`,
+    `Experiências rendem mais que bens: d ≈ 0,38, maior nas experiências sociais; parte disso pode ser viés de publicação (Weingarten & Goodman 2021).`,
+    `Comprar tempo associou-se a mais satisfação com a vida (n = 6.271) (Whillans 2017); em contexto de pobreza, a replicação foi nula.`,
+    `Dívida sem garantia associa-se fortemente a transtornos mentais (OR 3,24; observacional) (Richardson 2013).`
+  ],
+  pq: `Metanálises e experimentos com efeitos pequenos a moderados, dependentes de haver alguma folga financeira.`,
+  rel: `R1 Aposta sólida · R2 Aposta sólida (Pilar para dívida) · R3 Aposta sólida`,
+  risco: `Financiar experiências com dívida inverte o sinal; postar a experiência traz a comparação social de volta.`,
+  mito: `“Dinheiro não traz felicidade”.`,
+  src: [`killingsworth23`, `weingarten21`, `whillans17`, `richardson13`, `dunn11`]
+},
+{
+  id: `minimalismo`, m: 6, v: `experimentum`, c: 2,
+  n: `Simplifique por escolha`,
+  a: `Reduza o peso do consumo e do status na sua vida, por escolha e não por doutrina.`,
+  imp: `Pequeno`, custo: `Baixo`,
+  dose: `—`, fx: `Semanas`,
+  w: 8, ok: `A satisfação com a vida (SWLS mensal) sobe`,
+  num: [
+    `Minimalismo e simplicidade voluntária associam-se a mais bem-estar em 23 estudos, quase todos correlacionais e com amostras autosselecionadas (Hook 2021).`,
+    `Materialismo e bem-estar: r −0,19 (Dittmar 2014).`
+  ],
+  pq: `Associação replicada, sem ECR.`,
+  rel: `R1 — · R2 Experimento · R3 Aposta sólida`,
+  src: [`hook21`, `dittmar14`]
+},
+{
+  id: `tempo`, m: 6, v: `probabile`, c: 2,
+  n: `Tempo livre na dose certa`,
+  a: `Proteja algumas horas por dia para atividades suas, nem zero nem dias inteiros vazios, e encurte deslocamentos quando puder.`,
+  imp: `Pequeno`, custo: `Baixo`,
+  dose: `~2–5 h por dia de tempo livre`, fx: `Semanas`,
+  w: 8, ok: `A sensação de ter tempo de sobra e o WHO-5 melhoram`,
+  num: [
+    `Curva em U (35.375 pessoas e 2 experimentos): pouco tempo livre gera estresse; tempo livre demais, sem atividade produtiva, reduz o bem-estar. O pico fica em ~2–5 h por dia (Sharif 2021).`,
+    `Deslocamentos longos reduzem a satisfação com a vida sem compensação em salário ou moradia (Stutzer & Frey 2008).`
+  ],
+  pq: `Estudos grandes com curva consistente; autorrelato e contexto ocidental.`,
+  rel: `R1 — · R2 Aposta sólida · R3 Aposta sólida`,
+  src: [`sharif21`, `stutzer08`]
+},
+{
+  id: `casa`, m: 6, v: `experimentum`, c: 1,
+  n: `Casa: luz, plantas, ordem e silêncio`,
+  a: `Deixe a luz natural entrar, tenha uma planta, reduza o ruído de fundo e mantenha a ordem funcional.`,
+  imp: `Pequeno`, custo: `Baixo`,
+  dose: `Pequenos ajustes`, fx: `Semanas`,
+  w: 6, ok: `WHO-5 sobe`,
+  num: [
+    `Ruído de tráfego: +4% de chance de depressão e +12% de ansiedade a cada 10 dB (estudos quase todos transversais; Dzhambov & Lercher 2019).`,
+    `Plantas e desordem: estudos pequenos ou correlacionais.`
+  ],
+  pq: `ECRs pequenos ou transversais. Baratos e plausíveis, sem base para promessas.`,
+  rel: `R1 — · R2 Experimento · R3 Experimento`,
+  src: [`dzhambov19`]
+},
+
+/* ───────── VII · LAZER ───────── */
+{
+  id: `hobbies`, m: 7, v: `probabile`, c: 2,
+  n: `Um hobby com as mãos`,
+  a: `Reserve 1–2 sessões por semana para arte ou hobby manual (desenho, instrumento, marcenaria, escrita criativa), com progresso visível.`,
+  imp: `Pequeno a moderado`, custo: `Baixo`,
+  dose: `1–2 sessões por semana`, fx: `Semanas`,
+  w: 8, ok: `WHO-5 sobe ≥10`,
+  num: [
+    `Participação cultural frequente: mortalidade HR 0,69 em 14 anos (n = 6.710; observacional) (Fancourt & Steptoe 2019).`,
+    `Hobbies associam-se a menos sintomas depressivos em 93.263 pessoas com 65 anos ou mais, em 16 países (Mak 2023).`,
+    `A revisão de escopo da OMS consolidou o papel das artes na saúde mental, com qualidade de evidência heterogênea (Fancourt & Finn 2019).`
+  ],
+  pq: `Coortes grandes com ajustes, mas autosseleção persistente; ECRs pequenos.`,
+  rel: `R1 Experimento · R2 Aposta sólida · R3 Aposta sólida`,
+  src: [`fancourt19`, `mak23`, `who19`]
+},
+{
+  id: `musica`, m: 7, v: `probabile`, c: 2,
+  n: `Faça música e dance`,
+  a: `Cante em grupo, dance, toque: faça música com o corpo e com gente, não só ouça.`,
+  imp: `Pequeno a moderado`, custo: `Baixo`,
+  dose: `1 sessão em grupo por semana`, fx: `Na sessão · semanas`,
+  w: 8, ok: `WHO-5 sobe ≥10`,
+  num: [
+    `Dança e terapia pelo movimento: d ≈ 0,60 em desfechos psicológicos (41 estudos controlados; heterogeneidade alta) (Koch 2019).`,
+    `Na metanálise em rede de exercício para depressão, a dança teve um dos maiores efeitos pontuais, com poucos estudos (Noetel 2024).`,
+    `Ouvir música tem efeito agudo confiável no humor; fazer música soma sincronia social.`
+  ],
+  pq: `Metanálise de dança com efeito moderado; poucas sínteses sobre canto em grupo em pessoas saudáveis.`,
+  rel: `R1 — · R2 Aposta sólida · R3 Aposta sólida`,
+  src: [`koch19`, `noetel24`]
+},
+{
+  id: `leitura`, m: 7, v: `experimentum`, c: 2,
+  n: `Leia por prazer, em papel à noite`,
+  a: `Leia livros por prazer 20–30 min por dia; à noite, prefira papel a tablet.`,
+  imp: `Pequeno`, custo: `Baixo`,
+  dose: `20–30 min por dia`, fx: `Semanas`,
+  w: 6, ok: `WHO-5 e sono melhoram`,
+  num: [
+    `Leitores de livros viveram mais (HR 0,80 em 12 anos; n = 3.635; observacional, com classe social e reserva cognitiva como confundidores) (Bavishi 2016).`,
+    `“Ficção aumenta a empatia”: o efeito causal de curto prazo não replicou, e a associação é pequena (g ≈ 0,15) (Panero 2016; Dodell-Feder & Tamir 2018).`,
+    `Ler em tablet à noite atrasou a melatonina e piorou o sono em comparação com o livro impresso (Chang 2015).`
+  ],
+  pq: `Coorte grande, porém observacional. O ganho provável é substituir a rolagem do feed antes de dormir.`,
+  rel: `R1 Experimento · R2 Indiferente · R3 Aposta sólida`,
+  quem: `Ficção ou não ficção: não há evidência de que um gênero vença o outro para o bem-estar. Escolha pelo prazer.`,
+  sin: `Substitui o feed antes de dormir: ganho duplo.`,
+  src: [`bavishi16`, `panero16`, `dodell18`, `chang15`]
+},
+{
+  id: `aprender`, m: 7, v: `experimentum`, c: 1,
+  n: `Aprenda algo que você quer`,
+  a: `Aprenda um idioma, um instrumento ou uma habilidade pelo prazer do progresso, não como promessa de felicidade.`,
+  imp: `Pequeno`, custo: `Médio (tempo)`,
+  dose: `15–30 min por dia`, fx: `Meses`,
+  w: 8, ok: `Satisfação com o progresso`,
+  num: [`Não há ECR com desfecho de bem-estar para aprender idiomas ou fazer cursos em adultos saudáveis [lacuna]. O racional vem da necessidade de competência (Teoria da Autodeterminação) e das coortes de hobbies.`],
+  pq: `Sem ensaios; efeito indireto.`,
+  rel: `R1 — · R2 Experimento · R3 Experimento`,
+  src: [`ryan01`, `mak23`]
+},
+{
+  id: `pet`, m: 7, v: `indifferens`, c: 2,
+  n: `Bicho de estimação: só se quiser`,
+  a: `Tenha um animal porque você quer um animal. O “efeito pet” como terapia não resiste a bons desenhos de estudo.`,
+  imp: `Desprezível (posse em saudáveis)`, custo: `Médio a alto`,
+  dose: `—`, fx: `—`, w: 0,
+  num: [`Estudos com bons controles de confundimento não mostram donos de animais com mais bem-estar que não donos; os benefícios aparecem em intervenções estruturadas, sobretudo com idosos (Herzog 2011).`],
+  pq: `Efeitos concentrados em intervenções estruturadas; posse em pessoas saudáveis próxima de nula.`,
+  rel: `R1 — · R2 Indiferente / Experimento · R3 Indiferente`,
+  src: [`herzog11`]
+},
+{
+  id: `variedade`, m: 7, v: `probabile`, c: 2,
+  n: `Varie os prazeres e planeje as férias`,
+  a: `Ponha variedade nos prazeres (rotação, surpresa) e marque as férias com antecedência para saborear a espera.`,
+  imp: `Pequeno`, custo: `Médio`,
+  dose: `1 novidade por semana`, fx: `Imediato`, w: 0,
+  num: [
+    `A adaptação hedônica é real, mas mais lenta quando há variedade e apreciação (experimento que testou o modelo de prevenção da adaptação; Sheldon & Lyubomirsky 2012).`,
+    `A antecipação aumenta a felicidade antes da viagem (n = 1.530; Nawijn 2010); o efeito das férias some poucas semanas depois da volta (de Bloom 2009).`
+  ],
+  pq: `Experimentos e metanálises convergentes, com efeitos pequenos e temporários.`,
+  rel: `R1 — · R2 Aposta sólida · R3 Aposta sólida`,
+  src: [`sheldon12`, `nawijn10`, `debloom09`]
+}
+];
+
+/* Tribunal dos mitos · v: falso · parcial · sem · verdadeiro */
+const MITOS = [
+  { q: `40% da felicidade está sob seu controle`, v: `falso`, t: `A “torta” 50/10/40 é uma decomposição conceitual da variância entre pessoas, sem fonte empírica rastreável para os 40%. A herdabilidade do bem-estar fica em ~36%, e herdabilidade não diz o que um indivíduo pode mudar. Existe margem modificável, menor e mais difícil de medir.`, s: [`brown20`, `bartels15`, `sheldon21`] },
+  { q: `Dinheiro não traz felicidade; acima de US$ 75 mil por ano, a renda deixa de importar`, v: `falso`, t: `O bem-estar segue subindo com o log da renda para a maioria; só no grupo menos feliz há achatamento acima de ~US$ 100 mil. Cada real a mais rende menos, mas rende.`, s: [`killingsworth23`] },
+  { q: `Vitamina D baixa causa depressão, e suplementar resolve`, v: `falso`, t: `No ECR VITAL-DEP (18.353 adultos, 5 anos), 2.000 UI/dia não preveniram depressão (HR 0,97). Reponha se houver deficiência, por outros motivos.`, s: [`okereke20`] },
+  { q: `Triptofano ou 5-HTP melhoram o humor`, v: `sem`, t: `Estudos antigos e pequenos, nada consistente em pessoas saudáveis. Risco de síndrome serotoninérgica com antidepressivos.`, s: [`turner06`] },
+  { q: `90% da serotonina é produzida no intestino, então a dieta controla o humor`, v: `parcial`, t: `A maior parte da serotonina do corpo é mesmo periférica, mas ela não atravessa a barreira hematoencefálica. A dieta mexe com o humor por outras vias (inflamação, microbiota, energia), não pelo atalho do meme.`, s: [] },
+  { q: `Pornografia e redes “queimam” receptores de dopamina, e um detox os restaura`, v: `falso`, t: `Queda de receptores D2/D3 aparece na dependência de cocaína e metanfetamina; no jogo patológico, a liberação de dopamina é maior. Para redes e pornografia não há estudo PET. O que funciona age por tempo e sono deslocados.`, s: [`boileau14`, `castelo25`] },
+  { q: `Leva 21 dias para formar um hábito`, v: `falso`, t: `Mediana de 66 dias até a automaticidade, variando de 18 a 254. O “21” vem de uma observação informal num livro de autoajuda de 1960. Um dia perdido não zera a curva.`, s: [`lally10`] },
+  { q: `São necessários 10.000 passos por dia`, v: `parcial`, t: `Meta útil, número arbitrário, nascido no marketing de um pedômetro japonês. Os ganhos começam bem antes: 7.000 contra 2.000 passos já se associam a 22% menos sintomas depressivos, e o ganho em mortalidade satura por volta de 6–10 mil, conforme a idade.`, s: [`ding25`, `paluch22`] },
+  { q: `Banho frio aumenta a dopamina em 250% e melhora o humor de forma duradoura`, v: `parcial`, t: `O número existe: 1 h de imersão a 14 °C elevou a dopamina do sangue, não do cérebro, em poucos jovens. Humor duradouro: sem evidência.`, s: [`sramek00`, `buijze16`] },
+  { q: `Meditação muda a estrutura do cérebro em 8 semanas`, v: `falso`, t: `O achado original tinha 16 pessoas e controle de lista de espera. No ECR com 218 pessoas e controle ativo, nenhuma mudança estrutural apareceu.`, s: [`kral22`] },
+  { q: `Ler ficção aumenta a empatia`, v: `parcial`, t: `O efeito causal rápido do estudo publicado na Science não replicou; a associação entre leitura e cognição social é pequena e quase toda correlacional. Leia pelo prazer.`, s: [`panero16`, `dodell18`] },
+  { q: `Sorrir deixa você mais feliz`, v: `parcial`, t: `No Many Smiles (3.878 pessoas, 19 países), sorrir de propósito e imitar sorrisos aumentaram um pouco a felicidade; a técnica da caneta na boca, não. Efeito real, pequeno e passageiro.`, s: [`coles22`] },
+  { q: `A luz azul do celular arruína o sono`, v: `parcial`, t: `O efeito da luz existe, mas é pequeno; o que mais pesa é o conteúdo estimulante e o adiamento da hora de dormir.`, s: [`chang15`] },
+  { q: `Todo mundo precisa de exatamente 8 horas de sono`, v: `falso`, t: `A faixa recomendada para adultos é de 7 a 9 h, com variação individual real. A regularidade pesa tanto quanto a duração.`, s: [`watson15`, `windred24`] },
+  { q: `Comfort food melhora o humor; açúcar dá energia`, v: `falso`, t: `Açúcar não melhora o humor e piora o alerta na primeira hora (31 estudos). Comfort food melhora o humor tanto quanto uma comida neutra ou nenhuma: o conforto é, em boa parte, regressão à média.`, s: [`mantantzis19`, `wagner14`] },
+  { q: `Introvertidos não precisam de gente para ser felizes`, v: `falso`, t: `Introvertidos também ganham afeto positivo com contato social, em doses menores e com mais custo de energia. Solitude escolhida descansa; isolamento não escolhido, não.`, s: [`jacques19`, `nguyen18`] },
+  { q: `Diário de gratidão todo dia funciona melhor que uma vez por semana`, v: `sem`, t: `Não há evidência de que o diário seja melhor. No estudo clássico, contar bênçãos 1×/semana rendeu mais que 3×/semana, achado ainda não replicado em larga escala.`, s: [`lyubomirsky05`] },
+  { q: `Terapia é só para quem tem transtorno`, v: `falso`, t: `Em pessoas sem diagnóstico, intervenções psicológicas aumentam o bem-estar e reduzem a incidência de depressão em ~21% (NNT 20).`, s: [`weiss16`, `vanzoonen14`] },
+  { q: `Cortar todos os prazeres de uma vez é a melhor estratégia`, v: `sem`, t: `Nenhum ECR sustenta. A restrição rígida favorece o “já que furei, vou com tudo”, e pausas curtíssimas de redes pioraram o bem-estar. Melhor reduzir com substituição, uma mudança por vez.`, s: [`thrul25`] },
+  { q: `Basta largar as redes sociais para ficar mais feliz`, v: `parcial`, t: `A abstinência total não mudou o bem-estar na média; reduções de 1 semana ou mais melhoram pouco (g ≈ 0,15–0,2). Depende da duração, do perfil e do que ocupa o tempo liberado.`, s: [`lemahieu25`, `burnell25`, `thrul25`] },
+  { q: `Exercício substitui antidepressivo para qualquer pessoa`, v: `parcial`, t: `Na depressão leve a moderada, o exercício tem efeitos comparáveis aos de tratamentos ativos, mas por comparação indireta e com certeza baixa. Não vale para depressão grave sem acompanhamento.`, s: [`noetel24`] },
+  { q: `Os jovens são os mais felizes`, v: `falso`, t: `No Global Flourishing Study (22 países, inclusive o Brasil), em muitos países os jovens florescem menos que os mais velhos, ao contrário da antiga curva em U.`, s: [`vanderweele25`] },
+  { q: `Mindfulness é melhor que qualquer alternativa`, v: `falso`, t: `Contra controles ativos específicos (exercício, relaxamento, outras terapias), mindfulness não mostra superioridade. Escolha pelo gosto e pela adesão.`, s: [`galante21`, `goyal14`] },
+  { q: `Uma taça de vinho por dia faz bem`, v: `falso`, t: `A curva em J some na randomização mendeliana: o “benefício” do beber leve vinha de confundimento. O risco cresce com a dose.`, s: [`biddinger22`] },
+  { q: `Acordar às 5 h deixa qualquer um mais feliz`, v: `sem`, t: `Não há evidência de que acordar cedo, por si, aumente a felicidade. O que tem evidência é dormir o suficiente, em horário regular.`, s: [`windred24`] }
+];
+
+/* Kits por orçamento de tempo · cada item pode apontar para fichas */
+const KITS = [
+  {
+    id: `kit-a`, t: `~15 min por dia`, sub: `O básico que sobrevive ao internato`,
+    lead: `O pacote de maior valor por minuto. Deixa de fora exercício estruturado, dieta e meditação formal, porque em 15 min o bloco de luz, sono e conversa rende mais.`,
+    items: [
+      [`10 min de caminhada rápida ao ar livre de manhã (luz e movimento juntos)`, [`luz`, `mexa-se`]],
+      [`Uma conversa de verdade por dia, sem o celular na mão`, [`microconexoes`]],
+      [`Acordar sempre no mesmo horário; celular carregando fora do quarto`, [`sono-regular`, `celular`]],
+      [`Última cafeína 8–9 h antes de dormir`, [`cafeina`]],
+      [`Toda semana: três coisas boas (5 min) e uma conversa mais profunda`, [`gratidao`, `microconexoes`]],
+      [`Medir: WHO-5 aos domingos (1 min)`, []]
+    ]
+  },
+  {
+    id: `kit-b`, t: `~45 min por dia`, sub: `O kit completo`,
+    lead: `Para fases com mais espaço. Se virar lista de cobranças, volte ao kit de 15 min e reexpanda aos poucos.`,
+    items: [
+      [`Tudo do kit de 15 min`, []],
+      [`30–40 min de movimento, 5 vezes por semana, 2 delas com força`, [`mexa-se`]],
+      [`10 min de mindfulness ou respiração; TCC-I digital se você dorme mal`, [`mindfulness`, `respiracao`, `tcc-i`]],
+      [`Marmita de comida de verdade e 2 porções a mais de frutas e vegetais`, [`comida`]],
+      [`2 encontros presenciais por semana com o círculo íntimo e 1 grupo regular`, [`vinculos`, `grupos`]],
+      [`1 experiência social por mês, marcada com antecedência`, [`dinheiro`, `variedade`]],
+      [`Medir: WHO-5 semanal, SWLS mensal e revisão das práticas a cada 3 meses`, []]
+    ]
+  },
+  {
+    id: `kit-c`, t: `Semana de plantão ou prova`, sub: `O que preservar quando tudo aperta`,
+    lead: `O objetivo muda: preservar o núcleo de proteção. O resto pausa sem culpa e volta depois, sem “compensar”.`,
+    items: [
+      [`Bloco de sono-âncora fixo e cochilo de 20–30 min antes do plantão noturno`, [`plantao`]],
+      [`Luz forte no plantão, óculos escuros na volta, quarto escuro para dormir`, [`plantao`, `luz`]],
+      [`Cafeína só na primeira metade do turno`, [`cafeina`]],
+      [`10 min de escada ou caminhada por dia`, [`mexa-se`]],
+      [`Uma interação de verdade por dia, nem que seja no corredor`, [`microconexoes`]],
+      [`1–2 suspiros cíclicos nos picos; uma frase autocompassiva depois de errar`, [`respiracao`, `regulacao`]],
+      [`Pause sem culpa: exercício estruturado, gratidão escrita, ajustes de dieta. Só não piore: nada de energético em série nem álcool para dormir`, [`porcaria`, `alcool`]],
+      [`No fim da semana, WHO-5. Se der 50 ou menos, veja “Quando procurar ajuda”`, []]
+    ]
+  }
+];
+
+/* WHO-5 · adaptação em português (OMS). Pontuação: soma 0–25 × 4 = 0–100 */
+const WHO5 = {
+  intro: `Nas últimas duas semanas…`,
+  q: [
+    `Eu me senti alegre e de bom humor`,
+    `Eu me senti calmo(a) e tranquilo(a)`,
+    `Eu me senti ativo(a) e com energia`,
+    `Eu acordei me sentindo descansado(a) e revigorado(a)`,
+    `Meu dia a dia esteve cheio de coisas que me interessam`
+  ],
+  op: [`Em nenhum momento`, `Algumas vezes`, `Menos da metade do tempo`, `Mais da metade do tempo`, `A maior parte do tempo`, `Todo o tempo`]
+};
+
+</script>
+<script>
+(function () {
+  'use strict';
+  document.documentElement.lang = 'pt-BR';
+
+  /* ───────── utilidades ───────── */
+  const $ = (s, el) => (el || document).querySelector(s);
+  function h(tag, attrs) {
+    const el = document.createElement(tag);
+    if (attrs) {
+      for (const k of Object.keys(attrs)) {
+        const v = attrs[k];
+        if (v == null || v === false) continue;
+        if (k === 'class') el.className = v;
+        else if (k.slice(0, 2) === 'on' && typeof v === 'function') el.addEventListener(k.slice(2), v);
+        else el.setAttribute(k, v === true ? '' : v);
+      }
+    }
+    const kids = Array.prototype.slice.call(arguments, 2).flat(Infinity);
+    for (const kid of kids) {
+      if (kid == null || kid === false) continue;
+      el.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
+    }
+    return el;
+  }
+  const SV = 'fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"';
+  const ICONS = {
+    columna: '<svg viewBox="0 0 16 16" ' + SV + '><path d="M2.5 3h11M4 5h8M5.2 5v7M8 5v7M10.8 5v7M4 12h8M2.5 14h11"/></svg>',
+    probabile: '<svg viewBox="0 0 16 16" ' + SV + '><path d="M8 2.4v11.2M5 13.6h6M3 4.8h10M3 4.8L1.3 8.9h3.4zM13 4.8l-1.7 4.1h3.4z"/></svg>',
+    experimentum: '<svg viewBox="0 0 16 16" ' + SV + '><path d="M6 1.8h4M6.8 1.8v4.4L3.2 12.6a1 1 0 0 0 .9 1.6h7.8a1 1 0 0 0 .9-1.6L9.2 6.2V1.8M4.7 10h6.6"/></svg>',
+    indifferens: '<svg viewBox="0 0 16 16" ' + SV + '><circle cx="8" cy="8" r="5.6"/><path d="M5.2 8h5.6"/></svg>',
+    fabula: '<svg viewBox="0 0 16 16" ' + SV + '><path d="M2.8 3.2c3.2 1.1 7.2 1.1 10.4 0v4.6a5.2 5.2 0 0 1-10.4 0z"/><path d="M5.4 7h1.6M9 7h1.6M6 10.2c1.3.9 2.7.9 4 0"/></svg>',
+    cave: '<svg viewBox="0 0 16 16" ' + SV + '><path d="M8 2.2l6.2 11H1.8z"/><path d="M8 6.4v3.4M8 11.6v.1"/></svg>',
+    kits: '<svg viewBox="0 0 24 24" ' + SV + '><path d="M12 3.2l8.5 4.2L12 11.6 3.5 7.4zM3.5 12L12 16.2 20.5 12M3.5 16.4L12 20.6l8.5-4.2"/></svg>',
+    guia: '<svg viewBox="0 0 24 24" ' + SV + '><path d="M3.5 5.4C6 4.2 9.4 4.2 12 6v14c-2.6-1.8-6-1.8-8.5-.6zM20.5 5.4C18 4.2 14.6 4.2 12 6v14c2.6-1.8 6-1.8 8.5-.6z"/></svg>',
+    close: '<svg viewBox="0 0 24 24" ' + SV + '><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg>',
+    check: '<svg viewBox="0 0 24 24" ' + SV + '><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
+  };
+  function icon(name) {
+    const t = document.createElement('span');
+    t.innerHTML = ICONS[name] || '';
+    const el = t.firstElementChild;
+    if (el) el.setAttribute('aria-hidden', 'true');
+    return el;
+  }
+  const pad = n => String(n).padStart(2, '0');
+  const todayStr = (d) => { d = d || new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); };
+  const nowIso = () => new Date().toISOString();
+  function daysBetween(a, b) {
+    const x = a.slice(0, 10).split('-').map(Number), y = b.slice(0, 10).split('-').map(Number);
+    return Math.round((Date.UTC(y[0], y[1] - 1, y[2]) - Date.UTC(x[0], x[1] - 1, x[2])) / 864e5);
+  }
+  function fmtDate(iso) {
+    const d = new Date(iso.length === 10 ? iso + 'T12:00:00' : iso);
+    return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' }).replace('.', '');
+  }
+  function localDay(iso) { return todayStr(new Date(iso.length === 10 ? iso + 'T12:00:00' : iso)); }
+  let toastTimer = null;
+  function toast(msg) {
+    const t = $('#toast');
+    t.textContent = msg; t.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { t.hidden = true; }, 2800);
+  }
+  function twoStep(label, confirmLabel, fn) {
+    let armed = false, timer = null;
+    const b = h('button', { class: 'btn small alt', type: 'button' }, label);
+    b.addEventListener('click', () => {
+      if (!armed) {
+        armed = true; b.textContent = confirmLabel; b.className = 'btn small warn';
+        timer = setTimeout(() => { armed = false; b.textContent = label; b.className = 'btn small alt'; }, 4000);
+      } else { clearTimeout(timer); fn(); }
+    });
+    return b;
+  }
+
+  /* ───────── vocabulário ───────── */
+  const V = {
+    columna: { la: 'COLVMNA', pt: 'Pilar', s: 'Faça: a evidência de que vai te fazer bem é forte.', crit: 'Confiança moderada ou alta e impacto ao menos moderado; ou confiança alta, impacto pequeno, custo baixo e grande benefício para a saúde.' },
+    probabile: { la: 'PROBABILE', pt: 'Aposta sólida', s: 'Provavelmente vale a pena.', crit: 'Confiança moderada com impacto pequeno, ou confiança baixa com impacto potencialmente grande e custo baixo.' },
+    experimentum: { la: 'EXPERIMENTVM', pt: 'Experimento', s: 'Pode funcionar ou não: teste por algumas semanas e meça.', crit: 'Evidência baixa ou mista, ou efeito muito dependente do perfil, com custo e risco baixos o bastante para testar.' },
+    indifferens: { la: 'INDIFFERENS', pt: 'Indiferente', s: 'Não precisa; faça só se gostar.', crit: 'Evidência razoável de efeito nulo ou desprezível, sem dano relevante.' },
+    fabula: { la: 'FABVLA', pt: 'Mito', s: 'Não é verdade, ou não do jeito que dizem.', crit: 'Alegação popular contrariada pela evidência.' },
+    cave: { la: 'CAVE', pt: 'Cuidado', s: 'Risco, contraindicação ou excesso prejudicial.', crit: 'Selo extra, combinável com os outros: dano plausível, contraindicação ou excesso prejudicial.' }
+  };
+  const ORDER = ['columna', 'probabile', 'experimentum', 'indifferens', 'fabula', 'cave'];
+  const MODS = [null,
+    { n: 'I', la: 'Corpus', pt: 'Corpo' }, { n: 'II', la: 'Mens', pt: 'Mente' }, { n: 'III', la: 'Vincula', pt: 'Vínculos' },
+    { n: 'IV', la: 'Propositum', pt: 'Sentido' }, { n: 'V', la: 'Attentio', pt: 'Atenção' }, { n: 'VI', la: 'Opes', pt: 'Recursos' },
+    { n: 'VII', la: 'Otium', pt: 'Lazer' }];
+  const CONF = ['', 'muito baixa', 'baixa', 'moderada', 'alta'];
+  const MYTHV = { falso: 'FALSO', parcial: 'PARCIALMENTE VERDADEIRO', sem: 'SEM EVIDÊNCIA', verdadeiro: 'VERDADEIRO' };
+  const byId = {};
+  P.forEach(p => { byId[p.id] = p; });
+
+  function srcHref(link) {
+    if (link.indexOf('doi:') === 0) return 'https://doi.org/' + link.slice(4);
+    if (link.indexOf('pm:') === 0) return 'https://pubmed.ncbi.nlm.nih.gov/?term=' + encodeURIComponent(link.slice(3));
+    return link;
+  }
+  function srcItem(key) {
+    const s = S[key];
+    if (!s) return null;
+    return h('li', null,
+      h('a', { href: srcHref(s[3]), target: '_blank', rel: 'noopener' }, s[0]), ' · ', h('i', null, s[1]),
+      h('span', { class: 'ty' }, s[2] + (s[3].indexOf('pm:') === 0 ? ' · abre uma busca no PubMed' : '')));
+  }
+  function srcLinks(keys) {
+    const out = [];
+    keys.forEach(k => {
+      const s = S[k]; if (!s) return;
+      if (out.length) out.push(' · ');
+      out.push(h('a', { href: srcHref(s[3]), target: '_blank', rel: 'noopener' }, s[0]));
+    });
+    return out;
+  }
+  function dots(c) {
+    const w = h('span', { class: 'dots', role: 'img', 'aria-label': 'Confiança ' + CONF[c] });
+    for (let i = 1; i <= 4; i++) w.append(h('i', { class: i <= c ? 'on' : null }));
+    return w;
+  }
+  const seal = v => h('span', { class: 'seal' }, icon(v), V[v].la);
+  const caveSeal = () => h('span', { class: 'seal cave' }, icon('cave'), 'CAVE');
+  function seals(p) {
+    const s = h('span', { class: 'seals' }, seal(p.v));
+    if (p.cave && p.v !== 'cave') s.append(caveSeal());
+    return s;
+  }
+  const sec = (title, ...kids) => h('section', { class: 'sec' }, h('h4', null, title), kids);
+  const ul = items => h('ul', null, items.map(t => h('li', null, t)));
+
+  /* ───────── armazenamento ───────── */
+  const store = (function () {
+    const K_LOCAL = 'arsv:dados', K_CACHE = 'arsv:cache';
+    const api = { mode: 'local', ready: false, pending: null, downloads: null, hasClaude: false, data: { who5: [], exps: {} } };
+    let col = null, onChange = function () {}, resolveReady;
+    const whenReady = new Promise(r => { resolveReady = r; });
+    const chains = new Map();
+    const read = k => { try { const r = localStorage.getItem(k); return r ? JSON.parse(r) : null; } catch (e) { return null; } };
+    const write = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* armazenamento indisponível */ } };
+    const drop = k => { try { localStorage.removeItem(k); } catch (e) { /* idem */ } };
+    const validExp = e => e && typeof e.id === 'string' && /^e[a-z0-9]{4,20}$/.test(e.id) && byId[e.p] && e.base && typeof e.base.s === 'number';
+    function norm(d) {
+      const out = { who5: [], exps: {} };
+      if (d && Array.isArray(d.who5)) out.who5 = d.who5.filter(x => x && typeof x.s === 'number' && typeof x.d === 'string').map(x => ({ d: x.d, s: x.s, c: x.c || '' }));
+      if (d && d.exps && typeof d.exps === 'object') Object.keys(d.exps).forEach(k => { const e = d.exps[k]; if (validExp(e)) out.exps[e.id] = e; });
+      return out;
+    }
+    const hasAny = d => d.who5.length > 0 || Object.keys(d.exps).length > 0;
+    function settle(mode, data) {
+      api.mode = mode; api.data = data;
+      if (!api.ready) { api.ready = true; resolveReady(); }
+      onChange();
+    }
+    api.init = function (cb) {
+      onChange = cb;
+      api.data = norm(read(K_CACHE) || read(K_LOCAL));
+      onChange();
+      const cl = window.claude;
+      if (!cl || typeof cl.use !== 'function') { settle('local', norm(read(K_LOCAL))); return; }
+      api.hasClaude = true;
+      cl.use('downloads').then(d => { api.downloads = d; onChange(); }).catch(() => {});
+      Promise.all([cl.use('user'), cl.use('db')]).then(async function (res) {
+        const user = res[0], db = res[1];
+        const uid = user ? await user.id() : null;
+        if (!db || !uid) { settle('local', norm(read(K_LOCAL))); return; }
+        try { col = db.collection('data/users/' + uid); } catch (e) { settle('local', norm(read(K_LOCAL))); return; }
+        let first = true;
+        col.onSnapshot(function (snap) {
+          const next = { who5: [], exps: {} };
+          snap.docs.forEach(doc => {
+            const d = doc.data(); if (!d) return;
+            if (doc.id === 'who5') next.who5 = norm({ who5: d.entries }).who5;
+            else if (d.kind === 'exp' && validExp(d)) next.exps[doc.id] = JSON.parse(JSON.stringify(d));
+          });
+          if (first) {
+            first = false;
+            const loc = norm(read(K_LOCAL));
+            if (hasAny(loc) && !hasAny(next)) api.pending = loc;
+          }
+          write(K_CACHE, next);
+          settle('conta', next);
+        }, function () { col = null; settle('local', norm(read(K_LOCAL))); });
+      }).catch(() => settle('local', norm(read(K_LOCAL))));
+    };
+    function queue(id, fn) {
+      const prev = chains.get(id) || Promise.resolve();
+      const p = prev.then(fn).catch(err => {
+        console.warn('Ars Virtutis', err);
+        toast(err && err.code === 'quota_exceeded' ? 'O espaço de dados deste app acabou; exporte e remova testes antigos.' : 'Não consegui salvar na sua conta agora. Tente de novo em instantes.');
+      });
+      chains.set(id, p);
+      return p;
+    }
+    const expBody = e => Object.assign({ kind: 'exp' }, JSON.parse(JSON.stringify(e)));
+    api.saveWho5 = async function () {
+      await whenReady;
+      if (api.mode === 'conta' && col) return queue('who5', () => col.doc('who5').set({ entries: api.data.who5.slice() }));
+      write(K_LOCAL, api.data);
+    };
+    api.saveExp = async function (e) {
+      await whenReady;
+      if (api.mode === 'conta' && col) return queue(e.id, () => col.doc(e.id).set(expBody(e)));
+      write(K_LOCAL, api.data);
+    };
+    api.removeExp = async function (id) {
+      await whenReady;
+      if (api.mode === 'conta' && col) return queue(id, () => col.doc(id).delete());
+      write(K_LOCAL, api.data);
+    };
+    function merge(base, inc) {
+      const out = { who5: base.who5.slice(), exps: Object.assign({}, base.exps) };
+      const key = x => x.d + '|' + x.s + '|' + (x.c || '');
+      const have = new Set(out.who5.map(key));
+      inc.who5.forEach(x => { if (!have.has(key(x))) { out.who5.push(x); have.add(key(x)); } });
+      Object.keys(inc.exps).forEach(k => { if (!out.exps[k]) out.exps[k] = inc.exps[k]; });
+      out.who5.sort((a, b) => (a.d < b.d ? -1 : 1));
+      return out;
+    }
+    api.importAll = async function (raw) {
+      const inc = norm(raw);
+      if (!hasAny(inc)) return 0;
+      api.data = merge(api.data, inc);
+      onChange();
+      await whenReady;
+      if (api.mode === 'conta' && col) {
+        await queue('who5', () => col.doc('who5').set({ entries: api.data.who5.slice() }));
+        for (const k of Object.keys(inc.exps)) await queue(k, () => col.doc(k).set(expBody(api.data.exps[k])));
+      } else write(K_LOCAL, api.data);
+      return inc.who5.length + Object.keys(inc.exps).length;
+    };
+    api.acceptPending = async function () {
+      const p = api.pending; if (!p) return;
+      api.pending = null;
+      await api.importAll(p);
+      drop(K_LOCAL);
+      toast('Dados levados para a sua conta.');
+    };
+    api.dismissPending = function () { api.pending = null; onChange(); };
+    api.exportJson = () => JSON.stringify({ app: 'Ars Virtutis', versao: 1, exportado: nowIso(), who5: api.data.who5, exps: api.data.exps }, null, 2);
+    return api;
+  })();
+
+  /* ───────── estado de interface ───────── */
+  const ui = { tab: 'praticas', fv: 'all', fm: 0 };
+  try { const u = JSON.parse(localStorage.getItem('arsv:ui') || 'null'); if (u) { if (u.fv) ui.fv = u.fv; if (typeof u.fm === 'number') ui.fm = u.fm; } } catch (e) { /* sem preferências salvas */ }
+  function saveUi() { try { localStorage.setItem('arsv:ui', JSON.stringify({ fv: ui.fv, fm: ui.fm })); } catch (e) { /* idem */ } }
+
+  /* ───────── camadas (ficha e modal) ───────── */
+  const focusStack = [];
+  function showLayer(L) {
+    if (L.hidden) focusStack.push(document.activeElement);
+    L.hidden = false; L.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+    const t = L.querySelector('h2');
+    if (t) { t.tabIndex = -1; try { t.focus({ preventScroll: true }); } catch (e) { t.focus(); } }
+  }
+  function hideLayer(L) {
+    if (L.hidden) return;
+    L.hidden = true;
+    if ($('#sheet').hidden && $('#modal').hidden) document.body.style.overflow = '';
+    const f = focusStack.pop();
+    if (f && document.contains(f) && f.focus) { try { f.focus({ preventScroll: true }); } catch (e) { f.focus(); } }
+  }
+  const closeSheet = () => hideLayer($('#sheet'));
+  const closeModal = () => hideLayer($('#modal'));
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if (!$('#modal').hidden) closeModal(); else if (!$('#sheet').hidden) closeSheet();
+  });
+  function layerTop(crumb, onClose) {
+    return h('div', { class: 'layer-top' }, h('span', { class: 'crumb' }, crumb),
+      h('button', { class: 'btn alt small', type: 'button', onclick: onClose }, icon('close'), 'Fechar'));
+  }
+
+  /* ───────── ficha da prática ───────── */
+  function openSheet(id) {
+    const p = byId[id]; if (!p) return;
+    const L = $('#sheet');
+    L.className = 'layer v-' + p.v; L.textContent = '';
+    const m = MODS[p.m];
+    const inn = h('div', { class: 'in' });
+    inn.append(layerTop(m.n + ' · ' + m.la.toUpperCase() + ' · ' + m.pt, closeSheet));
+    const head = h('div', { class: 'sh-head' }, seals(p), h('h2', { class: 'sh-title', id: 'sh-title' }, p.n),
+      h('p', { class: 'sh-verdict' }, V[p.v].pt + '. ' + V[p.v].s));
+    if (p.cond) head.append(h('span', { class: 'sh-cond' }, p.cond));
+    inn.append(head);
+    const facts = h('dl', { class: 'facts' });
+    const fact = (k, ...v) => facts.append(h('div', { class: 'f' }, h('dt', null, k), h('dd', null, v)));
+    fact('CONFIANÇA', dots(p.c), ' ', CONF[p.c], p.cn ? h('div', { class: 'small-t muted' }, p.cn) : null);
+    fact('IMPACTO', p.imp);
+    fact('CUSTO', p.custo);
+    if (p.dose && p.dose !== '—') fact('DOSE MÍNIMA', p.dose);
+    if (p.fx && p.fx !== '—') fact('TEMPO ATÉ EFEITO', p.fx);
+    inn.append(facts, h('p', { class: 'sh-lead' }, p.a));
+    if (p.proto) inn.append(sec('FAÇA ASSIM', ul(p.proto)));
+    if (p.tab) inn.append(sec('SUPLEMENTO POR SUPLEMENTO', h('div', { class: 'tbl' }, h('table', { class: 'supp' },
+      h('tbody', null, p.tab.map(r => h('tr', null, h('th', { scope: 'row' }, r[0]), h('td', null, r[1]))))))));
+    if (p.dia || p.plantao) {
+      const s = sec('NO SEU DIA', p.dia ? ul(p.dia) : null);
+      if (p.plantao) s.append(h('div', { class: 'plbox', style: 'margin-top:10px' }, h('b', null, 'PLANTÃO OU PROVA'), p.plantao));
+      inn.append(s);
+    }
+    if (p.w) {
+      const box = h('div', { class: 'testbox' },
+        h('div', { class: 'kv' }, h('span', null, 'Janela: ', h('b', null, p.w + (p.w === 1 ? ' semana' : ' semanas'))), h('span', null, 'Funcionou se: ', h('b', null, p.ok))));
+      if (p.falha) box.append(h('p', { style: 'margin:0;font-size:15px' }, 'Se não funcionar: ' + p.falha));
+      const act = activeFor(p.id);
+      box.append(h('div', { class: 'row' }, act
+        ? h('button', { class: 'btn vc', type: 'button', onclick: () => { closeSheet(); goTab('testar'); } }, 'Ver o teste em andamento')
+        : h('button', { class: 'btn vc', type: 'button', onclick: () => startFlow(p.id) }, icon('experimentum'), 'Testar por ' + p.w + (p.w === 1 ? ' semana' : ' semanas'))));
+      inn.append(sec('TESTE E DECIDA', box));
+    } else if (p.falha) inn.append(sec('SE NÃO FUNCIONAR', h('p', null, p.falha)));
+    if (p.num) {
+      const s = sec('QUANTO AJUDA', ul(p.num));
+      if (p.trad) s.append(h('p', { class: 'trad' }, p.trad));
+      inn.append(s);
+    }
+    if (p.pq) {
+      const s = sec('POR QUE ESSA CONFIANÇA', h('p', null, p.pq));
+      if (p.rel) s.append(h('p', { class: 'rel' }, h('b', null, 'Vereditos dos três relatórios: '), p.rel));
+      inn.append(s);
+    }
+    if (p.quem) inn.append(sec('PARA QUEM FUNCIONA MAIS OU MENOS', h('p', null, p.quem)));
+    if (p.risco) { const s = sec('RISCOS E EXCESSOS', h('p', { style: 'margin:0' }, p.risco)); s.className = 'sec cavebox'; inn.append(s); }
+    if (p.mito) inn.append(sec('MITOS LIGADOS', h('p', null, p.mito)));
+    if (p.sin) inn.append(sec('SINERGIAS', h('p', null, p.sin)));
+    if (p.ctx) inn.append(sec('NO BRASIL', h('p', null, p.ctx)));
+    if (p.src && p.src.length) inn.append(sec('FONTES', h('ul', { class: 'srcs' }, p.src.map(srcItem))));
+    L.append(inn);
+    showLayer(L);
+  }
+
+  /* ───────── PRÁTICAS ───────── */
+  function card(p) {
+    const b = h('button', { class: 'tab v-' + p.v, type: 'button', 'aria-haspopup': 'dialog', onclick: () => openSheet(p.id) });
+    b.append(h('span', { class: 'tab-top' }, seals(p), h('span', { class: 'modn', title: MODS[p.m].pt }, MODS[p.m].n)));
+    b.append(h('span', { class: 'nm' }, p.n));
+    if (p.cond) b.append(h('span', { class: 'cond' }, p.cond));
+    b.append(h('span', { class: 'ac' }, p.a));
+    const meta = h('span', { class: 'meta' }, h('span', null, dots(p.c), ' ', CONF[p.c]));
+    if (p.dose && p.dose !== '—') meta.append(h('span', null, 'Dose: ', h('b', null, p.dose)));
+    if (p.w) meta.append(h('span', null, 'Teste: ', h('b', null, p.w + ' sem')));
+    b.append(meta);
+    return b;
+  }
+  function renderStamp() {
+    const n = v => P.filter(p => p.v === v).length;
+    $('#stamp').textContent = P.length + ' práticas · ' + n('columna') + ' pilares · síntese de 3 levantamentos · out/2026';
+  }
+  function renderToday() {
+    const pool = P.filter(p => p.v === 'columna' || p.v === 'probabile');
+    const day = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 864e5);
+    const p = pool[day % pool.length];
+    const el = $('#today');
+    el.className = 'today v-' + p.v; el.textContent = '';
+    el.append(h('span', { class: 'eyebrow' }, 'LEMBRETE DE HOJE · ' + V[p.v].la), h('span', { class: 'nm' }, p.n), h('span', { class: 'ac' }, p.a));
+    el.onclick = () => openSheet(p.id);
+  }
+  function renderChips() {
+    const cv = $('#chips-v'); cv.textContent = '';
+    const opts = [['all', 'Todas', P.length]].concat(ORDER.map(v => [v, V[v].pt, P.filter(p => p.v === v).length]).filter(o => o[2] > 0));
+    opts.forEach(o => cv.append(h('button', {
+      class: 'chip' + (o[0] !== 'all' ? ' v-' + o[0] : ''), type: 'button', 'aria-pressed': ui.fv === o[0] ? 'true' : 'false',
+      onclick: () => { ui.fv = o[0]; saveUi(); renderChips(); renderGroups(); }
+    }, o[0] !== 'all' ? h('span', { class: 'dot' }) : null, o[1], h('span', { class: 'ct' }, String(o[2])))));
+    const cm = $('#chips-m'); cm.textContent = '';
+    [[0, 'Todas as áreas']].concat(MODS.slice(1).map((m, i) => [i + 1, m.n + ' · ' + m.pt])).forEach(o => cm.append(h('button', {
+      class: 'chip', type: 'button', 'aria-pressed': ui.fm === o[0] ? 'true' : 'false',
+      onclick: () => { ui.fm = o[0]; saveUi(); renderChips(); renderGroups(); }
+    }, o[1])));
+  }
+  function renderGroups() {
+    const box = $('#groups'); box.textContent = '';
+    ORDER.forEach(v => {
+      if (ui.fv !== 'all' && ui.fv !== v) return;
+      const items = P.filter(p => p.v === v && (ui.fm === 0 || p.m === ui.fm));
+      if (!items.length) return;
+      box.append(h('section', { class: 'vgroup v-' + v },
+        h('div', { class: 'vhead' }, h('div', null, h('h2', null, icon(v), V[v].la, ' · ', V[v].pt), h('p', null, V[v].s)),
+          h('span', { class: 'n' }, items.length + (items.length === 1 ? ' prática' : ' práticas'))),
+        h('div', { class: 'list' }, items.map(card))));
+    });
+    if (!box.children.length) box.append(h('p', { class: 'empty', style: 'margin-top:24px' }, 'Nenhuma prática com esse filtro.'));
+  }
+  function renderStrip() {
+    const box = $('#strip'); box.textContent = '';
+    const act = Object.values(store.data.exps).filter(e => e.status === 'ativo');
+    box.hidden = !act.length;
+    act.slice(0, 3).forEach(e => {
+      const p = byId[e.p]; const total = e.weeks * 7;
+      const day = Math.min(daysBetween(e.start, todayStr()) + 1, total);
+      const done = e.ticks.indexOf(todayStr()) >= 0;
+      box.append(h('div', { class: 'strip-item v-' + p.v },
+        h('button', { class: 't plain', type: 'button', onclick: () => goTab('testar') },
+          h('b', null, p.n), h('span', null, 'Testando · dia ' + day + ' de ' + total)),
+        h('button', { class: 'btn small ' + (done ? 'vc' : 'alt'), type: 'button', 'aria-pressed': done ? 'true' : 'false', onclick: () => toggleTick(e.id) },
+          icon('check'), done ? 'Feito hoje' : 'Fiz hoje')));
+    });
+  }
+
+  /* ───────── KITS e MITOS ───────── */
+  function renderKits() {
+    const box = $('#kit-list'); box.textContent = '';
+    KITS.forEach(k => {
+      const ol = h('ol');
+      k.items.forEach(it => {
+        const li = h('li', null, h('span', null, it[0]));
+        if (it[1].length) li.append(h('span', { class: 'links' }, it[1].map(id => {
+          const p = byId[id];
+          return h('button', { class: 'lk v-' + p.v, type: 'button', onclick: () => openSheet(id) }, icon(p.v), p.n);
+        })));
+        ol.append(li);
+      });
+      box.append(h('article', { class: 'kit', id: k.id }, h('h3', null, k.t), h('p', { class: 'sub' }, k.sub.toUpperCase()), h('p', { class: 'lead' }, k.lead), ol));
+    });
+  }
+  function renderMyths() {
+    const box = $('#myths'); box.textContent = '';
+    MITOS.forEach(m => {
+      const a = h('article', { class: 'myth' }, h('span', { class: 'verd ' + m.v }, MYTHV[m.v]), h('p', { class: 'q' }, '“' + m.q + '”'), h('p', null, m.t));
+      if (m.s.length) a.append(h('p', { class: 'srcline' }, 'Fontes: ', srcLinks(m.s)));
+      box.append(a);
+    });
+  }
+
+  /* ───────── GUIA ───────── */
+  function renderGuia() {
+    const lg = $('#legend'); lg.textContent = '';
+    ORDER.forEach(v => lg.append(h('div', { class: 'it v-' + v }, h('span', { class: 'ic' }, icon(v)),
+      h('div', null, h('b', null, V[v].la), ' ', h('span', { class: 'pt' }, V[v].pt), h('p', null, V[v].s + ' ' + V[v].crit)))));
+    const sm = $('#src-meta'); sm.textContent = '';
+    sm.append('Fontes: ', srcLinks(['bartels15', 'brown20', 'sheldon21', 'luhmann12', 'sheldon12', 'huta10', 'gollwitzer06', 'lally10', 'fang22', 'mauss11', 'topp15']));
+  }
+  function renderDataStatus() {
+    let t;
+    if (!store.ready) t = 'Conectando ao armazenamento…';
+    else if (store.mode === 'conta') t = 'Seus testes e check-ins ficam salvos na sua conta Claude, numa área privada: só você vê.';
+    else if (store.hasClaude) t = 'Seus dados estão salvos só neste navegador. Entre na sua conta Claude para guardá-los com segurança.';
+    else t = 'Versão offline: os dados ficam só neste aparelho. Exporte de vez em quando para não perder.';
+    $('#data-status').textContent = t;
+    $('#store-status').textContent = t;
+    $('#btn-offline').hidden = !(store.downloads && store.hasClaude);
+  }
+  function showIO(kind) {
+    const box = $('#io-box'); box.textContent = ''; box.hidden = false;
+    if (kind === 'export') {
+      const ta = h('textarea', { id: 'io-export', readonly: true, 'aria-label': 'Seus dados em JSON' });
+      ta.value = store.exportJson();
+      const copy = h('button', { class: 'btn small', type: 'button' }, 'Copiar');
+      copy.addEventListener('click', () => {
+        const fallback = () => { ta.focus(); ta.select(); toast('Texto selecionado: copie com o menu do sistema.'); };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ta.value).then(() => toast('Copiado.'), fallback);
+        else fallback();
+      });
+      box.append(h('p', { class: 'small-t muted', style: 'margin:0 0 6px' }, 'Guarde este texto num lugar seguro; ele restaura seus testes e check-ins.'), ta, h('div', { class: 'row', style: 'margin-top:8px' }, copy));
+    } else {
+      const ta = h('textarea', { id: 'io-import', 'aria-label': 'Cole aqui os dados exportados' });
+      const go = h('button', { class: 'btn small', type: 'button' }, 'Importar');
+      go.addEventListener('click', async () => {
+        let obj;
+        try { obj = JSON.parse(ta.value); } catch (e) { toast('Esse texto não é um JSON válido.'); return; }
+        const n = await store.importAll(obj);
+        toast(n ? n + ' registros importados.' : 'Nada novo para importar.');
+        if (n) { box.hidden = true; renderAll(); }
+      });
+      box.append(h('p', { class: 'small-t muted', style: 'margin:0 0 6px' }, 'Cole o texto exportado. Registros repetidos são ignorados.'), ta, h('div', { class: 'row', style: 'margin-top:8px' }, go));
+    }
+  }
+  async function doExport() {
+    if (store.downloads) {
+      try { await store.downloads.save({ filename: 'ars-virtutis-dados.json', data: store.exportJson() }); toast('Arquivo pronto para salvar.'); return; }
+      catch (e) { if (e && e.code === 'declined') return; }
+    }
+    showIO('export');
+  }
+  async function doOffline() {
+    try {
+      const r = await fetch('ars-virtutis-offline.html');
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const html = await r.text();
+      await store.downloads.save({ filename: 'ars-virtutis.html', data: html });
+      toast('Arquivo pronto para salvar.');
+    } catch (e) {
+      if (e && e.code === 'declined') return;
+      toast('Não consegui preparar o arquivo agora.');
+    }
+  }
+
+  /* ───────── TESTAR ───────── */
+  const activeFor = pid => Object.values(store.data.exps).find(e => e.p === pid && e.status === 'ativo');
+  const who5Sorted = () => store.data.who5.slice().sort((a, b) => (a.d < b.d ? -1 : 1));
+  function addWho5(s, c) {
+    store.data.who5.push({ d: nowIso(), s: s, c: c || '' });
+    store.saveWho5();
+  }
+  function adherence(e) {
+    const endD = e.end && e.end.d ? localDay(e.end.d) : todayStr();
+    const days = Math.max(1, Math.min(daysBetween(e.start, endD) + 1, e.weeks * 7));
+    const done = e.ticks.filter(t => t >= e.start && t <= endD).length;
+    return { days: days, done: Math.min(done, days) };
+  }
+  function lastScore(e) {
+    if (e.checks && e.checks.length) return e.checks[e.checks.length - 1].s;
+    return e.base.s;
+  }
+  function toggleTick(id) {
+    const e = store.data.exps[id]; if (!e) return;
+    const t = todayStr(); const i = e.ticks.indexOf(t);
+    if (i >= 0) e.ticks.splice(i, 1); else e.ticks.push(t);
+    store.saveExp(e);
+    renderStrip(); if (ui.tab === 'testar') renderTestar();
+  }
+  function createExp(pid, weeks, score) {
+    const id = 'e' + Date.now().toString(36);
+    const e = { id: id, kind: 'exp', p: pid, start: todayStr(), weeks: weeks, base: { d: nowIso(), s: score }, ticks: [], checks: [], end: null, status: 'ativo' };
+    store.data.exps[id] = e;
+    store.saveExp(e);
+    addWho5(score, 'base:' + id);
+  }
+  function checkin(id, s) {
+    const e = store.data.exps[id]; if (!e) return;
+    e.checks.push({ d: nowIso(), s: s });
+    store.saveExp(e);
+    addWho5(s, 'check:' + id);
+    renderAll();
+    toast('Check-in salvo: ' + s + ' de 100.');
+  }
+  function abandon(id) {
+    const e = store.data.exps[id]; if (!e) return;
+    e.status = 'interrompido'; e.end = { d: nowIso(), s: null };
+    store.saveExp(e); renderAll();
+  }
+  function removeExp(id) {
+    if (!store.data.exps[id]) return;
+    delete store.data.exps[id];
+    store.removeExp(id); renderAll();
+  }
+  const verdictOf = d => (d >= 10 ? 'funcionou' : d >= 1 ? 'inconclusivo' : 'nao');
+  function resultParts(e) {
+    const d = e.end.s - e.base.s, v = verdictOf(d), adh = adherence(e);
+    const out = [h('b', null, (v === 'funcionou' ? 'Funcionou pela régua' : v === 'inconclusivo' ? 'Inconclusivo' : 'Não funcionou desta vez') + ': '),
+      'WHO-5 de ' + e.base.s + ' para ' + e.end.s + ' (' + (d > 0 ? '+' : '') + d + '). ',
+      v === 'funcionou' ? 'Mantenha. Para confirmar, pause 2 semanas e veja se cai.' : v === 'inconclusivo' ? 'Ajuste a dose ou o formato, ou estenda por mais 4 semanas.' : 'Troque a prática ou o formato; resultado nulo também é informação.'];
+    if (adh.done / adh.days < 0.5) out.push(' Você marcou a prática em só ' + Math.round(adh.done / adh.days * 100) + '% dos dias, então o teste diz pouco sobre ela.');
+    return out;
+  }
+  function expCard(e) {
+    const p = byId[e.p];
+    const total = e.weeks * 7;
+    const day = Math.max(1, Math.min(daysBetween(e.start, todayStr()) + 1, total));
+    const art = h('article', { class: 'exp v-' + p.v });
+    art.append(h('div', { class: 'hd' },
+      h('div', null, h('b', null, p.n), h('div', { class: 'small-t muted' }, 'Régua: ' + p.ok)),
+      h('span', { class: 'when' }, e.status === 'ativo' ? 'dia ' + day + ' de ' + total : 'desde ' + fmtDate(e.start))));
+    if (e.status === 'ativo') {
+      art.append(h('div', { class: 'bar', role: 'img', 'aria-label': 'Dia ' + day + ' de ' + total }, h('i', { style: 'width:' + (day / total * 100).toFixed(1) + '%' })));
+      const adh = adherence(e);
+      art.append(h('div', { class: 'kv' }, h('span', null, 'Linha de base: ', h('b', null, String(e.base.s))), h('span', null, 'Último WHO-5: ', h('b', null, String(lastScore(e)))), h('span', null, 'Feito em ', h('b', null, adh.done + ' de ' + adh.days), ' dias')));
+      const doneToday = e.ticks.indexOf(todayStr()) >= 0;
+      const ended = day >= total;
+      art.append(h('div', { class: 'row' },
+        h('button', { class: 'btn small ' + (doneToday ? 'vc' : 'alt'), type: 'button', 'aria-pressed': doneToday ? 'true' : 'false', onclick: () => toggleTick(e.id) }, icon('check'), doneToday ? 'Feito hoje' : 'Fiz hoje'),
+        h('button', { class: 'btn small alt', type: 'button', onclick: () => openWho5({ title: 'Check-in do teste', sub: p.n, onDone: s => checkin(e.id, s) }) }, 'Check-in WHO-5'),
+        h('button', { class: 'btn small ' + (ended ? '' : 'alt'), type: 'button', onclick: () => finishFlow(e.id) }, ended ? 'Hora de decidir' : 'Encerrar e medir'),
+        twoStep('Desistir', 'Confirmar', () => abandon(e.id))));
+      if (ended) art.append(h('p', { class: 'small-t', style: 'margin:0;color:var(--vc)' }, 'A janela terminou: responda o WHO-5 final para ver o resultado.'));
+    } else {
+      if (e.status === 'concluido' && e.end && typeof e.end.s === 'number') art.append(h('div', { class: 'result' }, resultParts(e)));
+      else art.append(h('p', { class: 'small-t muted', style: 'margin:0' }, 'Interrompido em ' + fmtDate(e.end && e.end.d ? e.end.d : e.start) + '.'));
+      art.append(h('div', { class: 'row' }, twoStep('Remover', 'Confirmar remoção', () => removeExp(e.id))));
+    }
+    return art;
+  }
+  function chart(entries) {
+    const W = 320, H = 132, pl = 30, pr = 12, pt = 10, pb = 24, n = entries.length;
+    const x = i => (n === 1 ? pl + (W - pl - pr) / 2 : pl + i * (W - pl - pr) / (n - 1));
+    const y = v => pt + (100 - v) * (H - pt - pb) / 100;
+    const NS = 'http://www.w3.org/2000/svg';
+    const el = (tag, at, st) => { const e = document.createElementNS(NS, tag); for (const k in at) e.setAttribute(k, at[k]); if (st) e.setAttribute('style', st); return e; };
+    const s = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': 'Histórico do WHO-5: ' + entries.map(e => e.s).join(', ') });
+    [0, 50, 100].forEach(v => {
+      s.append(el('line', { x1: pl, x2: W - pr, y1: y(v), y2: y(v), 'stroke-width': 1, 'stroke-dasharray': v === 50 ? '3 3' : '0' }, 'stroke:var(--line)'));
+      const t = el('text', { x: pl - 6, y: y(v) + 3.5, 'text-anchor': 'end', 'font-size': 10 }, 'fill:var(--ink-2)');
+      t.textContent = String(v); s.append(t);
+    });
+    if (n > 1) s.append(el('path', { d: entries.map((e, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(e.s).toFixed(1)).join(' '), fill: 'none', 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, 'stroke:var(--accent)'));
+    entries.forEach((e, i) => s.append(el('circle', { cx: x(i), cy: y(e.s), r: i === n - 1 ? 4.2 : 2.6, 'stroke-width': 1.6 }, 'stroke:var(--accent);fill:' + (i === n - 1 ? 'var(--accent)' : 'var(--panel)'))));
+    const lab = (i, anchor) => { const t = el('text', { x: x(i), y: H - 6, 'text-anchor': anchor, 'font-size': 10 }, 'fill:var(--ink-2)'); t.textContent = fmtDate(entries[i].d); s.append(t); };
+    lab(0, n === 1 ? 'middle' : 'start');
+    if (n > 1) lab(n - 1, 'end');
+    return h('div', { class: 'chart' }, s);
+  }
+  function scoreNotice(s) {
+    if (s <= 28) return h('div', { class: 'notice cave', style: 'margin-top:12px' }, h('b', null, 'Escore muito baixo. '),
+      'Não é diagnóstico, mas vale conversar com um profissional logo. Se houver qualquer pensamento de morte, ligue para o CVV no 188 (24 h, gratuito). ',
+      h('button', { class: 'btn alt small', type: 'button', style: 'margin-top:8px', onclick: goHelp }, 'Quando procurar ajuda'));
+    if (s <= 50) return h('div', { class: 'notice v-experimentum', style: 'margin-top:12px' }, h('b', null, 'Abaixo de 50. '),
+      'A recomendação usual é fazer uma triagem para depressão (PHQ-9) com um profissional. Se repetir na próxima semana, procure avaliação. ',
+      h('button', { class: 'btn alt small', type: 'button', style: 'margin-top:8px', onclick: goHelp }, 'Quando procurar ajuda'));
+    return null;
+  }
+  function goHelp() { closeModal(); closeSheet(); goTab('guia'); const a = $('#ajuda'); if (a) a.scrollIntoView(); }
+  function renderTestar() {
+    const ib = $('#import-banner'); ib.textContent = '';
+    ib.hidden = !store.pending;
+    if (store.pending) ib.append(h('div', { class: 'notice', style: 'margin-bottom:12px' },
+      'Há testes e check-ins salvos só neste aparelho. ',
+      h('div', { class: 'row', style: 'margin-top:8px' },
+        h('button', { class: 'btn small', type: 'button', onclick: () => store.acceptPending().then(renderAll) }, 'Levar para a minha conta'),
+        h('button', { class: 'btn small alt', type: 'button', onclick: () => store.dismissPending() }, 'Agora não'))));
+    const box = $('#w5-panel'); box.textContent = '';
+    const es = who5Sorted();
+    box.append(h('h3', null, 'Seu bem-estar (WHO-5)'));
+    if (!es.length) box.append(h('p', { class: 'muted', style: 'margin:0' }, 'Cinco perguntas sobre as últimas duas semanas, com escore de 0 a 100. Responda uma vez por semana, de preferência no mesmo dia.'));
+    else {
+      const last = es[es.length - 1], prev = es.length > 1 ? es[es.length - 2] : null;
+      const sc = h('div', { class: 'score' }, h('span', { class: 'big' }, String(last.s)), h('span', { class: 'of' }, 'de 100 · ' + fmtDate(last.d)));
+      if (prev) { const d = last.s - prev.s; sc.append(h('span', { class: 'delta ' + (d > 0 ? 'up' : d < 0 ? 'down' : '') }, (d > 0 ? '+' : '') + d + ' desde a anterior')); }
+      box.append(sc, chart(es));
+      if (es.length === 1) box.append(h('p', { class: 'small-t muted', style: 'margin:6px 0 0' }, 'Responda de novo na semana que vem para ver a linha.'));
+      const nt = scoreNotice(last.s); if (nt) box.append(nt);
+    }
+    box.append(h('div', { class: 'row', style: 'margin-top:12px' }, h('button', { class: 'btn', type: 'button', onclick: () => openWho5({ title: 'Check-in WHO-5', onDone: s => { addWho5(s, 'check'); renderAll(); toast('Check-in salvo: ' + s + ' de 100.'); } }) }, 'Responder o WHO-5 (1 min)')));
+    box.append(h('p', { class: 'small-t muted', style: 'margin:10px 0 0' }, 'WHO-5 da OMS, adaptado para o português. Para uso clínico, use a versão validada. Mudança de 10 pontos ou mais é a régua prática; 50 ou menos sugere triagem para depressão.'));
+    const act = $('#exp-active'), done = $('#exp-done'); act.textContent = ''; done.textContent = '';
+    const exps = Object.values(store.data.exps).sort((a, b) => (a.start < b.start ? 1 : a.start > b.start ? -1 : (a.id < b.id ? 1 : -1)));
+    const A = exps.filter(e => e.status === 'ativo'), D = exps.filter(e => e.status !== 'ativo');
+    if (!A.length) act.append(h('p', { class: 'empty', style: 'margin:0' }, 'Nenhum teste em andamento. Abra uma prática e toque em “Testar”, ou comece por aqui.'));
+    A.forEach(e => act.append(expCard(e)));
+    $('#done-block').hidden = !D.length;
+    D.forEach(e => done.append(expCard(e)));
+    renderDataStatus();
+  }
+
+  /* ───────── WHO-5 e fluxos de teste ───────── */
+  let formSeq = 0;
+  function who5Form(onChange) {
+    const id = 'w5f' + (++formSeq);
+    const vals = [null, null, null, null, null];
+    const form = h('form', { class: 'w5', onsubmit: e => e.preventDefault() });
+    form.append(h('p', { class: 'w5-legend' }, WHO5.intro + ' Marque de 0 (em nenhum momento) a 5 (todo o tempo).'));
+    const scoreEl = h('p', { class: 'small-t muted', style: 'margin:0' }, 'Responda as cinco para ver o escore.');
+    WHO5.q.forEach((q, qi) => {
+      const picked = h('div', { class: 'picked' });
+      const seg = h('div', { class: 'seg' });
+      for (let v = 0; v <= 5; v++) {
+        const inp = h('input', { type: 'radio', name: id + '-q' + qi, id: id + '-q' + qi + '-' + v, value: String(v), 'aria-label': v + ', ' + WHO5.op[v] });
+        inp.addEventListener('change', () => { vals[qi] = v; picked.textContent = WHO5.op[v]; update(); });
+        seg.append(h('label', { for: inp.id }, inp, h('span', null, String(v))));
+      }
+      form.append(h('fieldset', null, h('legend', null, (qi + 1) + '. ' + q), seg, h('div', { class: 'ends' }, h('span', null, 'nenhum momento'), h('span', null, 'todo o tempo')), picked));
+    });
+    function update() {
+      if (vals.every(v => v != null)) { const s = vals.reduce((a, b) => a + b, 0) * 4; scoreEl.textContent = 'Escore: ' + s + ' de 100.'; onChange(s); }
+      else onChange(null);
+    }
+    form.append(scoreEl);
+    return form;
+  }
+  function openWho5(opt) {
+    const M = $('#modal'); M.className = 'layer modal'; M.textContent = '';
+    let score = null;
+    const save = h('button', { class: 'btn', type: 'button', disabled: true }, 'Salvar');
+    const inn = h('div', { class: 'in' }, layerTop('WHO-5', closeModal),
+      h('div', { class: 'sh-head' }, h('h2', { class: 'sh-title', id: 'md-title' }, opt.title), opt.sub ? h('p', { class: 'muted', style: 'margin:0' }, opt.sub) : null),
+      h('div', { style: 'margin-top:16px' }, who5Form(s => { score = s; save.disabled = s == null; })),
+      h('div', { class: 'row', style: 'margin-top:12px' }, save));
+    save.addEventListener('click', () => { if (score == null) return; closeModal(); opt.onDone(score); });
+    M.append(inn); showLayer(M);
+  }
+  function startFlow(pid) {
+    const p = byId[pid];
+    let weeks = p.w || 4, score = null;
+    const M = $('#modal'); M.className = 'layer modal v-' + p.v; M.textContent = '';
+    const out = h('output', { id: 'weeks-out', 'aria-live': 'polite' }, weeks + (weeks === 1 ? ' semana' : ' semanas'));
+    const setW = n => { weeks = Math.max(1, Math.min(16, n)); out.textContent = weeks + (weeks === 1 ? ' semana' : ' semanas'); };
+    const startBtn = h('button', { class: 'btn vc', type: 'button', disabled: true }, 'Começar o teste');
+    const inn = h('div', { class: 'in' }, layerTop('NOVO TESTE', closeModal),
+      h('div', { class: 'sh-head' }, seals(p), h('h2', { class: 'sh-title', id: 'md-title' }, p.n), h('p', { class: 'muted', style: 'margin:0' }, 'Funcionou se: ' + p.ok)),
+      sec('DURAÇÃO', h('div', { class: 'row' },
+        h('div', { class: 'stepper' }, h('button', { type: 'button', 'aria-label': 'Uma semana a menos', onclick: () => setW(weeks - 1) }, '−'), out, h('button', { type: 'button', 'aria-label': 'Uma semana a mais', onclick: () => setW(weeks + 1) }, '+')),
+        h('span', { class: 'small-t muted' }, 'Sugestão das evidências: ' + p.w + (p.w === 1 ? ' semana' : ' semanas')))),
+      sec('LINHA DE BASE · WHO-5', who5Form(s => { score = s; startBtn.disabled = s == null; })),
+      h('div', { class: 'row', style: 'margin-top:12px' }, startBtn));
+    startBtn.addEventListener('click', () => {
+      if (score == null) return;
+      createExp(pid, weeks, score);
+      closeModal(); closeSheet(); goTab('testar'); renderStrip();
+      toast('Teste iniciado. Marque “Fiz hoje” nos dias em que praticar.');
+    });
+    M.append(inn); showLayer(M);
+  }
+  function pickFlow() {
+    const M = $('#modal'); M.className = 'layer modal'; M.textContent = '';
+    const testable = P.filter(p => p.w > 0 && !activeFor(p.id));
+    const groups = ORDER.map(v => [v, testable.filter(p => p.v === v)]).filter(g => g[1].length);
+    const inn = h('div', { class: 'in' }, layerTop('NOVO TESTE', closeModal),
+      h('div', { class: 'sh-head' }, h('h2', { class: 'sh-title', id: 'md-title' }, 'O que você quer testar?'), h('p', { class: 'muted', style: 'margin:0' }, 'Uma prática por vez. Comece pelos pilares.')));
+    groups.forEach(g => inn.append(sec(V[g[0]].la + ' · ' + V[g[0]].pt.toUpperCase(), h('div', { class: 'picker' }, g[1].map(p =>
+      h('button', { type: 'button', class: 'v-' + p.v, onclick: () => startFlow(p.id) }, h('b', null, p.n), h('span', null, 'Janela de ' + p.w + (p.w === 1 ? ' semana' : ' semanas') + ' · ' + p.ok)))))));
+    M.append(inn); showLayer(M);
+  }
+  function finishFlow(id) {
+    const e = store.data.exps[id]; if (!e) return;
+    const p = byId[e.p];
+    const M = $('#modal'); M.className = 'layer modal v-' + p.v; M.textContent = '';
+    let score = null;
+    const fin = h('button', { class: 'btn vc', type: 'button', disabled: true }, 'Ver o resultado');
+    const body = h('div', null,
+      h('p', { class: 'muted', style: 'margin:12px 0 0' }, 'Linha de base: ' + e.base.s + ' de 100. Responda pensando nas últimas duas semanas.'),
+      h('div', { style: 'margin-top:14px' }, who5Form(s => { score = s; fin.disabled = s == null; })),
+      h('div', { class: 'row', style: 'margin-top:12px' }, fin));
+    const inn = h('div', { class: 'in' }, layerTop('ENCERRAR TESTE', closeModal),
+      h('div', { class: 'sh-head' }, seals(p), h('h2', { class: 'sh-title', id: 'md-title' }, p.n)), body);
+    fin.addEventListener('click', () => {
+      if (score == null) return;
+      e.end = { d: nowIso(), s: score }; e.status = 'concluido';
+      store.saveExp(e);
+      addWho5(score, 'fim:' + id);
+      body.textContent = '';
+      body.append(h('div', { class: 'result', style: 'margin-top:16px' }, resultParts(e)),
+        h('p', { class: 'small-t muted' }, 'Lembre: expectativa e regressão à média inflam ganhos, e semanas de prova ou plantão distorcem a medida.'),
+        h('div', { class: 'row' }, h('button', { class: 'btn', type: 'button', onclick: () => { closeModal(); renderAll(); } }, 'Fechar')));
+      renderAll();
+    });
+    M.append(inn); showLayer(M);
+  }
+
+  /* ───────── navegação ───────── */
+  const TABS = [['praticas', 'Práticas', 'columna'], ['kits', 'Kits', 'kits'], ['testar', 'Testar', 'experimentum'], ['mitos', 'Mitos', 'fabula'], ['guia', 'Guia', 'guia']];
+  function renderTabbar() {
+    const bar = $('#tabbar'); bar.textContent = '';
+    TABS.forEach(t => bar.append(h('button', { type: 'button', id: 'tb-' + t[0], onclick: () => goTab(t[0]) }, icon(t[2]), h('span', null, t[1]))));
+  }
+  function goTab(id) {
+    TABS.forEach(t => {
+      $('#v-' + t[0]).hidden = t[0] !== id;
+      const b = $('#tb-' + t[0]);
+      if (t[0] === id) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
+    });
+    ui.tab = id;
+    window.scrollTo(0, 0);
+    try { history.replaceState(null, '', '#' + id); } catch (e) { /* o visualizador pode bloquear */ }
+    if (id === 'testar') renderTestar();
+  }
+  function renderAll() {
+    renderStrip();
+    if (ui.tab === 'testar') renderTestar();
+    renderDataStatus();
+  }
+
+  /* ───────── início ───────── */
+  renderStamp(); renderToday(); renderChips(); renderGroups(); renderKits(); renderMyths(); renderGuia(); renderTabbar();
+  $('#new-test').addEventListener('click', pickFlow);
+  $('#btn-export').addEventListener('click', doExport);
+  $('#btn-import').addEventListener('click', () => showIO('import'));
+  $('#btn-offline').addEventListener('click', doOffline);
+  const hash = (location.hash || '').slice(1);
+  if (TABS.some(t => t[0] === hash)) goTab(hash);
+  else if (hash.indexOf('p-') === 0 && byId[hash.slice(2)]) { goTab('praticas'); openSheet(hash.slice(2)); }
+  else goTab('praticas');
+  store.init(renderAll);
+})();
+
+</script>
+<script>if('serviceWorker' in navigator){addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}</script>
+</body>
+</html>
